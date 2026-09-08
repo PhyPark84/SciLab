@@ -8,6 +8,7 @@
 <style>
 :root{--a:#00979d;--o:#ff7a00;--bg:#f5f7fb;--card:#fff;--line:#dfe5ec;--text:#202630;--muted:#6d7684;--purple:#7c3aed}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,"Noto Sans KR",sans-serif}.wrap{width:min(1450px,calc(100% - 28px));margin:18px auto}.head{text-align:center;margin:6px 0 16px}.brandLogo{cursor:pointer;user-select:none;display:block;margin:0 auto;max-width:min(520px,94vw);height:auto}.logo{font-size:42px;font-weight:900;margin:0}.logo .a{color:var(--a)}.logo .l{color:var(--o)}.by{font-size:12px;color:#999}.card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:15px;margin-bottom:13px;box-shadow:0 4px 16px #1e2d460a}.card h2{font-size:17px;margin:0 0 11px}.grid{display:grid;grid-template-columns:1fr 1.18fr;gap:13px}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.row>*{min-width:0}button,select,input,textarea{font:inherit}button{border:0;border-radius:9px;padding:9px 12px;font-weight:800;cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}.primary{background:var(--a);color:#fff}.orange{background:var(--o);color:#fff}.purple{background:var(--purple);color:#fff}.soft{background:#e8f5f5;color:#08767b}.gray{background:#edf0f4;color:#39414d}.danger{background:#fff0f0;color:#b83232}.small{padding:6px 9px;font-size:12px}select,input,textarea{border:1px solid var(--line);border-radius:8px;padding:8px;background:#fff}textarea{width:100%;resize:vertical}.status{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.stat{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:10px}.stat b{display:block;font-size:12px;margin-bottom:4px}.val{font-weight:900;color:var(--a)}.muted{color:var(--muted);font-size:13px;line-height:1.5}.chips{display:flex;gap:6px;flex-wrap:wrap}.chip{background:#eaf7f7;color:#08767b;border-radius:999px;padding:6px 10px;font-weight:800;font-size:13px}.tableWrap{max-height:400px;overflow:auto;border:1px solid var(--line);border-radius:10px;background:#fff}table{border-collapse:collapse;width:100%;font-size:13px}th,td{padding:7px 9px;border-bottom:1px solid #edf0f4;text-align:center;white-space:nowrap}th{position:sticky;top:0;background:#eef7f7;color:#16686c;z-index:2}.excluded{opacity:.35;text-decoration:line-through}.controls{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.controls label{font-size:12px;font-weight:800}.controls select,.controls input{width:100%;margin-top:4px}canvas.graph{width:100%;height:500px;border:1px solid var(--line);border-radius:10px;background:#fff;touch-action:none;cursor:crosshair}.result{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:14px;min-height:130px;font-size:15px;line-height:1.65;overflow:auto}.analysisSection{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:9px 0}.analysisTitle{font-size:16px;font-weight:900;color:#08767b;margin-bottom:7px}.analysisTitle.reg{color:#6d28d9}.analysisGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px 18px}.analysisItem b{color:#334155}.codeGuide{background:#f8fafc;border:1px solid var(--line);border-radius:9px;padding:10px;font-family:ui-monospace,Consolas,monospace;font-size:13px;white-space:pre-wrap}.footer{text-align:center;color:#aaa;font-size:12px;padding:8px}.banner{display:none;background:#fff9dd;border:1px solid #f0d46a;border-radius:10px;padding:10px 12px;margin-bottom:12px;font-size:13px}.modal{display:none;position:fixed;inset:0;background:#0009;z-index:50;align-items:center;justify-content:center;padding:20px}.modal.show{display:flex}.modalBox{background:#fff;border-radius:15px;padding:17px;width:min(850px,96vw);max-height:92vh;overflow:auto;box-shadow:0 20px 60px #0005}.modalBox.large{width:min(1180px,97vw)}.modalHead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}.modalHead h3{margin:0}.checkgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.checkitem{border:1px solid var(--line);border-radius:8px;padding:7px;background:#fafbfc}.sheetWrap{overflow:auto;max-height:500px;border:1px solid var(--line)}.sheet{min-width:700px}.sheet td,.sheet th{min-width:110px}.sheet td[contenteditable="true"]{background:#fff;text-align:left}.sheet .nameRow td{background:#eaf4f4;font-weight:700}.notegrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.notegrid .full{grid-column:1/-1}.tooltip{position:fixed;display:none;pointer-events:none;background:#fff;border:1px solid #cbd5e1;border-radius:8px;padding:7px 9px;font-size:12px;box-shadow:0 5px 20px #0002;z-index:80;white-space:pre-line}.inlineChecks{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.inlineChecks label{font-size:13px}.rangeGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.rangeGrid input{width:100%}.sampleList{display:grid;gap:8px}.sampleBtn{text-align:left;padding:12px;background:#f7fafb;border:1px solid var(--line)}
+.calcVarHeader{cursor:pointer;color:#6d28d9!important;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px}.calcVarHeader:hover{background:#f3e8ff!important}.calcVarHeader:focus{outline:2px solid #7c3aed;outline-offset:-2px}
 @media(max-width:920px){.grid{grid-template-columns:1fr}.status{grid-template-columns:1fr 1fr}.checkgrid{grid-template-columns:1fr 1fr}.notegrid{grid-template-columns:1fr}.notegrid .full{grid-column:auto}.rangeGrid{grid-template-columns:1fr 1fr}}
 
 .modeHub{background:linear-gradient(135deg,#eefafa,#f7fbff);border:1px solid #cfe7e8;border-radius:18px;padding:17px;margin-bottom:10px}
@@ -485,14 +486,14 @@ Arduino 코드를 작성하거나 수정할 때 시리얼 데이터는 ArduLab�
 </div>
 
 <!-- 계산 변수 -->
-<div id="calcModal" class="modal"><div class="modalBox"><div class="modalHead"><h3>계산 변수 추가</h3><button data-close="calcModal" class="gray">닫기</button></div><label>새 변수 이름<input id="calcName" style="width:100%;margin-top:4px" placeholder="speed"></label><label style="display:block;margin-top:9px">계산식<input id="calcExpr" style="width:100%;margin-top:4px" placeholder="아래 버튼을 눌러 계산식을 만들어 보세요."></label>
+<div id="calcModal" class="modal"><div class="modalBox"><div class="modalHead"><h3 id="calcModalTitle">계산 변수 추가</h3><button data-close="calcModal" class="gray">닫기</button></div><label>계산 변수 이름<input id="calcName" style="width:100%;margin-top:4px" placeholder="speed"></label><label style="display:block;margin-top:9px">계산식<input id="calcExpr" style="width:100%;margin-top:4px" placeholder="아래 버튼을 눌러 계산식을 만들어 보세요."></label>
 <div style="margin-top:10px"><b style="font-size:13px">변수</b><div id="calcVarButtons" class="row" style="margin-top:6px"></div></div>
 <div style="margin-top:10px"><b style="font-size:13px">계산기</b><div id="calcKeypad" class="row" style="margin-top:6px">
 <button type="button" class="gray small" data-calc=" + ">＋</button><button type="button" class="gray small" data-calc=" - ">−</button><button type="button" class="gray small" data-calc=" * ">×</button><button type="button" class="gray small" data-calc=" / ">÷</button><button type="button" class="gray small" data-calc=" ** ">^</button>
 <button type="button" class="gray small" data-calc="(">(</button><button type="button" class="gray small" data-calc=")">)</button><button type="button" class="gray small" data-calc="sqrt(">√</button><button type="button" class="gray small" data-calc="abs(">abs</button><button type="button" class="gray small" data-calc="sin(">sin</button><button type="button" class="gray small" data-calc="cos(">cos</button><button type="button" class="gray small" data-calc="tan(">tan</button><button type="button" class="gray small" data-calc="log(">log</button><button type="button" class="gray small" data-calc="pi">π</button>
 <button type="button" class="soft small" id="calcDiffBtn">미분</button><button type="button" class="soft small" id="calcIntegBtn">적분</button><button type="button" class="danger small" id="calcBack">⌫</button><button type="button" class="danger small" id="calcClear">전체 지우기</button>
 </div></div>
-<p class="muted">버튼을 눌러 계산식을 만들 수 있고, 필요하면 계산식 칸을 직접 수정할 수도 있습니다. 미분/적분 버튼을 누르면 X 변수와 Y 변수를 직접 선택할 수 있습니다.</p><button id="calcApply" class="primary">변수 생성</button></div></div>
+<p class="muted">계산변수는 데이터 표의 보라색 변수명을 클릭하거나 터치하면 계산식을 다시 확인·수정할 수 있습니다.</p><div class="row"><button id="calcApply" class="primary">변수 생성</button><button id="calcDelete" class="danger" style="display:none">계산변수 삭제</button></div></div></div>
 
 <!-- 이동평균 변수 -->
 <div id="maModal" class="modal"><div class="modalBox"><div class="modalHead"><h3>이동평균 변수 생성</h3><button data-close="maModal" class="gray">닫기</button></div><label>변수<select id="maVarSelect" style="width:100%;margin-top:4px"></select></label><label style="display:block;margin-top:9px">이동평균 개수 n<input id="maVarN" type="number" min="2" value="5" style="width:100%;margin-top:4px"></label><button id="maCreate" class="primary" style="margin-top:10px">생성</button></div></div>
@@ -536,6 +537,7 @@ let port=null,reader=null,keepReading=false,collecting=false,lineBuffer='',sourc
 let dataRows=[],excluded=new Set(),startTime=null,lastSample=null,totalDt=0,dtCount=0,tableDirty=false,tableTimer=null;
 let selectedRange=null,graphState=null,intervalState=null,dragStartPx=null,hoverMain=null,hoverInterval=null;
 let note={title:'',design:'',x_name:'',x_description:'',y_name:'',y_description:'',observation:'',interpretation:'',error:'',question:''};
+let calculatedDefinitions={}; // {계산변수명: 계산식}
 function fmt(n){if(!Number.isFinite(n))return '';const a=Math.abs(n);if(a>=10000||a>0&&a<0.0001)return n.toExponential(3);return n.toFixed(4).replace(/0+$/,'').replace(/\.$/,'')}
 function openModal(id){$(id).classList.add('show')} function closeModal(id){$(id).classList.remove('show')}
 document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>closeModal(b.dataset.close));
@@ -576,7 +578,7 @@ function processSerialData(d){
 function addSerialRow(d,receivedAt=null){mediaDataApplied=false;$('status').textContent='데이터 수집 중';const now=receivedAt??performance.now();if(startTime===null){startTime=now;lastSample=now}const row={time:+((now-startTime)/1000).toFixed(3),...d};dataRows.push(row);if(dataRows.length>MAX_DATA){dataRows.shift();excluded=new Set([...excluded].filter(i=>i>0).map(i=>i-1))}if(lastSample!==null&&now>lastSample){totalDt+=(now-lastSample)/1000;dtCount++;const av=totalDt/dtCount;$('sampling').textContent=`${av.toFixed(3)} s / ${(1/av).toFixed(1)} Hz`}lastSample=now;updateCounts();markTableDirty();scheduleSave()}
 function updateCounts(){$('count').textContent=dataRows.length+'개';$('activeCount').textContent=getActiveRows().length+'개'}
 function markTableDirty(){tableDirty=true} function startTableTimer(){if(tableTimer)return;tableTimer=setInterval(()=>{if(tableDirty){renderTable();tableDirty=false}},TABLE_REFRESH_MS)}
-function renderTable(){const valid=tableVars.filter(v=>allVars.includes(v));const vars=valid.length?valid:(allVars.length?allVars:['time']);$('thead').innerHTML='<tr><th>No.</th>'+vars.map(v=>`<th>${escapeHtml(v)}</th>`).join('')+'</tr>';const start=Math.max(0,dataRows.length-TABLE_RENDER_LIMIT),rows=[];for(let i=start;i<dataRows.length;i++){const r=dataRows[i],cls=excluded.has(i)?'excluded':'';rows.push(`<tr class="${cls}"><td>${i+1}</td>${vars.map(v=>`<td>${fmt(r[v])}</td>`).join('')}</tr>`)}$('tbody').innerHTML=rows.join('');const w=$('tableWrap');w.scrollTop=w.scrollHeight}
+function renderTable(){const valid=tableVars.filter(v=>allVars.includes(v));const vars=valid.length?valid:(allVars.length?allVars:['time']);$('thead').innerHTML='<tr><th>No.</th>'+vars.map(v=>Object.prototype.hasOwnProperty.call(calculatedDefinitions,v)?`<th class="calcVarHeader" data-calc-var="${escapeAttr(v)}" tabindex="0" role="button" title="계산식 확인·수정">${escapeHtml(v)} ✎</th>`:`<th>${escapeHtml(v)}</th>`).join('')+'</tr>';const start=Math.max(0,dataRows.length-TABLE_RENDER_LIMIT),rows=[];for(let i=start;i<dataRows.length;i++){const r=dataRows[i],cls=excluded.has(i)?'excluded':'';rows.push(`<tr class="${cls}"><td>${i+1}</td>${vars.map(v=>`<td>${fmt(r[v])}</td>`).join('')}</tr>`)}$('tbody').innerHTML=rows.join('');const w=$('tableWrap');w.scrollTop=w.scrollHeight}
 async function readSerial(){
   const decoder=new TextDecoder();
   try{
@@ -612,12 +614,18 @@ $('connect').onclick=async()=>{
   try{
     selectedPort=await navigator.serial.requestPort();
     await selectedPort.open({baudRate:+$('baud').value});
+    if(dataRows.length){
+      const ok=confirm('기존 실험 데이터가 있습니다. Arduino 새 수집을 시작하면 기존 데이터와 계산변수를 초기화합니다. 계속할까요?');
+      if(!ok){try{await selectedPort.close()}catch{}return}
+      dataRows=[];excluded.clear();selectedRange=null;graphState=null;intervalState=null;calculatedDefinitions={};mediaDataApplied=false;
+    }
     port=selectedPort;
     keepReading=true;
     collecting=true;
     lineBuffer='';
     sourceVars=[];allVars=[];tableVars=[];
     startTime=null;lastSample=null;totalDt=0;dtCount=0;
+    updateCounts();renderTable();clearCanvas($('chart'));clearCanvas($('intervalChart'));
     $('connect').disabled=true;
     $('disconnect').disabled=false;
     $('baud').disabled=true;
@@ -666,16 +674,23 @@ let saveTimer=null;
 function scheduleSave(){clearTimeout(saveTimer);saveTimer=setTimeout(saveSession,600)}
 function saveSession(){
   try{
-    localStorage.setItem(STORAGE_KEY,JSON.stringify({version:2,savedAt:Date.now(),dataRows,excluded:[...excluded],sourceVars,tableVars,selectedRange,note}));
+    // 자동저장은 최근 MAX_DATA행만 보관하여 localStorage 용량 초과를 줄인다.
+    const offset=Math.max(0,dataRows.length-MAX_DATA);
+    const savedRows=dataRows.slice(offset);
+    const savedExcluded=[...excluded].filter(i=>i>=offset&&i<dataRows.length).map(i=>i-offset);
+    localStorage.setItem(STORAGE_KEY,JSON.stringify({version:3,savedAt:Date.now(),dataRows:savedRows,excluded:savedExcluded,sourceVars,tableVars,selectedRange,note,calculatedDefinitions}));
   }catch(err){console.warn('ArduLab session save skipped:',err)}
 }
 function restoreSession(){
   try{
     const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return false;
-    const s=JSON.parse(raw);if(!s||s.version!==2||!Array.isArray(s.dataRows))return false;
-    dataRows=s.dataRows.slice(-MAX_DATA);
-    excluded=new Set((Array.isArray(s.excluded)?s.excluded:[]).filter(i=>Number.isInteger(i)&&i>=0&&i<dataRows.length));
+    const s=JSON.parse(raw);if(!s||![2,3].includes(s.version)||!Array.isArray(s.dataRows))return false;
+    // 구버전(v2)의 큰 저장 데이터도 인덱스가 어긋나지 않도록 offset을 함께 보정한다.
+    const offset=Math.max(0,s.dataRows.length-MAX_DATA);
+    dataRows=s.dataRows.slice(offset);
+    excluded=new Set((Array.isArray(s.excluded)?s.excluded:[]).map(i=>i-offset).filter(i=>Number.isInteger(i)&&i>=0&&i<dataRows.length));
     sourceVars=Array.isArray(s.sourceVars)?s.sourceVars:[];
+    calculatedDefinitions=s.calculatedDefinitions&&typeof s.calculatedDefinitions==='object'?{...s.calculatedDefinitions}:{};
     allVars=unionVars();
     tableVars=Array.isArray(s.tableVars)?s.tableVars.filter(v=>allVars.includes(v)):[...allVars];
     if(!tableVars.length)tableVars=[...allVars];
@@ -690,10 +705,28 @@ $('newExp').onclick=()=>openModal('newExperimentModal');
 
 // 파일 불러오기 / 저장
 $('loadFile').onclick=()=>$('fileInput').click();$('fileInput').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{if(f.name.toLowerCase().endsWith('.xlsx'))await loadXlsx(f);else loadCsvText(await f.text());}catch(err){console.error(err);alert('파일을 읽지 못했습니다: '+err.message)}e.target.value=''};
-function splitCSVLine(line){const a=[];let s='',q=false;for(let i=0;i<line.length;i++){const c=line[i];if(c==='"'){if(q&&line[i+1]==='"'){s+='"';i++}else q=!q}else if(c===','&&!q){a.push(s.trim());s=''}else s+=c}a.push(s.trim());return a}
-function loadCsvText(text){const lines=text.replace(/^\uFEFF/,'').split(/\r?\n/).filter(x=>x.trim());if(lines.length<2)throw new Error('데이터가 부족합니다.');const headers=splitCSVLine(lines[0]).map(x=>x.trim());const rows=[];for(const l of lines.slice(1)){const c=splitCSVLine(l),r={};headers.forEach((h,i)=>{if(!h)return;const n=Number(String(c[i]??'').replace(/,/g,''));if(Number.isFinite(n))r[h]=n});if(Object.keys(r).length)rows.push(r)}applyLoadedRows(rows,headers,'CSV 파일 분석 모드')}
+function parseCSVRows(text){
+  text=text.replace(/^\uFEFF/,'');
+  const rows=[];let row=[],cell='',quoted=false;
+  for(let i=0;i<text.length;i++){
+    const c=text[i];
+    if(c==='"'){
+      if(quoted&&text[i+1]==='"'){cell+='"';i++}else quoted=!quoted;
+    }else if(c===','&&!quoted){row.push(cell.trim());cell=''}
+    else if((c==='\n'||c==='\r')&&!quoted){
+      if(c==='\r'&&text[i+1]==='\n')i++;
+      row.push(cell.trim());cell='';
+      if(row.some(v=>String(v).trim()!==''))rows.push(row);
+      row=[];
+    }else cell+=c;
+  }
+  row.push(cell.trim());if(row.some(v=>String(v).trim()!==''))rows.push(row);
+  if(quoted)throw new Error('CSV 따옴표가 닫히지 않았습니다.');
+  return rows;
+}
+function loadCsvText(text){const arr=parseCSVRows(text);if(arr.length<2)throw new Error('데이터가 부족합니다.');const headers=arr[0].map(x=>String(x).trim()),rows=[];for(const c of arr.slice(1)){const r={};headers.forEach((h,i)=>{if(!h)return;const n=Number(String(c[i]??'').replace(/,/g,''));if(Number.isFinite(n))r[h]=n});if(Object.keys(r).length)rows.push(r)}applyLoadedRows(rows,headers,'CSV 파일 분석 모드')}
 async function loadXlsx(file){if(typeof XLSX==='undefined')throw new Error('Excel 처리 라이브러리를 불러오지 못했습니다. 인터넷 연결을 확인해 주세요.');const buf=await file.arrayBuffer(),wb=XLSX.read(buf,{type:'array'}),ws=wb.Sheets[wb.SheetNames[0]],arr=XLSX.utils.sheet_to_json(ws,{header:1,raw:true,defval:''});if(arr.length<2)throw new Error('데이터가 부족합니다.');const headers=arr[0].map(x=>String(x).trim()),rows=[];for(const vals of arr.slice(1)){const r={};headers.forEach((h,i)=>{if(!h)return;const v=vals[i],n=typeof v==='number'?v:Number(String(v).replace(/,/g,''));if(Number.isFinite(n))r[h]=n});if(Object.keys(r).length)rows.push(r)}applyLoadedRows(rows,headers,'Excel 파일 분석 모드')}
-function applyLoadedRows(rows,headers,msg){if(!rows.length)throw new Error('읽을 수 있는 숫자 데이터가 없습니다.');mediaDataApplied=false;dataRows=rows;excluded.clear();sourceVars=[];allVars=unionVars();tableVars=[...allVars];selectedRange=null;refreshVarUI();updateCounts();renderTable();$('status').textContent=msg;$('schemaMsg').textContent='파일 데이터 불러오기 완료';scheduleSave()}
+function applyLoadedRows(rows,headers,msg){if(!rows.length)throw new Error('읽을 수 있는 숫자 데이터가 없습니다.');mediaDataApplied=false;dataRows=rows;excluded.clear();sourceVars=[];calculatedDefinitions={};allVars=unionVars();tableVars=[...allVars];selectedRange=null;refreshVarUI();updateCounts();renderTable();$('status').textContent=msg;$('schemaMsg').textContent='파일 데이터 불러오기 완료';scheduleSave()}
 function csvEscape(x){const s=String(x??'');return /[",\n]/.test(s)?`"${s.replace(/"/g,'""')}"`:s}
 $('saveCsv').onclick=()=>{const rows=getActiveRows();if(!rows.length){alert('저장할 분석 데이터가 없습니다.');return}const cols=tableVars.length?tableVars:allVars;if(!cols.length){alert('표에 저장할 변수를 선택해 주세요.');return}const lines=[cols.map(csvEscape).join(',')];for(const r of rows)lines.push(cols.map(c=>csvEscape(r[c]??'')).join(','));downloadBlob(new Blob(['\ufeff'+lines.join('\n')],{type:'text/csv;charset=utf-8'}),`ArduLab_data_${stamp()}.csv`)};
 
@@ -712,9 +745,14 @@ function manualPaste(e){const text=e.clipboardData.getData('text/plain');if(!tex
 $('manualBtn').onclick=()=>{if(!manualData.length)initManual();openModal('manualModal')};$('addRows').onclick=()=>{for(let i=0;i<10;i++)manualData.push(Array(manualData[0]?.length||6).fill(''));renderManual()};$('addCols').onclick=()=>{manualData.forEach(r=>r.push('','',''));renderManual()};$('manualClear').onclick=()=>initManual();$('manualExample').onclick=()=>{initManual();const ex=[['Voltage','Current','Resistance'],['0','0.000','10'],['1','0.100','10'],['2','0.200','10'],['3','0.300','10'],['4','0.400','10'],['5','0.500','10']];ex.forEach((r,i)=>r.forEach((v,j)=>manualData[i][j]=v));renderManual()};$('manualApply').onclick=()=>{const headers=manualData[0].map((x,i)=>String(x).trim()||`Variable${i+1}`),rows=[];for(const vals of manualData.slice(1)){const r={};vals.forEach((v,i)=>{const n=Number(String(v).replace(/,/g,''));if(Number.isFinite(n)&&String(v).trim()!=='')r[headers[i]]=n});if(Object.keys(r).length)rows.push(r)}if(!rows.length){alert('분석에 사용할 숫자 데이터가 없습니다.');return}applyLoadedRows(rows,headers,'수동입력 분석 모드');closeModal('manualModal')};
 
 // 계산 변수
+let calcEditName=null;
 function refreshCalcButtons(){const box=$('calcVarButtons');box.innerHTML=allVars.map(v=>`<button type="button" class="soft small" data-var="${escapeAttr(v)}">${escapeHtml(v)}</button>`).join('');box.querySelectorAll('[data-var]').forEach(b=>b.onclick=()=>insertCalcToken(b.dataset.var))}
 function insertCalcToken(token){const el=$('calcExpr'),start=el.selectionStart??el.value.length,end=el.selectionEnd??el.value.length;el.value=el.value.slice(0,start)+token+el.value.slice(end);const p=start+token.length;el.focus();el.setSelectionRange(p,p)}
-$('calcVarBtn').onclick=()=>{refreshCalcButtons();openModal('calcModal')};
+function openNewCalcModal(){calcEditName=null;$('calcModalTitle').textContent='계산 변수 추가';$('calcName').readOnly=false;$('calcName').value='';$('calcExpr').value='';$('calcApply').textContent='변수 생성';$('calcDelete').style.display='none';refreshCalcButtons();openModal('calcModal')}
+function openCalcEditor(name){if(!Object.prototype.hasOwnProperty.call(calculatedDefinitions,name))return;calcEditName=name;$('calcModalTitle').textContent='계산 변수 확인·수정';$('calcName').value=name;$('calcName').readOnly=true;$('calcExpr').value=calculatedDefinitions[name];$('calcApply').textContent='수정 적용';$('calcDelete').style.display='inline-block';refreshCalcButtons();openModal('calcModal')}
+$('calcVarBtn').onclick=openNewCalcModal;
+$('thead').addEventListener('click',e=>{const th=e.target.closest('[data-calc-var]');if(th)openCalcEditor(th.dataset.calcVar)});
+$('thead').addEventListener('keydown',e=>{const th=e.target.closest('[data-calc-var]');if(th&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openCalcEditor(th.dataset.calcVar)}});
 document.querySelectorAll('#calcKeypad [data-calc]').forEach(b=>b.onclick=()=>insertCalcToken(b.dataset.calc));
 let calculusMode='diff';
 
@@ -729,10 +767,7 @@ function openCalculusPicker(mode){
   xSel.innerHTML=allVars.map(v=>`<option value="${escapeAttr(v)}">${escapeHtml(v)}</option>`).join('');
   ySel.innerHTML=allVars.map(v=>`<option value="${escapeAttr(v)}">${escapeHtml(v)}</option>`).join('');
 
-  // time이 있으면 X의 편리한 초기 위치로만 보여주되,
-  // 학생이 반드시 선택해서 결정할 수 있도록 한다.
   if(allVars.includes('time')) xSel.value='time';
-
   const firstY=allVars.find(v=>v!==xSel.value) || allVars[0];
   if(firstY) ySel.value=firstY;
 
@@ -746,28 +781,86 @@ function openCalculusPicker(mode){
 
 $('calcDiffBtn').onclick=()=>openCalculusPicker('diff');
 $('calcIntegBtn').onclick=()=>openCalculusPicker('integ');
-
 $('calculusInsertBtn').onclick=()=>{
-  const x=$('calculusX').value;
-  const y=$('calculusY').value;
-  if(!x||!y){
-    alert('X 변수와 Y 변수를 모두 선택해 주세요.');
-    return;
-  }
-  if(x===y){
-    alert('X 변수와 Y 변수는 서로 다른 변수를 선택해 주세요.');
-    return;
-  }
-  const token=calculusMode==='diff'
-    ? `diff("${y}","${x}")`
-    : `integ("${y}","${x}")`;
-  insertCalcToken(token);
+  const x=$('calculusX').value,y=$('calculusY').value;
+  if(!x||!y){alert('X 변수와 Y 변수를 모두 선택해 주세요.');return}
+  if(x===y){alert('X 변수와 Y 변수는 서로 다른 변수를 선택해 주세요.');return}
+  insertCalcToken(calculusMode==='diff'?`diff("${y}","${x}")`:`integ("${y}","${x}")`);
   closeModal('calculusModal');
 };
 $('calcBack').onclick=()=>{const el=$('calcExpr'),p=el.selectionStart??el.value.length;if(p>0){el.value=el.value.slice(0,p-1)+el.value.slice(el.selectionEnd??p);el.focus();el.setSelectionRange(p-1,p-1)}};
 $('calcClear').onclick=()=>{$('calcExpr').value='';$('calcExpr').focus()};
 let calcIntegCache=new Map();
-$('calcApply').onclick=()=>{const name=$('calcName').value.trim(),expr=$('calcExpr').value.trim();if(!/^[A-Za-z가-힣_][A-Za-z0-9가-힣_]*$/.test(name)){alert('변수 이름은 영어·한글·_로 시작하고 영어/한글/숫자/_만 사용할 수 있습니다.');return}if(!expr)return;calcIntegCache.clear();let success=0;for(let i=0;i<dataRows.length;i++){try{const v=calcExpression(expr,i);if(Number.isFinite(v)){dataRows[i][name]=v;success++}else dataRows[i][name]=''}catch{dataRows[i][name]=''}}if(!success){alert('계산된 값이 없습니다. 변수명과 수식을 확인하세요.');return}syncVars();if(!tableVars.includes(name))tableVars.push(name);renderTable();scheduleSave();closeModal('calcModal');alert(`계산 변수 '${name}'이 추가되었습니다. 계산 성공: ${success}개`)};
+
+function calcDependencies(expr){
+  const deps=new Set(),reserved=new Set(['sqrt','log','sin','cos','tan','abs','pi','diff','integ']);
+  for(const m of expr.matchAll(/(?:diff|integ)\(\s*["']([\p{L}_][\p{L}\p{N}_]*)["'](?:\s*,\s*["']([\p{L}_][\p{L}\p{N}_]*)["'])?\s*\)/gu)){deps.add(m[1]);if(m[2])deps.add(m[2]);else deps.add('time')}
+  const scrub=expr.replace(/(?:diff|integ)\([^)]*\)/gu,' ');
+  for(const m of scrub.matchAll(/(?<![0-9.])[\p{L}_][\p{L}\p{N}_]*/gu))if(!reserved.has(m[0]))deps.add(m[0]);
+  return [...deps];
+}
+function calcOrder(defs){
+  const state={},out=[];
+  function visit(name,trail=[]){
+    if(state[name]===2)return;
+    if(state[name]===1)throw new Error(`계산변수 순환 참조: ${[...trail,name].join(' → ')}`);
+    state[name]=1;
+    for(const d of calcDependencies(defs[name]))if(Object.prototype.hasOwnProperty.call(defs,d))visit(d,[...trail,name]);
+    state[name]=2;out.push(name);
+  }
+  Object.keys(defs).forEach(n=>visit(n));return out;
+}
+function recalculateCalculatedVariables(){
+  const defs=calculatedDefinitions,order=calcOrder(defs);
+  // 이전 계산값을 먼저 지워 오래된 값이 새 계산에 섞이지 않게 한다.
+  for(const r of dataRows)for(const name of Object.keys(defs))delete r[name];
+  for(const name of order){
+    const expr=defs[name];calcIntegCache.clear();let success=0;
+    for(let i=0;i<dataRows.length;i++){
+      try{const v=calcExpression(expr,i);if(Number.isFinite(v)){dataRows[i][name]=v;success++}else dataRows[i][name]=''}catch{dataRows[i][name]=''}
+    }
+    if(!success)throw new Error(`'${name}' 계산 결과가 없습니다. 변수명과 수식을 확인하세요.`);
+  }
+}
+function applyCalcDefinition(name,expr){
+  if(!/^[A-Za-z가-힣_][A-Za-z0-9가-힣_]*$/.test(name))throw new Error('변수 이름은 영어·한글·_로 시작하고 영어/한글/숫자/_만 사용할 수 있습니다.');
+  if(!expr)throw new Error('계산식을 입력해 주세요.');
+  if(!calcEditName && allVars.includes(name) && !Object.prototype.hasOwnProperty.call(calculatedDefinitions,name))throw new Error(`'${name}'은 이미 원본 변수로 존재합니다. 다른 이름을 사용해 주세요.`);
+  const before={...calculatedDefinitions};
+  calculatedDefinitions[name]=expr;
+  try{recalculateCalculatedVariables()}catch(err){calculatedDefinitions=before;try{recalculateCalculatedVariables()}catch{}throw err}
+  syncVars();if(!tableVars.includes(name))tableVars.push(name);renderTable();scheduleSave();
+}
+$('calcApply').onclick=()=>{
+  const name=$('calcName').value.trim(),expr=$('calcExpr').value.trim();
+  try{applyCalcDefinition(name,expr)}catch(err){alert(err.message||'계산식을 확인해 주세요.');return}
+  const edited=!!calcEditName;calcEditName=null;closeModal('calcModal');alert(edited?`계산 변수 '${name}'의 식을 수정하고 다시 계산했습니다.`:`계산 변수 '${name}'이 추가되었습니다.`);
+};
+$('calcDelete').onclick=()=>{
+  const name=calcEditName;if(!name)return;
+  const dependents=Object.entries(calculatedDefinitions).filter(([n,e])=>n!==name&&calcDependencies(e).includes(name)).map(([n])=>n);
+  if(dependents.length){alert(`'${name}'을 사용하는 계산변수가 있어 삭제할 수 없습니다: ${dependents.join(', ')}`);return}
+  if(!confirm(`계산 변수 '${name}'을 삭제할까요?`))return;
+  delete calculatedDefinitions[name];for(const r of dataRows)delete r[name];tableVars=tableVars.filter(v=>v!==name);calcIntegCache.clear();syncVars();renderTable();scheduleSave();calcEditName=null;closeModal('calcModal');
+};
+
+function evalMathExpression(src){
+  let i=0;
+  const skip=()=>{while(/\s/.test(src[i]||''))i++};
+  function number(){skip();const m=src.slice(i).match(/^(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+\-]?\d+)?/);if(!m)throw new Error('숫자 형식 오류');i+=m[0].length;return Number(m[0])}
+  function primary(){
+    skip();
+    if(src[i]==='('){i++;const v=add();skip();if(src[i]!==')')throw new Error('괄호 오류');i++;return v}
+    const fm=src.slice(i).match(/^(sqrt|log|sin|cos|tan|abs)\s*\(/);
+    if(fm){const fn=fm[1];i+=fm[0].length;const v=add();skip();if(src[i]!==')')throw new Error('함수 괄호 오류');i++;return Math[fn](v)}
+    return number();
+  }
+  function unary(){skip();if(src[i]==='+'){i++;return unary()}if(src[i]==='-'){i++;return -unary()}return primary()}
+  function power(){let v=unary();skip();if(src.slice(i,i+2)==='**'){i+=2;v=v**power()}return v}
+  function mul(){let v=power();for(;;){skip();if(src.slice(i,i+2)==='**')break;const op=src[i];if(!['*','/','%'].includes(op))break;i++;const b=power();v=op==='*'?v*b:op==='/'?v/b:v%b}return v}
+  function add(){let v=mul();for(;;){skip();const op=src[i];if(op!=='+'&&op!=='-')break;i++;const b=mul();v=op==='+'?v+b:v-b}return v}
+  const v=add();skip();if(i!==src.length)throw new Error('지원하지 않는 계산식');return v;
+}
 function calcExpression(expr,i){
   let s=expr.trim();
   const ident='([\\p{L}_][\\p{L}\\p{N}_]*)';
@@ -775,16 +868,15 @@ function calcExpression(expr,i){
    .replace(new RegExp(`integ\\(\\s*["']${ident}["']\\s*,\\s*["']${ident}["']\\s*\\)`,'gu'),(_,y,x)=>String(calcInteg(y,x,i)))
    .replace(new RegExp(`diff\\(\\s*["']${ident}["']\\s*\\)`,'gu'),(_,y)=>String(calcDiff(y,'time',i)))
    .replace(new RegExp(`integ\\(\\s*["']${ident}["']\\s*\\)`,'gu'),(_,y)=>String(calcInteg(y,'time',i)));
-  const funcs={sqrt:'Math.sqrt',log:'Math.log',sin:'Math.sin',cos:'Math.cos',tan:'Math.tan',abs:'Math.abs'};
-  s=s.replace(/[\p{L}_][\p{L}\p{N}_]*/gu,id=>{
+  const funcs=new Set(['sqrt','log','sin','cos','tan','abs']);
+  s=s.replace(/(?<![0-9.])[\p{L}_][\p{L}\p{N}_]*/gu,id=>{
     if(id==='pi')return String(Math.PI);
-    if(Object.prototype.hasOwnProperty.call(funcs,id))return id;
+    if(funcs.has(id))return id;
     if(!Object.prototype.hasOwnProperty.call(dataRows[i],id))throw new Error('unknown');
     const v=dataRows[i][id];if(!Number.isFinite(v))throw new Error('nan');return `(${v})`;
   });
-  for(const [k,v] of Object.entries(funcs))s=s.replace(new RegExp(`\\b${k}\\s*\\(`,'g'),v+'(');
   if(!/^[0-9eE+\-*/%().,\sA-Za-z]+$/.test(s))throw new Error('unsafe');
-  return Function(`"use strict";return (${s})`)();
+  return evalMathExpression(s);
 }
 function calcDiff(yVar,xVar,i){
   const n=dataRows.length;if(n<2||i<0||i>=n)return NaN;
@@ -930,7 +1022,8 @@ function yAxisFromPoints(pts,applyCustom=false){
     const a=$('yMin').value.trim(),b=$('yMax').value.trim();
     if(a!==''&&Number.isFinite(Number(a)))ymin=Number(a);
     if(b!==''&&Number.isFinite(Number(b)))ymax=Number(b);
-    if(ymin===ymax){ymin-=1;ymax+=1}
+    if(ymin>ymax)[ymin,ymax]=[ymax,ymin];
+    if(ymin===ymax){const d=Math.abs(ymin)*.05||1;ymin-=d;ymax+=d}
   }
   return{ymin,ymax};
 }
@@ -941,6 +1034,8 @@ function getXaxisConfig(seriesData){
     const a=$('xMin').value.trim(),b=$('xMax').value.trim();
     if(a!==''&&Number.isFinite(Number(a)))xmin=Number(a);
     if(b!==''&&Number.isFinite(Number(b)))xmax=Number(b);
+    if(xmin>xmax)[xmin,xmax]=[xmax,xmin];
+    if(xmin===xmax){const d=Math.abs(xmin)*.05||1;xmin-=d;xmax+=d}
   }
   return{xmin,xmax};
 }
@@ -1259,6 +1354,7 @@ function resetWholeExperiment(){
   sourceVars=[];
   allVars=[];
   tableVars=[];
+  calculatedDefinitions={};
   selectedRange=null;
   graphState=null;
   intervalState=null;
@@ -1845,13 +1941,13 @@ function animateVideo(){
 }
 
 $('videoPlayBtn').onclick=()=>{
-  const fps=validatePositiveNumber($('videoFps').value,'FPS',true);
+  const fps=validatePositiveNumber($('videoFps').value,'FPS',false);
   if(fps===null)return;
   mediaVideo.paused?mediaVideo.play():mediaVideo.pause();
 };
 function stepFrame(dir){
   if(mediaKind!=='video')return;
-  const fps=validatePositiveNumber($('videoFps').value,'FPS',true);
+  const fps=validatePositiveNumber($('videoFps').value,'FPS',false);
   if(fps===null)return;
   mediaVideo.pause();
   mediaVideo.currentTime=Math.max(0,Math.min(mediaVideo.duration||Infinity,mediaVideo.currentTime+dir/fps));
@@ -2257,7 +2353,7 @@ function autoAdvanceAfterPoint(){
   if(mediaKind!=='video'||!$('autoAdvanceCheck')?.checked)return;
   const frames=getAutoAdvanceFrames();
   if(frames===null)return;
-  const fps=validatePositiveNumber($('videoFps').value,'FPS',true);
+  const fps=validatePositiveNumber($('videoFps').value,'FPS',false);
   if(fps===null)return;
   mediaVideo.pause();
   mediaVideo.currentTime=Math.min(mediaVideo.duration||Infinity,mediaVideo.currentTime+frames/fps);
@@ -2610,7 +2706,7 @@ function applyMediaPointsToData(silent=false){
   let rows=[],headers=[];
 
   if(mediaKind==='video'){
-    const fps=validatePositiveNumber($('videoFps').value,'FPS',true);if(fps===null)return;
+    const fps=validatePositiveNumber($('videoFps').value,'FPS',false);if(fps===null)return;
     const frameOf=p=>Number.isInteger(p.frame)?p.frame:Math.max(0,Math.round(Number(p.time||0)*fps));
     const frameSet=new Set();
     [1,2,3].forEach(tid=>(mediaPointsByTarget[tid]||[]).forEach(p=>frameSet.add(frameOf(p))));
