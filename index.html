@@ -95,6 +95,13 @@
 .inputPanel{border-top:4px solid #cfe8e9}.inputPanel.active{animation:panelIn .16s ease-out}@keyframes panelIn{from{opacity:.55;transform:translateY(-3px)}to{opacity:1;transform:none}}.inputPanelKicker{font-size:10px;letter-spacing:.12em;font-weight:900;color:#8b96a3;text-transform:uppercase;margin-bottom:5px}.inputPanel h2{font-size:20px}.inputLead{font-size:13px;color:#6d7684;line-height:1.55;margin:-4px 0 13px}.subBadge{font-size:10px;vertical-align:middle;background:#edf0f4;color:#596575;border-radius:999px;padding:4px 7px;margin-left:5px}
 .analysisHub{background:linear-gradient(135deg,#fff9f2,#fff);border:1px solid #f4d5b5;border-radius:18px;padding:18px 20px;margin:22px 0 12px;box-shadow:0 5px 18px #8e4b1008}.analysisBrandRow{display:flex;align-items:center;justify-content:space-between;gap:18px}.analysisHubTitle{font-size:22px;font-weight:950;letter-spacing:-.3px}.arduText{color:var(--a)}.labText{color:var(--o)}.analysisHubDesc{font-size:13px;color:#6d7684;margin-top:7px;line-height:1.5}.analysisSteps{display:flex;align-items:center;gap:7px;flex-wrap:wrap;justify-content:flex-end}.analysisSteps span{background:#fff;border:1px solid #eadbc9;border-radius:999px;padding:7px 9px;font-size:11px;font-weight:900;color:#566272}.analysisSteps b{color:#c7a982}.commonActions #goAnalysisBtn{margin-left:5px}
 @media(max-width:760px){.sciHead{align-items:flex-start}.sciLogo{font-size:37px}.sciPurpose{display:none}.modeHubTitle{font-size:18px}.modeHubSubtitle{text-align:left}.analysisBrandRow{display:block}.analysisSteps{justify-content:flex-start;margin-top:13px}.flowBridge{flex-wrap:wrap}.commonActions #goAnalysisBtn{width:100%;margin-left:0}}
+
+.analysisSendBtn{width:100%;min-height:54px;margin-top:12px;border:0;border-radius:14px;background:linear-gradient(90deg,#00979d,#18aab0);color:white;font-size:15px;font-weight:950;letter-spacing:-.1px;box-shadow:0 7px 18px #00979d24;cursor:pointer}.analysisSendBtn:hover{filter:brightness(.98);transform:translateY(-1px)}
+.sendBoundary{margin-top:18px;padding-top:14px;border-top:2px dashed #d7e4e7}.sendBoundary .sendHint{text-align:center;font-size:11px;color:#7a8794;margin-bottom:5px;font-weight:700}
+.simIntro{border:1px solid #dce6ec;background:linear-gradient(135deg,#f8fbfd,#f5fbfb);border-radius:14px;padding:14px;margin-bottom:13px}.simIntro b{color:#177f84}.simCats{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:12px 0}.simCatBtn{border:1px solid #dfe5ec;background:#fff;border-radius:12px;padding:11px 7px;text-align:center;font-weight:900;color:#44515e;cursor:pointer}.simCatBtn span{display:block;font-size:22px;margin-bottom:4px}.simCatBtn.active{border-color:#56b9bd;background:#eaf8f8;color:#08767b}.simExperimentGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:8px 0 14px}.simExpBtn{border:1px solid #dde5ec;background:#fff;border-radius:12px;padding:12px;text-align:left;cursor:pointer;min-height:86px}.simExpBtn:hover{box-shadow:0 6px 15px #23384c12}.simExpBtn.active{border-color:#f3a253;background:#fff8f0}.simExpName{font-size:13px;font-weight:950;color:#2d3945}.simExpDesc{font-size:10px;color:#788491;line-height:1.4;margin-top:5px}.simFrameWrap{border:1px solid #dce4eb;border-radius:14px;overflow:hidden;background:#f7f9fc}.generalSimFrame{width:100%;height:780px;border:0;display:block;background:#f6f8fb}.simHidden{display:none!important}
+@media(max-width:900px){.simCats{grid-template-columns:repeat(3,1fr)}.simExperimentGrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:580px){.simCats{grid-template-columns:repeat(2,1fr)}.simExperimentGrid{grid-template-columns:1fr}.generalSimFrame{height:980px}}
+
 </style>
 </head>
 <body>
@@ -110,19 +117,19 @@
 <section class="modeHub acquisitionHub">
   <div class="stageEyebrow">SCIENCE WORKFLOW</div>
   <div class="modeHubTitle"><span class="stageNo">1</span> 데이터를 어떻게 만들까요?</div>
-  <div class="modeHubSubtitle">실험·측정 방법을 선택하세요. 어떤 방법을 사용해도 만들어진 데이터는 공통 분석 도구 <b>ArduLab</b>으로 이어집니다.</div>
+  <div class="modeHubSubtitle">실험·측정 방법을 선택하세요. 각 도구에서 만든 데이터는 <b>「수집한 데이터를 분석으로 보내기」</b>를 눌러 공통 데이터 분석 영역으로 전달합니다.</div>
   <div class="modeChooser">
-    <button class="modeBtn active" data-input-mode="arduino"><span class="modeIcon">🔌</span><span class="modeName">센서 실험</span><span class="modeDesc">Arduino · Web Serial로 센서 데이터를 실시간 수집</span><span class="modeFlow">실시간 측정 → ArduLab</span></button>
-    <button class="modeBtn" data-input-mode="media"><span class="modeIcon">📷</span><span class="modeName">영상 측정</span><span class="modeDesc">사진·영상에서 위치와 움직임을 좌표 데이터로 측정</span><span class="modeFlow">좌표 측정 → ArduLab</span></button>
-    <button class="modeBtn" data-input-mode="wind"><span class="modeIcon">🌬️</span><span class="modeName">가상 실험</span><span class="modeDesc">풍동 시뮬레이션으로 물리 현상을 실험하고 측정</span><span class="modeFlow">가상 측정 → ArduLab</span></button>
-    <button class="modeBtn" data-input-mode="file"><span class="modeIcon">📂</span><span class="modeName">데이터 가져오기</span><span class="modeDesc">CSV · Excel · 직접 입력 · 예제 데이터를 불러오기</span><span class="modeFlow">기존 데이터 → ArduLab</span></button>
+    <button class="modeBtn active" data-input-mode="arduino"><span class="modeIcon">🔌</span><span class="modeName">ArduLab</span><span class="modeDesc">Arduino · Web Serial로 센서 데이터를 실시간 수집</span><span class="modeFlow">피지컬 컴퓨팅 기반 데이터 수집</span></button>
+    <button class="modeBtn" data-input-mode="media"><span class="modeIcon">📷</span><span class="modeName">영상 분석</span><span class="modeDesc">사진·영상에서 위치와 움직임을 좌표 데이터로 측정</span><span class="modeFlow">영상에서 측정 데이터 생성</span></button>
+    <button class="modeBtn" data-input-mode="wind"><span class="modeIcon">🌬️</span><span class="modeName">시뮬레이션 실험</span><span class="modeDesc">여러 과학 영역의 가상 실험으로 데이터를 생성</span><span class="modeFlow">가상 실험 데이터 생성</span></button>
+    <button class="modeBtn" data-input-mode="file"><span class="modeIcon">📂</span><span class="modeName">데이터 가져오기</span><span class="modeDesc">CSV · Excel · 직접 입력 · 예제 데이터를 불러오기</span><span class="modeFlow">외부·수동 데이터 준비</span></button>
   </div>
-  <div class="flowBridge"><span>데이터 수집·생성</span><b>↓</b><span class="ardulabChip">ArduLab 공통 분석</span></div>
-  <div class="commonActions"><button id="newExp" class="danger">새 실험</button><button id="saveCsv" class="soft">CSV 저장</button><button id="noteBtn" class="gray">실험노트</button><button id="guideBtn" class="gray">❓ 사용 안내</button><button id="goAnalysisBtn" class="primary" type="button">ArduLab 분석실로 이동 ↓</button></div>
+  <div class="flowBridge"><span>① 데이터 수집·생성</span><b>→</b><span class="ardulabChip">분석데이터 보내기</span><b>→</b><span>② 데이터 분석</span></div>
+  <div class="commonActions"><button id="newExp" class="danger">새 실험</button><button id="saveCsv" class="soft">CSV 저장</button><button id="noteBtn" class="gray">실험노트</button><button id="guideBtn" class="gray">❓ 사용 안내</button><button id="goAnalysisBtn" class="primary" type="button">데이터 분석 영역으로 이동 ↓</button></div>
 </section>
 
 <section id="arduinoInputPanel" class="card inputPanel active">
-  <div class="inputPanelKicker">데이터 수집</div><h2>🔌 센서 실험 <span class="subBadge">Arduino</span></h2><p class="inputLead">센서를 연결해 실시간 데이터를 수집합니다. 수집된 값은 아래 ArduLab 분석실에 자동으로 쌓입니다.</p>
+  <div class="inputPanelKicker">데이터 수집</div><h2>🔌 ArduLab <span class="subBadge">Arduino</span></h2><p class="inputLead">피지컬 컴퓨팅 기반으로 Arduino 센서 데이터를 실시간 수집합니다. 측정이 끝나면 아래 전송 버튼으로 데이터 분석 영역에 넘깁니다.</p>
   <div class="row">
     <label>보드레이트
       <select id="baud"><option>9600</option><option>19200</option><option>38400</option><option>57600</option><option>115200</option></select>
@@ -131,11 +138,11 @@
     <button id="disconnect" class="gray" disabled>연결 해제</button>
     <button id="collect" class="orange" disabled>▶ 수집 시작</button>
   </div>
-  
+  <div class="sendBoundary"><div class="sendHint">데이터 수집과 데이터 분석의 경계</div><button class="analysisSendBtn" data-send-analysis>수집한 데이터를 분석으로 보내기 →</button></div>
 </section>
 
 <section id="mediaInputPanel" class="card inputPanel">
-  <div class="inputPanelKicker">데이터 측정</div><h2>📷 영상 측정</h2><p class="inputLead">사진이나 영상에서 위치를 기록해 시간·좌표 데이터를 만듭니다. 측정이 끝나면 ArduLab 데이터로 적용하세요.</p>
+  <div class="inputPanelKicker">데이터 수집</div><h2>📷 영상 분석</h2><p class="inputLead">사진이나 영상에서 위치를 기록해 시간·좌표 데이터를 만듭니다. 측정이 끝나면 공통 데이터 분석 영역으로 보냅니다.</p>
   <div class="row">
     <button id="loadImageBtn" class="primary">사진 불러오기</button>
     <button id="loadVideoBtn" class="primary">영상 불러오기</button>
@@ -231,26 +238,36 @@
   </div>
 
   <div class="row" style="margin-top:10px">
-    <button id="applyMediaDataBtn" class="primary">ArduLab 데이터로 적용</button>
-    <span class="muted">적용하면 아래의 기존 표·그래프·회귀·구간분석 기능을 그대로 사용할 수 있습니다.</span>
+    <button id="applyMediaDataBtn" class="analysisSendBtn">수집한 데이터를 분석으로 보내기 →</button>
+    <span class="muted">영상에서 기록한 좌표 데이터를 공통 데이터 분석 영역으로 전달합니다.</span>
   </div>
 </section>
 
 <section id="fileInputPanel" class="card inputPanel">
-  <div class="inputPanelKicker">데이터 가져오기</div><h2>📂 데이터 가져오기</h2><p class="inputLead">이미 가지고 있는 데이터를 불러오거나 직접 입력한 뒤 ArduLab에서 바로 분석합니다.</p>
+  <div class="inputPanelKicker">데이터 가져오기</div><h2>📂 데이터 가져오기</h2><p class="inputLead">이미 가지고 있는 데이터를 불러오거나 직접 입력해 분석할 데이터를 준비합니다.</p>
   <div class="row">
     <button id="loadFile" class="soft">CSV/Excel 불러오기</button>
     <input id="fileInput" type="file" accept=".csv,.xlsx,text/csv" hidden>
     <button id="manualBtn" class="soft">데이터 수동입력</button>
     <button id="sampleBtn" class="soft">예제 데이터</button>
   </div>
-  <p class="muted">CSV/Excel, 직접 입력 데이터, 예제 데이터를 불러오면 아래 ArduLab의 동일한 표·그래프·회귀·구간분석 기능을 사용할 수 있습니다.</p>
+  <p class="muted">CSV/Excel, 직접 입력 데이터, 예제 데이터를 준비한 뒤 아래 전송 버튼을 눌러 공통 데이터 분석 영역으로 이동합니다.</p>
+  <div class="sendBoundary"><div class="sendHint">데이터 수집과 데이터 분석의 경계</div><button class="analysisSendBtn" data-send-analysis>수집한 데이터를 분석으로 보내기 →</button></div>
 </section>
 
 <section id="windInputPanel" class="card inputPanel">
-  <div class="inputPanelKicker">가상 데이터 생성</div><h2>🌬️ 가상 실험 <span class="subBadge">풍동</span></h2><p class="inputLead">시뮬레이션으로 현상을 바꾸어가며 측정값을 만들고, 기록된 데이터를 ArduLab으로 보냅니다.</p>
-  <div class="windLabIntro">베르누이, 날개 양력·실속, 마그누스 효과, 자유 STL 풍동을 탐구할 수 있습니다. 풍동에서 기록한 측정값은 공통 분석 도구 ArduLab으로 전송됩니다.</div>
-  <div class="windFrameWrap"><iframe id="windLabFrame" class="windFrame" title="ArduLab 가상 풍동 실험실" srcdoc="&lt;!doctype html&gt;
+  <div class="inputPanelKicker">데이터 수집 · 가상 실험</div><h2>🧪 시뮬레이션 실험</h2><p class="inputLead">과학 영역을 선택하고 가상 실험을 수행해 데이터를 생성합니다. 실험별 전송 버튼을 누르면 공통 데이터 분석 영역으로 넘어갑니다.</p>
+  <div class="simIntro"><b>영역별 시뮬레이션 실험</b><br><span class="muted">현재 유체역학 · 역학 · 파동·진동 · 전기 · 광학 · 천체운동 실험을 제공합니다. 각 실험은 독립적으로 데이터를 생성합니다.</span></div>
+  <div class="simCats" id="simCats">
+    <button class="simCatBtn active" data-sim-cat="fluid"><span>🌊</span>유체역학</button>
+    <button class="simCatBtn" data-sim-cat="mechanics"><span>🏃</span>역학</button>
+    <button class="simCatBtn" data-sim-cat="waves"><span>🌊</span>파동·진동</button>
+    <button class="simCatBtn" data-sim-cat="electric"><span>⚡</span>전기</button>
+    <button class="simCatBtn" data-sim-cat="optics"><span>🔭</span>광학</button>
+    <button class="simCatBtn" data-sim-cat="astro"><span>🌌</span>천체운동</button>
+  </div>
+  <div id="simExperimentGrid" class="simExperimentGrid"></div>
+  <div id="windFrameWrap" class="windFrameWrap"><iframe id="windLabFrame" class="windFrame" title="ArduLab 가상 풍동 실험실" srcdoc="&lt;!doctype html&gt;
 &lt;html lang=&quot;ko&quot;&gt;
 &lt;head&gt;
 &lt;meta charset=&quot;utf-8&quot; /&gt;
@@ -319,7 +336,7 @@ main{min-height:0;display:grid;grid-template-columns:330px 1fr 330px;gap:12px;pa
 
   &lt;div class=&quot;button-grid&quot;&gt;&lt;button class=&quot;primary&quot; id=&quot;startExperiment&quot;&gt;실험 시작&lt;/button&gt;&lt;button class=&quot;danger&quot; id=&quot;stopExperiment&quot; disabled&gt;실험 종료&lt;/button&gt;&lt;/div&gt;
   &lt;div class=&quot;state-line&quot; id=&quot;experimentState&quot;&gt;대기 중 · 조건을 설정한 뒤 실험을 시작하세요.&lt;/div&gt;
-  &lt;button class=&quot;secondary&quot; id=&quot;resetMotion&quot;&gt;운동 / 측정 초기화&lt;/button&gt;&lt;button class=&quot;secondary&quot; id=&quot;resetView&quot;&gt;카메라 시점 초기화&lt;/button&gt;&lt;button class=&quot;secondary primary&quot; id=&quot;sendToArduLab&quot; style=&quot;margin-top:8px&quot;&gt;측정 데이터를 ArduLab 분석으로 보내기&lt;/button&gt;&lt;div id=&quot;sendState&quot; class=&quot;small&quot; style=&quot;margin-top:6px&quot;&gt;실험 데이터를 기록한 뒤 전송할 수 있습니다.&lt;/div&gt;
+  &lt;button class=&quot;secondary&quot; id=&quot;resetMotion&quot;&gt;운동 / 측정 초기화&lt;/button&gt;&lt;button class=&quot;secondary&quot; id=&quot;resetView&quot;&gt;카메라 시점 초기화&lt;/button&gt;&lt;button class=&quot;secondary primary&quot; id=&quot;sendToArduLab&quot; style=&quot;margin-top:8px&quot;&gt;수집한 데이터를 분석으로 보내기 →&lt;/button&gt;&lt;div id=&quot;sendState&quot; class=&quot;small&quot; style=&quot;margin-top:6px&quot;&gt;실험 데이터를 기록한 뒤 전송할 수 있습니다.&lt;/div&gt;
 &lt;/section&gt;
 
 &lt;section class=&quot;viewer&quot;&gt;
@@ -435,8 +452,8 @@ function sendWindDataToParent(){
    vars=[&#x27;time&#x27;,&#x27;wind_speed_mps&#x27;,&#x27;pitch_deg&#x27;,&#x27;Fz_N&#x27;];
    rows=dataLog.map(d=&gt;({time:d.t,wind_speed_mps:d.a,pitch_deg:d.b,Fz_N:d.c}));
  }
- parent.postMessage({type:&#x27;ARDULAB_WIND_DATA&#x27;,mode:m,vars,rows},&#x27;*&#x27;);
- $(&quot;sendState&quot;).textContent=`${rows.length}개 측정값을 ArduLab 분석으로 보냈습니다.`;
+ parent.postMessage({type:&#x27;SCILAB_SIM_DATA&#x27;,mode:m,vars,rows},&#x27;*&#x27;);
+ $(&quot;sendState&quot;).textContent=`${rows.length}개 측정값을 데이터 분석 영역으로 보냈습니다.`;
 }
 $(&quot;sendToArduLab&quot;).onclick=sendWindDataToParent;
 initParticles();updateControls();requestAnimationFrame(tick);
@@ -444,10 +461,49 @@ initParticles();updateControls();requestAnimationFrame(tick);
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;"></iframe></div>
+  <div id="generalSimWrap" class="simFrameWrap simHidden"><iframe id="generalSimFrame" class="generalSimFrame" title="SciLab 시뮬레이션 실험" srcdoc="&lt;!doctype html&gt;&lt;html lang=&quot;ko&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;title&gt;SciLab 시뮬레이션 실험&lt;/title&gt;&lt;style&gt;
+:root{--a:#00979d;--o:#ff7a00;--line:#dfe5ec;--text:#25313d;--muted:#74808d;--bg:#f6f8fb}*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Inter,system-ui,-apple-system,&quot;Segoe UI&quot;,sans-serif;color:var(--text)}.app{display:grid;grid-template-columns:310px 1fr 300px;gap:10px;padding:10px;min-height:760px}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;overflow:auto}.ey{font-size:10px;font-weight:900;letter-spacing:.13em;color:#8995a1}.title{font-size:20px;font-weight:950;margin:4px 0}.desc{font-size:11px;color:var(--muted);line-height:1.5;margin-bottom:12px}.control{margin:10px 0}.control label{display:flex;justify-content:space-between;gap:8px;font-size:11px;font-weight:800;color:#53606d;margin-bottom:5px}.control input[type=range]{width:100%}.control input[type=number],.control select{width:100%;border:1px solid var(--line);border-radius:8px;padding:8px;background:#fff}.val{color:var(--a);font-weight:950}.btns{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}button{border:1px solid var(--line);border-radius:10px;padding:10px;background:#fff;font-weight:900;cursor:pointer}button.primary{background:var(--a);color:#fff;border-color:var(--a)}button.orange{background:#fff4e8;color:#b85b09;border-color:#ffd3a6}.viewer{position:relative;background:radial-gradient(circle at 50% 40%,#17334e,#08131f 68%);border-radius:14px;overflow:hidden;min-height:510px}canvas{width:100%;height:100%;display:block}.hud{position:absolute;left:12px;top:12px;background:#07121ddd;color:#e8f3fb;border:1px solid #35506a;border-radius:10px;padding:8px 10px;font-size:11px}.formula{position:absolute;left:12px;bottom:12px;right:12px;background:#07121ddd;color:#d8e8f3;border:1px solid #35506a;border-radius:10px;padding:8px 10px;font:11px ui-monospace,monospace}.metricGrid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.metric{border:1px solid var(--line);background:#f8fafc;border-radius:10px;padding:9px}.metric .n{font-size:9px;color:var(--muted)}.metric .v{font-size:17px;font-weight:950;margin-top:3px}.tableWrap{max-height:230px;overflow:auto;margin-top:10px;border:1px solid var(--line);border-radius:9px}table{width:100%;border-collapse:collapse;font-size:9px}th,td{padding:5px;border-bottom:1px solid #edf0f3;text-align:right;white-space:nowrap}th{position:sticky;top:0;background:#f7f9fb}.send{width:100%;margin-top:12px;min-height:52px;border:0;background:linear-gradient(90deg,#00979d,#18aab0);color:white;font-size:14px}.status{font-size:10px;color:var(--muted);margin-top:6px;text-align:center}.miniGraph{width:100%;height:150px;border:1px solid var(--line);border-radius:9px;margin-top:10px;background:white}@media(max-width:980px){.app{grid-template-columns:1fr}.viewer{min-height:460px}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;
+&lt;div class=&quot;app&quot;&gt;&lt;section class=&quot;panel&quot;&gt;&lt;div class=&quot;ey&quot;&gt;SIMULATION EXPERIMENT&lt;/div&gt;&lt;div class=&quot;title&quot; id=&quot;expTitle&quot;&gt;실험&lt;/div&gt;&lt;div class=&quot;desc&quot; id=&quot;expDesc&quot;&gt;&lt;/div&gt;&lt;div id=&quot;controls&quot;&gt;&lt;/div&gt;&lt;div class=&quot;btns&quot;&gt;&lt;button class=&quot;primary&quot; id=&quot;run&quot;&gt;▶ 실험 실행&lt;/button&gt;&lt;button id=&quot;reset&quot;&gt;초기화&lt;/button&gt;&lt;/div&gt;&lt;button class=&quot;orange&quot; id=&quot;sample&quot;&gt;조건 바꾸어 다시 측정&lt;/button&gt;&lt;/section&gt;&lt;section class=&quot;viewer&quot;&gt;&lt;canvas id=&quot;cv&quot;&gt;&lt;/canvas&gt;&lt;div class=&quot;hud&quot; id=&quot;hud&quot;&gt;대기 중&lt;/div&gt;&lt;div class=&quot;formula&quot; id=&quot;formula&quot;&gt;&lt;/div&gt;&lt;/section&gt;&lt;section class=&quot;panel&quot;&gt;&lt;div class=&quot;ey&quot;&gt;MEASURED DATA&lt;/div&gt;&lt;div class=&quot;metricGrid&quot; id=&quot;metrics&quot;&gt;&lt;/div&gt;&lt;canvas class=&quot;miniGraph&quot; id=&quot;graph&quot;&gt;&lt;/canvas&gt;&lt;div class=&quot;tableWrap&quot;&gt;&lt;table&gt;&lt;thead id=&quot;thead&quot;&gt;&lt;/thead&gt;&lt;tbody id=&quot;tbody&quot;&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;button id=&quot;send&quot; class=&quot;send&quot;&gt;수집한 데이터를 분석으로 보내기 →&lt;/button&gt;&lt;div class=&quot;status&quot; id=&quot;status&quot;&gt;실험을 실행하면 데이터가 생성됩니다.&lt;/div&gt;&lt;/section&gt;&lt;/div&gt;
+&lt;script&gt;
+const $=id=&gt;document.getElementById(id),cv=$(&#x27;cv&#x27;),ctx=cv.getContext(&#x27;2d&#x27;),gc=$(&#x27;graph&#x27;),gctx=gc.getContext(&#x27;2d&#x27;);let current=&#x27;freefall&#x27;,rows=[],animT=0,running=false,last=0;
+const defs={
+freefall:{title:&#x27;자유낙하&#x27;,desc:&#x27;초기 높이와 중력을 바꾸어 시간에 따른 위치·속도를 측정합니다.&#x27;,formula:&#x27;y = h₀ - ½gt²,  v = gt&#x27;,controls:[[&#x27;h&#x27;,&#x27;초기 높이 (m)&#x27;,20,1,100,1],[&#x27;g&#x27;,&#x27;중력가속도 (m/s²)&#x27;,9.8,1,20,.1]],gen:p=&gt;{let out=[];let tmax=Math.sqrt(2*p.h/p.g);for(let i=0;i&lt;=80;i++){let t=tmax*i/80,v=p.g*t,y=Math.max(0,p.h-.5*p.g*t*t);out.push({time:t,height:y,velocity:v,acceleration:p.g})}return out}},
+projectile:{title:&#x27;포물선 운동&#x27;,desc:&#x27;초기속도와 발사각에 따른 2차원 발사체 궤적을 탐구합니다.&#x27;,formula:&#x27;x=v₀cosθ·t,  y=v₀sinθ·t−½gt²&#x27;,controls:[[&#x27;v0&#x27;,&#x27;초기속도 (m/s)&#x27;,25,1,80,1],[&#x27;angle&#x27;,&#x27;발사각 (°)&#x27;,45,1,89,1],[&#x27;g&#x27;,&#x27;중력가속도&#x27;,9.8,1,20,.1]],gen:p=&gt;{let th=p.angle*Math.PI/180,T=2*p.v0*Math.sin(th)/p.g,out=[];for(let i=0;i&lt;=100;i++){let t=T*i/100,x=p.v0*Math.cos(th)*t,y=Math.max(0,p.v0*Math.sin(th)*t-.5*p.g*t*t),vx=p.v0*Math.cos(th),vy=p.v0*Math.sin(th)-p.g*t;out.push({time:t,x,y,vx,vy,speed:Math.hypot(vx,vy)})}return out}},
+incline:{title:&#x27;경사면 운동&#x27;,desc:&#x27;경사각과 마찰계수에 따라 물체의 가속도와 이동거리가 어떻게 달라지는지 측정합니다.&#x27;,formula:&#x27;a = g(sinθ − μcosθ)&#x27;,controls:[[&#x27;angle&#x27;,&#x27;경사각 (°)&#x27;,25,1,60,1],[&#x27;mu&#x27;,&#x27;마찰계수&#x27;,.15,0,.8,.01],[&#x27;g&#x27;,&#x27;중력가속도&#x27;,9.8,1,20,.1]],gen:p=&gt;{let th=p.angle*Math.PI/180,a=p.g*(Math.sin(th)-p.mu*Math.cos(th));a=Math.max(0,a);let out=[];for(let i=0;i&lt;=100;i++){let t=5*i/100;out.push({time:t,distance:.5*a*t*t,velocity:a*t,acceleration:a})}return out}},
+pendulum:{title:&#x27;단진자&#x27;,desc:&#x27;줄 길이와 초기각을 바꾸어 진자의 주기와 각운동을 관찰합니다.&#x27;,formula:&#x27;T ≈ 2π√(L/g)  (작은 각)&#x27;,controls:[[&#x27;L&#x27;,&#x27;줄 길이 (m)&#x27;,1,.1,5,.1],[&#x27;angle&#x27;,&#x27;초기각 (°)&#x27;,20,1,70,1],[&#x27;g&#x27;,&#x27;중력가속도&#x27;,9.8,1,20,.1]],gen:p=&gt;{let w=Math.sqrt(p.g/p.L),A=p.angle*Math.PI/180,T=2*Math.PI/w,out=[];for(let i=0;i&lt;=180;i++){let t=3*T*i/180,th=A*Math.cos(w*t),om=-A*w*Math.sin(w*t);out.push({time:t,angle:th*180/Math.PI,angularVelocity:om,period:T})}return out}},
+rocket:{title:&#x27;발사체 추진 실험&#x27;,desc:&#x27;본체 질량·연료 질량·분사량·분사속도가 추진 성능에 미치는 영향을 탐구합니다. 교육용 1차원 수직 발사 모델입니다.&#x27;,formula:&#x27;추력 F = ṁvₑ,  a=(F−mg−D)/m,  m(t)=m₀−ṁt&#x27;,controls:[[&#x27;dry&#x27;,&#x27;본체 질량 (kg)&#x27;,20,1,200,1],[&#x27;fuel&#x27;,&#x27;연료 질량 (kg)&#x27;,12,1,100,1],[&#x27;flow&#x27;,&#x27;연료 분사량 (kg/s)&#x27;,1.2,.1,10,.1],[&#x27;ve&#x27;,&#x27;분사 속도 (m/s)&#x27;,600,50,3000,10],[&#x27;cd&#x27;,&#x27;항력 계수&#x27;,.35,0,1.5,.01],[&#x27;area&#x27;,&#x27;단면적 (m²)&#x27;,.08,.01,2,.01]],gen:p=&gt;{let dt=.04,t=0,h=0,v=0,fuel=p.fuel,out=[],rho=1.225,g=9.8;for(let i=0;i&lt;500;i++){let burning=fuel&gt;0,mdot=burning?Math.min(p.flow,fuel/dt):0,thrust=mdot*p.ve,m=p.dry+fuel,drag=.5*rho*p.cd*p.area*v*Math.abs(v),a=(thrust-m*g-drag)/m;v+=a*dt;h=Math.max(0,h+v*dt);fuel=Math.max(0,fuel-mdot*dt);out.push({time:t,height:h,velocity:v,acceleration:a,totalMass:p.dry+fuel,fuelMass:fuel,thrust});t+=dt;if(!burning&amp;&amp;h===0&amp;&amp;t&gt;2)break}return out}},
+shm:{title:&#x27;단진동&#x27;,desc:&#x27;진폭·질량·용수철 상수에 따른 위치, 속도, 에너지 변화를 관찰합니다.&#x27;,formula:&#x27;ω=√(k/m),  x=Acosωt&#x27;,controls:[[&#x27;A&#x27;,&#x27;진폭 (m)&#x27;,.3,.05,1,.01],[&#x27;m&#x27;,&#x27;질량 (kg)&#x27;,1,.1,10,.1],[&#x27;k&#x27;,&#x27;용수철 상수 (N/m)&#x27;,20,1,100,1]],gen:p=&gt;{let w=Math.sqrt(p.k/p.m),T=2*Math.PI/w,out=[];for(let i=0;i&lt;=180;i++){let t=3*T*i/180,x=p.A*Math.cos(w*t),v=-p.A*w*Math.sin(w*t);out.push({time:t,position:x,velocity:v,kinetic:.5*p.m*v*v,potential:.5*p.k*x*x})}return out}},
+standing:{title:&#x27;정상파&#x27;,desc:&#x27;진동수와 줄 길이를 바꾸며 정상파의 마디·배와 파장을 탐구합니다.&#x27;,formula:&#x27;λ=2L/n,  f=nv/(2L)&#x27;,controls:[[&#x27;L&#x27;,&#x27;줄 길이 (m)&#x27;,1,.2,3,.1],[&#x27;n&#x27;,&#x27;모드 번호 n&#x27;,2,1,8,1],[&#x27;v&#x27;,&#x27;파동 속력 (m/s)&#x27;,20,1,100,1],[&#x27;A&#x27;,&#x27;진폭&#x27;,.25,.05,.5,.01]],gen:p=&gt;{let f=p.n*p.v/(2*p.L),out=[];for(let i=0;i&lt;=120;i++){let x=p.L*i/120,y=p.A*Math.sin(p.n*Math.PI*x/p.L);out.push({x,amplitude:y,frequency:f,wavelength:2*p.L/p.n})}return out}},
+interference:{title:&#x27;두 파의 간섭&#x27;,desc:&#x27;두 파의 위상차와 진폭을 변화시키며 중첩과 보강·상쇄 간섭을 확인합니다.&#x27;,formula:&#x27;y = A₁sin(kx)+A₂sin(kx+φ)&#x27;,controls:[[&#x27;A1&#x27;,&#x27;파1 진폭&#x27;,1,.1,2,.1],[&#x27;A2&#x27;,&#x27;파2 진폭&#x27;,1,.1,2,.1],[&#x27;phase&#x27;,&#x27;위상차 (°)&#x27;,90,0,360,5],[&#x27;lambda&#x27;,&#x27;파장&#x27;,2,.5,5,.1]],gen:p=&gt;{let ph=p.phase*Math.PI/180,k=2*Math.PI/p.lambda,out=[];for(let i=0;i&lt;=160;i++){let x=8*i/160,y1=p.A1*Math.sin(k*x),y2=p.A2*Math.sin(k*x+ph);out.push({x,wave1:y1,wave2:y2,result:y1+y2})}return out}},
+ohm:{title:&#x27;옴의 법칙&#x27;,desc:&#x27;전압과 저항의 관계를 바꾸며 V-I 데이터를 생성합니다.&#x27;,formula:&#x27;V = IR&#x27;,controls:[[&#x27;R&#x27;,&#x27;저항 (Ω)&#x27;,100,10,1000,10],[&#x27;vmax&#x27;,&#x27;최대 전압 (V)&#x27;,10,1,24,.5]],gen:p=&gt;{let out=[];for(let i=0;i&lt;=30;i++){let V=p.vmax*i/30,I=V/p.R;out.push({Voltage:V,Current:I,Resistance:p.R,Power:V*I})}return out}},
+series:{title:&#x27;직렬·병렬 회로&#x27;,desc:&#x27;두 저항의 연결 방식에 따라 등가저항·전류·전압분배를 비교합니다.&#x27;,formula:&#x27;직렬 R=R₁+R₂, 병렬 1/R=1/R₁+1/R₂&#x27;,controls:[[&#x27;R1&#x27;,&#x27;R₁ (Ω)&#x27;,100,10,1000,10],[&#x27;R2&#x27;,&#x27;R₂ (Ω)&#x27;,220,10,1000,10],[&#x27;V&#x27;,&#x27;전원 전압 (V)&#x27;,9,1,24,.5],[&#x27;mode&#x27;,&#x27;연결 방식&#x27;,&#x27;series&#x27;,0,0,0,[&#x27;series&#x27;,&#x27;parallel&#x27;]]],gen:p=&gt;{let Req=p.mode===&#x27;series&#x27;?p.R1+p.R2:1/(1/p.R1+1/p.R2),I=p.V/Req,out=[];for(let k=0;k&lt;=20;k++){let V=p.V*k/20,It=V/Req;out.push({Voltage:V,TotalCurrent:It,EquivalentResistance:Req,R1:p.R1,R2:p.R2})}return out}},
+rc:{title:&#x27;RC 충·방전&#x27;,desc:&#x27;저항과 정전용량을 바꾸며 축전기 전압과 전류의 시간 변화를 측정합니다.&#x27;,formula:&#x27;충전 Vc=V(1−e^(−t/RC))&#x27;,controls:[[&#x27;R&#x27;,&#x27;저항 (kΩ)&#x27;,10,1,100,1],[&#x27;C&#x27;,&#x27;정전용량 (μF)&#x27;,100,1,1000,10],[&#x27;V&#x27;,&#x27;전원 전압 (V)&#x27;,5,1,20,.5]],gen:p=&gt;{let R=p.R*1000,C=p.C*1e-6,tau=R*C,out=[];for(let i=0;i&lt;=120;i++){let t=5*tau*i/120,Vc=p.V*(1-Math.exp(-t/tau)),I=(p.V/R)*Math.exp(-t/tau);out.push({time:t,capacitorVoltage:Vc,current:I,timeConstant:tau})}return out}},
+refraction:{title:&#x27;반사·굴절&#x27;,desc:&#x27;입사각과 굴절률을 변화시키며 스넬 법칙을 확인합니다.&#x27;,formula:&#x27;n₁sinθ₁ = n₂sinθ₂&#x27;,controls:[[&#x27;n1&#x27;,&#x27;매질1 굴절률&#x27;,1,1,2.5,.01],[&#x27;n2&#x27;,&#x27;매질2 굴절률&#x27;,1.5,1,2.5,.01]],gen:p=&gt;{let out=[];for(let deg=0;deg&lt;=80;deg+=2){let s=p.n1*Math.sin(deg*Math.PI/180)/p.n2;if(Math.abs(s)&lt;=1){let r=Math.asin(s)*180/Math.PI;out.push({incidentAngle:deg,refractedAngle:r,n1:p.n1,n2:p.n2})}}return out}},
+lens:{title:&#x27;얇은 렌즈&#x27;,desc:&#x27;초점거리와 물체거리에 따른 상의 위치와 배율을 탐구합니다.&#x27;,formula:&#x27;1/f = 1/do + 1/di,  M=−di/do&#x27;,controls:[[&#x27;f&#x27;,&#x27;초점거리 (cm)&#x27;,10,2,30,.5]],gen:p=&gt;{let out=[];for(let d=p.f*1.1;d&lt;=p.f*5;d+=(p.f*3.9/60)){let di=1/(1/p.f-1/d),M=-di/d;out.push({objectDistance:d,imageDistance:di,magnification:M,focalLength:p.f})}return out}},
+diffraction:{title:&#x27;이중슬릿·회절&#x27;,desc:&#x27;파장·슬릿간격·스크린 거리에 따른 간섭무늬 위치를 계산합니다.&#x27;,formula:&#x27;Δy ≈ λL/d&#x27;,controls:[[&#x27;lambda&#x27;,&#x27;파장 (nm)&#x27;,550,380,700,5],[&#x27;d&#x27;,&#x27;슬릿 간격 (mm)&#x27;,.25,.05,1,.01],[&#x27;L&#x27;,&#x27;스크린 거리 (m)&#x27;,1,.2,3,.1]],gen:p=&gt;{let lam=p.lambda*1e-9,d=p.d*1e-3,out=[];for(let m=-10;m&lt;=10;m++){let y=m*lam*p.L/d;out.push({order:m,position:y,spacing:lam*p.L/d,wavelength:p.lambda})}return out}},
+kepler:{title:&#x27;케플러 법칙&#x27;,desc:&#x27;궤도 장반경과 이심률을 바꾸고, 공전주기와 궤도 속도 변화를 관찰합니다.&#x27;,formula:&#x27;T² ∝ a³,  r=a(1−e²)/(1+ecosθ)&#x27;,controls:[[&#x27;a&#x27;,&#x27;장반경 (AU)&#x27;,1,.3,6,.1],[&#x27;e&#x27;,&#x27;이심률&#x27;,.2,0,.85,.01]],gen:p=&gt;{let T=Math.sqrt(p.a**3),out=[];for(let i=0;i&lt;=180;i++){let th=2*Math.PI*i/180,r=p.a*(1-p.e*p.e)/(1+p.e*Math.cos(th)),x=r*Math.cos(th),y=r*Math.sin(th),v=Math.sqrt(Math.max(.001,2/r-1/p.a));out.push({theta:th,x,y,radius:r,relativeSpeed:v,semiMajorAxis:p.a,period:T,T2:T*T,a3:p.a**3})}return out}},
+escape:{title:&#x27;탈출속도&#x27;,desc:&#x27;천체의 질량·반지름·초기속도를 바꾸어 탈출 조건과 역학적 에너지를 비교합니다.&#x27;,formula:&#x27;vₑ = √(2GM/R)&#x27;,controls:[[&#x27;mass&#x27;,&#x27;천체 질량 (지구=1)&#x27;,1,.05,20,.05],[&#x27;radius&#x27;,&#x27;천체 반지름 (지구=1)&#x27;,1,.2,5,.05],[&#x27;v0&#x27;,&#x27;초기속도 (km/s)&#x27;,11.2,1,30,.1]],gen:p=&gt;{const GME=3.986004418e14,RE=6.371e6,mu=GME*p.mass,R=RE*p.radius,v0=p.v0*1000,ve=Math.sqrt(2*mu/R),dt=1,out=[],r=R,v=v0,t=0;for(let i=0;i&lt;300;i++){let a=-mu/(r*r);v+=a*dt;r=Math.max(R,v&lt;0&amp;&amp;r&lt;=R?R:r+v*dt);let E=.5*v*v-mu/r;out.push({time:t,altitude:(r-R)/1000,velocity:v/1000,escapeVelocity:ve/1000,specificEnergy:E/1e6});t+=dt;if(r&gt;R*8||r===R&amp;&amp;v&lt;0)break}return out}}
+};
+function ctrlHTML(d){return d.controls.map(c=&gt;{let[id,label,val,min,max,step,opts]=c;if(opts)return `&lt;div class=control&gt;&lt;label&gt;${label}&lt;/label&gt;&lt;select id=&quot;c_${id}&quot;&gt;${opts.map(o=&gt;`&lt;option value=${o}&gt;${o===&#x27;series&#x27;?&#x27;직렬&#x27;:&#x27;병렬&#x27;}&lt;/option&gt;`).join(&#x27;&#x27;)}&lt;/select&gt;&lt;/div&gt;`;return `&lt;div class=control&gt;&lt;label&gt;${label}&lt;span class=val id=&quot;v_${id}&quot;&gt;${val}&lt;/span&gt;&lt;/label&gt;&lt;input id=&quot;c_${id}&quot; type=range value=&quot;${val}&quot; min=&quot;${min}&quot; max=&quot;${max}&quot; step=&quot;${step}&quot;&gt;&lt;/div&gt;`}).join(&#x27;&#x27;)}
+function params(){let d=defs[current],p={};d.controls.forEach(c=&gt;{let el=$(&#x27;c_&#x27;+c[0]);p[c[0]]=c[6]?el.value:+el.value});return p}
+function setup(id){current=defs[id]?id:&#x27;freefall&#x27;;let d=defs[current];$(&#x27;expTitle&#x27;).textContent=d.title;$(&#x27;expDesc&#x27;).textContent=d.desc;$(&#x27;formula&#x27;).textContent=d.formula;$(&#x27;controls&#x27;).innerHTML=ctrlHTML(d);d.controls.forEach(c=&gt;{let el=$(&#x27;c_&#x27;+c[0]),v=$(&#x27;v_&#x27;+c[0]);if(v)el.oninput=()=&gt;v.textContent=el.value;else el.onchange=()=&gt;{} });rows=[];renderAll();$(&#x27;status&#x27;).textContent=&#x27;실험을 실행하면 데이터가 생성됩니다.&#x27;}
+function run(){rows=defs[current].gen(params());running=true;animT=0;renderAll();$(&#x27;status&#x27;).textContent=`${rows.length}개 측정값이 생성되었습니다.`}
+function fmt(v){return typeof v===&#x27;number&#x27;?(Math.abs(v)&gt;=1000?v.toExponential(2):+v.toFixed(4)):v}
+function metrics(){let d=rows,items=[];if(!d.length)return[];let last=d[d.length-1];if(current===&#x27;rocket&#x27;)items=[[&#x27;최대 고도&#x27;,Math.max(...d.map(r=&gt;r.height)).toFixed(1)+&#x27; m&#x27;],[&#x27;최대 속도&#x27;,Math.max(...d.map(r=&gt;r.velocity)).toFixed(1)+&#x27; m/s&#x27;],[&#x27;초기 추력&#x27;,d[0].thrust.toFixed(1)+&#x27; N&#x27;],[&#x27;연소시간&#x27;,(params().fuel/params().flow).toFixed(2)+&#x27; s&#x27;]];else if(current===&#x27;kepler&#x27;)items=[[&#x27;공전주기&#x27;,d[0].period.toFixed(3)+&#x27; yr&#x27;],[&#x27;T²&#x27;,d[0].T2.toFixed(3)],[&#x27;a³&#x27;,d[0].a3.toFixed(3)],[&#x27;이심률&#x27;,params().e.toFixed(2)]];else if(current===&#x27;escape&#x27;)items=[[&#x27;탈출속도&#x27;,d[0].escapeVelocity.toFixed(2)+&#x27; km/s&#x27;],[&#x27;초기속도&#x27;,params().v0.toFixed(2)+&#x27; km/s&#x27;],[&#x27;최종고도&#x27;,last.altitude.toFixed(0)+&#x27; km&#x27;],[&#x27;에너지&#x27;,last.specificEnergy.toFixed(2)+&#x27; MJ/kg&#x27;]];else{let keys=Object.keys(last).filter(k=&gt;typeof last[k]===&#x27;number&#x27;).slice(0,4);items=keys.map(k=&gt;[k,fmt(last[k])])}return items}
+function renderTable(){let d=rows;if(!d.length){$(&#x27;thead&#x27;).innerHTML=&#x27;&#x27;;$(&#x27;tbody&#x27;).innerHTML=&#x27;&#x27;;return}let keys=Object.keys(d[0]);$(&#x27;thead&#x27;).innerHTML=&#x27;&lt;tr&gt;&#x27;+keys.map(k=&gt;`&lt;th&gt;${k}&lt;/th&gt;`).join(&#x27;&#x27;)+&#x27;&lt;/tr&gt;&#x27;;$(&#x27;tbody&#x27;).innerHTML=d.slice(-18).reverse().map(r=&gt;&#x27;&lt;tr&gt;&#x27;+keys.map(k=&gt;`&lt;td&gt;${fmt(r[k])}&lt;/td&gt;`).join(&#x27;&#x27;)+&#x27;&lt;/tr&gt;&#x27;).join(&#x27;&#x27;)}
+function renderMetrics(){$(&#x27;metrics&#x27;).innerHTML=metrics().map(x=&gt;`&lt;div class=metric&gt;&lt;div class=n&gt;${x[0]}&lt;/div&gt;&lt;div class=v&gt;${x[1]}&lt;/div&gt;&lt;/div&gt;`).join(&#x27;&#x27;)}
+function seriesKeys(){if(!rows.length)return[];let ks=Object.keys(rows[0]).filter(k=&gt;typeof rows[0][k]===&#x27;number&#x27;);return ks.slice(0,3)}
+function drawGraph(){let r=gc.getBoundingClientRect(),dpr=devicePixelRatio||1;gc.width=r.width*dpr;gc.height=r.height*dpr;gctx.setTransform(dpr,0,0,dpr,0,0);let w=r.width,h=r.height;gctx.clearRect(0,0,w,h);gctx.strokeStyle=&#x27;#e4e9ee&#x27;;gctx.strokeRect(.5,.5,w-1,h-1);if(!rows.length)return;let ks=seriesKeys(),xk=ks[0],yk=ks[1]||ks[0],xs=rows.map(r=&gt;r[xk]),ys=rows.map(r=&gt;r[yk]),xmin=Math.min(...xs),xmax=Math.max(...xs),ymin=Math.min(...ys),ymax=Math.max(...ys);if(xmax===xmin)xmax=xmin+1;if(ymax===ymin)ymax=ymin+1;gctx.beginPath();rows.forEach((r,i)=&gt;{let x=10+(w-20)*(r[xk]-xmin)/(xmax-xmin),y=h-10-(h-20)*(r[yk]-ymin)/(ymax-ymin);i?gctx.lineTo(x,y):gctx.moveTo(x,y)});gctx.strokeStyle=&#x27;#00979d&#x27;;gctx.lineWidth=2;gctx.stroke();gctx.fillStyle=&#x27;#677582&#x27;;gctx.font=&#x27;10px system-ui&#x27;;gctx.fillText(`${yk} vs ${xk}`,10,13)}
+function draw(){let r=cv.getBoundingClientRect(),dpr=devicePixelRatio||1;cv.width=r.width*dpr;cv.height=r.height*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);let w=r.width,h=r.height;ctx.clearRect(0,0,w,h);ctx.strokeStyle=&#x27;#2b526e&#x27;;ctx.lineWidth=1;for(let i=0;i&lt;10;i++){ctx.beginPath();ctx.moveTo(0,h*i/10);ctx.lineTo(w,h*i/10);ctx.stroke()}if(!rows.length){ctx.fillStyle=&#x27;#dcecf6&#x27;;ctx.font=&#x27;700 16px system-ui&#x27;;ctx.fillText(&#x27;실험을 실행하세요&#x27;,w/2-65,h/2);return}let idx=Math.min(rows.length-1,Math.floor(animT)%rows.length),r0=rows[idx];$(&#x27;hud&#x27;).textContent=`${defs[current].title} · 측정 ${idx+1}/${rows.length}`;ctx.lineWidth=2;ctx.strokeStyle=&#x27;#57d1d5&#x27;;ctx.fillStyle=&#x27;#ffb15b&#x27;;
+if([&#x27;projectile&#x27;].includes(current)){let xmax=Math.max(...rows.map(r=&gt;r.x)),ymax=Math.max(...rows.map(r=&gt;r.y))||1;ctx.beginPath();rows.forEach((r,i)=&gt;{let x=40+(w-80)*r.x/xmax,y=h-45-(h-90)*r.y/ymax;i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.stroke();let x=40+(w-80)*r0.x/xmax,y=h-45-(h-90)*r0.y/ymax;ctx.beginPath();ctx.arc(x,y,8,0,7);ctx.fill()}else if(current===&#x27;rocket&#x27;){let ymax=Math.max(...rows.map(r=&gt;r.height))||1,y=h-50-(h-100)*r0.height/ymax;ctx.strokeStyle=&#x27;#9ab4c8&#x27;;ctx.beginPath();ctx.moveTo(w/2,h-40);ctx.lineTo(w/2,y);ctx.stroke();ctx.fillStyle=&#x27;#dce5ec&#x27;;ctx.fillRect(w/2-10,y-28,20,28);if(r0.thrust&gt;0){ctx.fillStyle=&#x27;#ff7a00&#x27;;ctx.beginPath();ctx.moveTo(w/2-7,y);ctx.lineTo(w/2+7,y);ctx.lineTo(w/2,y+30);ctx.fill()}}else if(current===&#x27;pendulum&#x27;){let L=Math.min(h*.35,w*.25),a=r0.angle*Math.PI/180,cx=w/2,cy=h*.25,x=cx+L*Math.sin(a),y=cy+L*Math.cos(a);ctx.strokeStyle=&#x27;#dbe8f2&#x27;;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(x,y);ctx.stroke();ctx.beginPath();ctx.arc(x,y,14,0,7);ctx.fill()}else if(current===&#x27;standing&#x27;){let p=params();ctx.beginPath();rows.forEach((r,i)=&gt;{let x=30+(w-60)*r.x/p.L,y=h/2-r.amplitude*h*.55;i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.stroke()}else if(current===&#x27;interference&#x27;){let xmax=Math.max(...rows.map(r=&gt;r.x));ctx.beginPath();rows.forEach((r,i)=&gt;{let x=25+(w-50)*r.x/xmax,y=h/2-r.result*45;i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.stroke()}else if(current===&#x27;kepler&#x27;){let max=Math.max(...rows.map(r=&gt;Math.abs(r.x)),...rows.map(r=&gt;Math.abs(r.y)))||1,cx=w/2,cy=h/2,sc=Math.min(w,h)*.36/max;ctx.strokeStyle=&#x27;#5bc6d0&#x27;;ctx.beginPath();rows.forEach((r,i)=&gt;{let x=cx+r.x*sc,y=cy+r.y*sc;i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.stroke();ctx.fillStyle=&#x27;#ffd05b&#x27;;ctx.beginPath();ctx.arc(cx,cy,10,0,7);ctx.fill();ctx.fillStyle=&#x27;#bde9ef&#x27;;ctx.beginPath();ctx.arc(cx+r0.x*sc,cy+r0.y*sc,6,0,7);ctx.fill()}else if(current===&#x27;escape&#x27;){let base=h*.7,alt=Math.min(h*.48,Math.max(0,r0.altitude)/20000*h*.48);ctx.fillStyle=&#x27;#477da2&#x27;;ctx.beginPath();ctx.arc(w/2,base,70,Math.PI,0);ctx.fill();ctx.fillStyle=&#x27;#ffb15b&#x27;;ctx.beginPath();ctx.arc(w/2,base-alt-78,7,0,7);ctx.fill();ctx.strokeStyle=&#x27;#ffb15b&#x27;;ctx.beginPath();ctx.moveTo(w/2,base-70);ctx.lineTo(w/2,base-alt-78);ctx.stroke()}else if(current===&#x27;refraction&#x27;){let p=params(),ang=(r0.incidentAngle||30)*Math.PI/180,ra=(r0.refractedAngle||20)*Math.PI/180,cx=w/2,cy=h/2;ctx.strokeStyle=&#x27;#7993a6&#x27;;ctx.beginPath();ctx.moveTo(0,cy);ctx.lineTo(w,cy);ctx.stroke();ctx.strokeStyle=&#x27;#ffd05b&#x27;;ctx.beginPath();ctx.moveTo(cx-180*Math.sin(ang),cy-180*Math.cos(ang));ctx.lineTo(cx,cy);ctx.lineTo(cx+180*Math.sin(ra),cy+180*Math.cos(ra));ctx.stroke()}else{let ks=seriesKeys(),xk=ks[0],yk=ks[1]||ks[0],xs=rows.map(r=&gt;r[xk]),ys=rows.map(r=&gt;r[yk]),xmin=Math.min(...xs),xmax=Math.max(...xs)||1,ymin=Math.min(...ys),ymax=Math.max(...ys);if(xmax===xmin)xmax=xmin+1;if(ymax===ymin)ymax=ymin+1;ctx.beginPath();rows.forEach((r,i)=&gt;{let x=35+(w-70)*(r[xk]-xmin)/(xmax-xmin),y=h-35-(h-70)*(r[yk]-ymin)/(ymax-ymin);i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.stroke()}}
+function renderAll(){renderTable();renderMetrics();drawGraph();draw()}
+$(&#x27;run&#x27;).onclick=run;$(&#x27;sample&#x27;).onclick=run;$(&#x27;reset&#x27;).onclick=()=&gt;setup(current);$(&#x27;send&#x27;).onclick=()=&gt;{if(!rows.length){$(&#x27;status&#x27;).textContent=&#x27;먼저 실험을 실행해 데이터를 생성하세요.&#x27;;return}let vars=Object.keys(rows[0]);parent.postMessage({type:&#x27;SCILAB_SIM_DATA&#x27;,experiment:current,vars,rows},&#x27;*&#x27;);$(&#x27;status&#x27;).textContent=`${rows.length}개 측정값을 데이터 분석 영역으로 보냈습니다.`};
+window.addEventListener(&#x27;message&#x27;,e=&gt;{let m=e.data;if(m&amp;&amp;m.type===&#x27;SCILAB_LOAD_EXPERIMENT&#x27;)setup(m.id)});window.addEventListener(&#x27;resize&#x27;,renderAll);function tick(t){if(running)animT+=(t-last)/65;last=t;draw();requestAnimationFrame(tick)}requestAnimationFrame(tick);setup(&#x27;freefall&#x27;);
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;"></iframe></div>
 </section>
 
 <section id="ardulabWorkspace" class="analysisHub">
-  <div class="analysisBrandRow"><div><div class="stageEyebrow">COMMON DATA WORKSPACE</div><div class="analysisHubTitle"><span class="stageNo stageNoOrange">2</span> <span class="arduText">Ardu</span><span class="labText">Lab</span> 데이터 분석</div><div class="analysisHubDesc">센서 · 영상 · 가상 실험 · 파일 입력에서 얻은 데이터를 하나의 분석 환경에서 확인하고 처리합니다.</div></div><div class="analysisSteps"><span>실험 데이터</span><b>→</b><span>데이터 처리</span><b>→</b><span>그래프·분석</span><b>→</b><span>실험노트</span></div></div>
+  <div class="analysisBrandRow"><div><div class="stageEyebrow">COMMON DATA WORKSPACE</div><div class="analysisHubTitle"><span class="stageNo stageNoOrange">2</span> 데이터 분석</div><div class="analysisHubDesc">ArduLab · 영상 분석 · 시뮬레이션 실험 · 데이터 가져오기에서 전달한 데이터를 하나의 공통 분석 환경에서 확인하고 처리합니다.</div></div><div class="analysisSteps"><span>실험 데이터</span><b>→</b><span>데이터 처리</span><b>→</b><span>그래프·분석</span><b>→</b><span>실험노트</span></div></div>
 </section>
 <section class="card">
   <h2>📡 데이터 상태</h2>
@@ -500,7 +556,7 @@ initParticles();updateControls();requestAnimationFrame(tick);
 <div class="row" style="margin:10px 0"><button id="drawBtn" class="primary">그래프 그리기</button><button id="manualIntervalBtn" class="soft">구간 직접 입력</button><button id="intervalBtn" class="soft">구간 그래프</button><button id="clearInterval" class="gray">구간 해제</button><button id="pngBtn" class="soft">그래프 PNG 저장</button></div>
 <canvas id="chart" class="graph" width="1050" height="500"></canvas><p class="muted">그래프를 그린 뒤 점에 마우스를 올리면 좌표를 볼 수 있습니다. 좌우로 드래그하면 구간을 선택합니다.</p><div id="result" class="result">분석 결과가 여기에 표시됩니다.</div>
 </section></div></div>
-<div class="footer"><b>SciLab</b> · 온라인 과학 실험실 &nbsp;|&nbsp; 데이터 분석 powered by <b>ArduLab</b></div>
+<div class="footer"><b>SciLab</b> · 온라인 과학 실험실 &nbsp;|&nbsp; 데이터 수집과 데이터 분석을 하나의 워크북에서</div>
 </div>
 <div id="tooltip" class="tooltip"></div>
 
@@ -936,7 +992,7 @@ function loadCsvText(text){const arr=parseCSVRows(text);if(arr.length<2)throw ne
 async function loadXlsx(file){if(typeof XLSX==='undefined')throw new Error('Excel 처리 라이브러리를 불러오지 못했습니다. 인터넷 연결을 확인해 주세요.');const buf=await file.arrayBuffer(),wb=XLSX.read(buf,{type:'array'}),ws=wb.Sheets[wb.SheetNames[0]],arr=XLSX.utils.sheet_to_json(ws,{header:1,raw:true,defval:''});if(arr.length<2)throw new Error('데이터가 부족합니다.');const headers=arr[0].map(x=>String(x).trim()),rows=[];for(const vals of arr.slice(1)){const r={};headers.forEach((h,i)=>{if(!h)return;const v=vals[i],n=typeof v==='number'?v:Number(String(v).replace(/,/g,''));if(Number.isFinite(n))r[h]=n});if(Object.keys(r).length)rows.push(r)}applyLoadedRows(rows,headers,'Excel 파일 분석 모드')}
 function applyLoadedRows(rows,headers,msg){if(!rows.length)throw new Error('읽을 수 있는 숫자 데이터가 없습니다.');mediaDataApplied=false;dataRows=rows;excluded.clear();sourceVars=[];calculatedDefinitions={};allVars=unionVars();tableVars=[...allVars];selectedRange=null;refreshVarUI();updateCounts();renderTable();$('status').textContent=msg;$('schemaMsg').textContent='파일 데이터 불러오기 완료';scheduleSave()}
 function csvEscape(x){const s=String(x??'');return /[",\n]/.test(s)?`"${s.replace(/"/g,'""')}"`:s}
-$('saveCsv').onclick=()=>{const rows=getActiveRows();if(!rows.length){alert('저장할 분석 데이터가 없습니다.');return}const cols=tableVars.length?tableVars:allVars;if(!cols.length){alert('표에 저장할 변수를 선택해 주세요.');return}const lines=[cols.map(csvEscape).join(',')];for(const r of rows)lines.push(cols.map(c=>csvEscape(r[c]??'')).join(','));downloadBlob(new Blob(['\ufeff'+lines.join('\n')],{type:'text/csv;charset=utf-8'}),`ArduLab_data_${stamp()}.csv`)};
+$('saveCsv').onclick=()=>{const rows=getActiveRows();if(!rows.length){alert('저장할 분석 데이터가 없습니다.');return}const cols=tableVars.length?tableVars:allVars;if(!cols.length){alert('표에 저장할 변수를 선택해 주세요.');return}const lines=[cols.map(csvEscape).join(',')];for(const r of rows)lines.push(cols.map(c=>csvEscape(r[c]??'')).join(','));downloadBlob(new Blob(['\ufeff'+lines.join('\n')],{type:'text/csv;charset=utf-8'}),`SciLab_data_${stamp()}.csv`)};
 
 // 표 변수 선택
 $('tableVarsBtn').onclick=()=>{const selected=new Set(tableVars);$('tableVarChecks').innerHTML=allVars.map(v=>`<label class="checkitem"><input type="checkbox" value="${escapeAttr(v)}" ${selected.has(v)?'checked':''}> ${escapeHtml(v)}</label>`).join('');openModal('tableVarsModal')};$('selectAllVars').onclick=()=>document.querySelectorAll('#tableVarChecks input').forEach(x=>x.checked=true);$('clearAllVars').onclick=()=>document.querySelectorAll('#tableVarChecks input').forEach(x=>x.checked=false);$('applyTableVars').onclick=()=>{tableVars=[...document.querySelectorAll('#tableVarChecks input:checked')].map(x=>x.value);renderTable();scheduleSave();closeModal('tableVarsModal')};
@@ -1545,25 +1601,30 @@ function setInputMode(mode){
   if(panel) panel.classList.add('active');
 }
 document.querySelectorAll('.modeBtn').forEach(b=>b.onclick=()=>setInputMode(b.dataset.inputMode));
-const goAnalysisBtn=$('goAnalysisBtn');if(goAnalysisBtn)goAnalysisBtn.onclick=()=>{const target=$('ardulabWorkspace');if(target)target.scrollIntoView({behavior:'smooth',block:'start'});};
-window.addEventListener('message',e=>{
-  const msg=e.data;
-  if(!msg||msg.type!=='ARDULAB_WIND_DATA'||!Array.isArray(msg.rows)||!msg.rows.length)return;
-  dataRows=msg.rows.map(r=>{const out={};for(const [k,v] of Object.entries(r)){const n=Number(v);out[k]=Number.isFinite(n)?n:v}return out});
-  excluded.clear();
-  sourceVars=(Array.isArray(msg.vars)?msg.vars:Object.keys(dataRows[0]||{})).filter(v=>v!=='time');
-  allVars=[];tableVars=[];calculatedDefinitions={};selectedRange=null;graphState=null;intervalState=null;
-  syncVars(false);updateCounts();renderTable();
-  $('sampling').textContent='가상 풍동';
-  $('status').textContent='풍동 데이터 불러옴';
-  $('schemaMsg').textContent=`가상 풍동에서 ${dataRows.length}개 측정값을 가져왔습니다. 아래 그래프/분석 기능을 바로 사용할 수 있습니다.`;
-  if(typeof scheduleSave==='function')scheduleSave();
-});
+function moveToAnalysis(){const target=$('ardulabWorkspace');if(target)target.scrollIntoView({behavior:'smooth',block:'start'});}const goAnalysisBtn=$('goAnalysisBtn');if(goAnalysisBtn)goAnalysisBtn.onclick=moveToAnalysis;document.querySelectorAll('[data-send-analysis]').forEach(b=>b.onclick=()=>{if(!dataRows.length){alert('분석으로 보낼 데이터가 아직 없습니다. 먼저 데이터를 수집하거나 불러오세요.');return}moveToAnalysis();});
+const simCatalog={
+  fluid:[{id:'wind',name:'🌬️ 풍동 실험',desc:'베르누이 · 날개 양력/실속 · 마그누스 · 자유 풍동'}],
+  mechanics:[{id:'freefall',name:'자유낙하',desc:'높이와 중력에 따른 낙하 운동'},{id:'projectile',name:'포물선 운동',desc:'초기속도와 발사각에 따른 궤적'},{id:'incline',name:'경사면 운동',desc:'경사각·마찰과 가속도'},{id:'pendulum',name:'단진자',desc:'줄 길이와 진동 주기'},{id:'rocket',name:'🚀 발사체 추진',desc:'연료 질량·분사량·분사속도·질량 변화와 추진'}],
+  waves:[{id:'shm',name:'단진동',desc:'용수철 진동과 에너지'},{id:'standing',name:'정상파',desc:'마디·배·파장과 진동수'},{id:'interference',name:'두 파의 간섭',desc:'위상차와 보강·상쇄 간섭'}],
+  electric:[{id:'ohm',name:'옴의 법칙',desc:'전압-전류와 저항'},{id:'series',name:'직렬·병렬 회로',desc:'등가저항과 전류 분배'},{id:'rc',name:'RC 충·방전',desc:'축전기 전압의 시간 변화'}],
+  optics:[{id:'refraction',name:'반사·굴절',desc:'스넬 법칙과 굴절각'},{id:'lens',name:'얇은 렌즈',desc:'물체거리·상거리·배율'},{id:'diffraction',name:'이중슬릿·회절',desc:'파장과 간섭무늬 간격'}],
+  astro:[{id:'kepler',name:'🪐 케플러 법칙',desc:'타원궤도와 T²-a³ 관계'},{id:'escape',name:'🚀 탈출속도',desc:'천체 질량·반지름과 탈출 조건'}]
+};
+let activeSimCat='fluid',activeSimExp='wind';
+function renderSimExperiments(cat){activeSimCat=cat;const grid=$('simExperimentGrid');if(!grid)return;grid.innerHTML=(simCatalog[cat]||[]).map((e,i)=>`<button class="simExpBtn ${i===0?'active':''}" data-sim-exp="${e.id}"><div class="simExpName">${e.name}</div><div class="simExpDesc">${e.desc}</div></button>`).join('');document.querySelectorAll('.simCatBtn').forEach(b=>b.classList.toggle('active',b.dataset.simCat===cat));grid.querySelectorAll('.simExpBtn').forEach(b=>b.onclick=()=>openSimExperiment(b.dataset.simExp,b));if((simCatalog[cat]||[]).length)openSimExperiment(simCatalog[cat][0].id,grid.querySelector('.simExpBtn'))}
+function openSimExperiment(id,btn){activeSimExp=id;document.querySelectorAll('.simExpBtn').forEach(b=>b.classList.toggle('active',b===btn));const wind=$('windFrameWrap'),general=$('generalSimWrap');if(id==='wind'){wind&&wind.classList.remove('simHidden');general&&general.classList.add('simHidden')}else{wind&&wind.classList.add('simHidden');general&&general.classList.remove('simHidden');const frame=$('generalSimFrame');if(frame&&frame.contentWindow)frame.contentWindow.postMessage({type:'SCILAB_LOAD_EXPERIMENT',id},'*')}}
+document.querySelectorAll('.simCatBtn').forEach(b=>b.onclick=()=>renderSimExperiments(b.dataset.simCat));
+renderSimExperiments('fluid');
+function loadIncomingAnalysisData(msg){
+  if(!Array.isArray(msg.rows)||!msg.rows.length)return;
+  dataRows=msg.rows.map(r=>{const out={};for(const [k,v] of Object.entries(r)){const n=Number(v);out[k]=Number.isFinite(n)?n:v}return out});excluded.clear();sourceVars=(Array.isArray(msg.vars)?msg.vars:Object.keys(dataRows[0]||{})).filter(v=>v!=='time');allVars=[];tableVars=[];calculatedDefinitions={};selectedRange=null;graphState=null;intervalState=null;syncVars(false);updateCounts();renderTable();$('sampling').textContent='시뮬레이션';$('status').textContent='시뮬레이션 데이터 불러옴';$('schemaMsg').textContent=`시뮬레이션에서 ${dataRows.length}개 측정값을 가져왔습니다. 데이터 분석 영역에서 그래프·회귀·구간분석을 사용할 수 있습니다.`;if(typeof scheduleSave==='function')scheduleSave();const target=$('ardulabWorkspace');if(target)target.scrollIntoView({behavior:'smooth',block:'start'});
+}
+window.addEventListener('message',e=>{const msg=e.data;if(!msg)return;if(msg.type==='SCILAB_SIM_DATA'||msg.type==='ARDULAB_WIND_DATA')loadIncomingAnalysisData(msg)});
 
 // ============================================================
 // 사진·영상 분석
 // - 사진/영상은 좌표 데이터를 만드는 입력 도구 역할만 합니다.
-// - 생성된 데이터는 기존 ArduLab 분석 기능으로 넘깁니다.
+// - 생성된 데이터는 SciLab 공통 데이터 분석 영역으로 넘깁니다.
 // ============================================================
 let mediaKind = null;      
 function resetWholeExperiment(){
@@ -2263,7 +2324,7 @@ function canvasPos(evt){
 
 function recalculateAllMediaPoints(){
   // 사진·영상 분석 영역의 작업 데이터만 다시 계산한다.
-  // 이미 'ArduLab 데이터로 적용'한 실험 데이터는 다음 적용 버튼을 누르기 전까지 변경하지 않는다.
+  // 이미 분석 영역으로 보낸 데이터는 다음 전송 버튼을 누르기 전까지 변경하지 않는다.
   if(!(mediaScale&&mediaOrigin&&mediaXAxis))return;
   [1,2,3].forEach(tid=>{
     (mediaPointsByTarget[tid]||[]).forEach(row=>{
@@ -2972,12 +3033,12 @@ function applyMediaPointsToData(silent=false){
   }
 
   applyLoadedRows(rows,headers,mediaKind==='video'?'영상 다중대상 분석 데이터':'사진 다중대상 분석 데이터');
-  $('schemaMsg').textContent=`${mediaKind==='video'?'영상':'사진'} 분석의 현재 좌표 데이터를 ArduLab 실험 데이터로 적용했습니다. 이후 사진·영상 분석 데이터를 수정해도 다시 'ArduLab 데이터로 적용'을 누르기 전까지 실험 데이터는 변경되지 않습니다. 좌표 단위: ${mediaUnit}.`;
+  $('schemaMsg').textContent=`${mediaKind==='video'?'영상':'사진'} 분석의 현재 좌표 데이터를 공통 데이터 분석 영역으로 보냈습니다. 이후 사진·영상 좌표를 수정해도 다시 '수집한 데이터를 분석으로 보내기'를 누르기 전까지 분석 데이터는 변경되지 않습니다. 좌표 단위: ${mediaUnit}.`;
 
   mediaDataApplied=true;
   if(!silent)setInputMode('media');
 }
-$('applyMediaDataBtn').onclick=()=>applyMediaPointsToData(false);
+$('applyMediaDataBtn').onclick=()=>{applyMediaPointsToData(false);setTimeout(()=>{if(dataRows.length)moveToAnalysis()},50)};
 
 $('guideBtn').onclick=()=>openModal('guideModal');
 $('copySetupPrompt').onclick=async()=>{try{await navigator.clipboard.writeText($('setupPrompt').textContent);alert('초기 세팅 프롬프트를 복사했습니다.')}catch{alert('복사하지 못했습니다. 프롬프트를 직접 선택해 복사해 주세요.')}};
