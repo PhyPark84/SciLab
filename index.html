@@ -13,7 +13,7 @@
 
 .modeHub{background:linear-gradient(135deg,#eefafa,#f7fbff);border:1px solid #cfe7e8;border-radius:18px;padding:17px;margin-bottom:10px}
 .modeHubTitle{font-size:14px;font-weight:900;color:#315d60;margin-bottom:10px;text-align:center}
-.modeChooser{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.modeChooser{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
 .modeBtn{min-height:82px;padding:13px 14px;border:2px solid transparent;background:#fff;color:#334155;text-align:left;box-shadow:0 3px 12px #1e2d460d}
 .modeBtn .modeIcon{font-size:23px;display:block;margin-bottom:6px}
 .modeBtn .modeName{font-size:16px;font-weight:900;display:block}
@@ -78,6 +78,12 @@
 }
 
 
+
+.windLabIntro{background:#eef8f8;border:1px solid #cfe8e8;border-radius:10px;padding:10px 12px;color:#315d60;font-size:13px;line-height:1.5;margin-bottom:10px}
+.windFrameWrap{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#f5f7fb}
+.windFrame{display:block;width:100%;height:980px;border:0;background:#f5f7fb}
+@media(max-width:1100px){.windFrame{height:1650px}}
+
 #calculusModal{z-index:12000}
 #calcModal{z-index:11000}
 </style>
@@ -105,6 +111,11 @@
       <span class="modeIcon">📂</span>
       <span class="modeName">파일·수동 데이터</span>
       <span class="modeDesc">CSV·Excel·직접 입력 데이터 분석</span>
+    </button>
+    <button class="modeBtn" data-input-mode="wind">
+      <span class="modeIcon">🌬️</span>
+      <span class="modeName">가상 풍동 실험</span>
+      <span class="modeDesc">베르누이·양력·마그누스·STL 풍동 탐구</span>
     </button>
   </div>
   <div class="commonActions">
@@ -239,6 +250,196 @@
     <button id="sampleBtn" class="soft">예제 데이터</button>
   </div>
   <p class="muted">Arduino 없이도 CSV/Excel, 직접 입력한 데이터, 예제 데이터를 불러와 같은 분석 기능을 사용할 수 있습니다.</p>
+</section>
+
+<section id="windInputPanel" class="card inputPanel">
+  <h2>🌬️ 가상 풍동 실험</h2>
+  <div class="windLabIntro">베르누이 기본 실험, 날개 양력·받음각·실속, 마그누스 효과, 자유 STL 풍동을 한 화면에서 탐구할 수 있습니다. 풍동에서 기록한 실시간 측정값은 아래의 기존 ArduLab 그래프·회귀·구간분석 기능으로 전송할 수 있습니다.</div>
+  <div class="windFrameWrap"><iframe id="windLabFrame" class="windFrame" title="ArduLab 가상 풍동 실험실" srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;ko&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot; /&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot; /&gt;
+&lt;title&gt;고등학생용 가상 풍동 실험실&lt;/title&gt;
+&lt;style&gt;
+:root{--bg:#f5f7fb;--panel:#ffffff;--panel2:#f8fafc;--text:#202630;--muted:#6d7684;--accent:#00979d;--good:#2f9e57;--warn:#ff7a00;--danger:#b83232;--line:#dfe5ec;--cyan:#00979d}
+*{box-sizing:border-box}html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,&quot;Segoe UI&quot;,sans-serif;background:var(--bg);color:var(--text)}body{overflow:auto}
+.app{height:100%;display:grid;grid-template-rows:62px 1fr}header{display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1px solid var(--line);background:#ffffff;gap:16px}header h1{font-size:18px;margin:0}header .sub{font-size:12px;color:var(--muted);text-align:right}
+main{min-height:0;display:grid;grid-template-columns:330px 1fr 330px;gap:12px;padding:12px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:auto}.pad{padding:14px}h2{font-size:14px;margin:0 0 12px}.sectionTitle{font-size:12px;font-weight:800;margin:18px 0 8px;color:#334155;border-top:1px solid var(--line);padding-top:14px}.row{margin-bottom:13px}label{font-size:12px;color:var(--muted);display:flex;justify-content:space-between;gap:8px;margin-bottom:6px}input[type=&quot;range&quot;]{width:100%}select,input[type=&quot;number&quot;],input[type=&quot;color&quot;],button{width:100%;background:#fff;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:9px 10px}input[type=&quot;color&quot;]{height:40px;padding:4px}button{cursor:pointer;font-weight:750;min-height:40px}button:disabled{opacity:.45;cursor:not-allowed}button.primary{background:var(--accent);border-color:transparent;color:#06111d}button.danger{background:#fff0f0;border-color:#f1b8b8;color:#b83232}button.secondary{margin-top:8px}.button-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0 2px}.filebox{border:1px dashed #426990;border-radius:12px;padding:12px;text-align:center;color:var(--muted);margin-bottom:14px;background:#f8fafc}.filebox input{width:100%;margin-top:8px}.checks{display:grid;gap:8px}.check{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--line);background:#f8fafc;padding:9px 10px;border-radius:9px;font-size:12px;color:#334155}.check input{width:auto;accent-color:var(--accent)}
+.viewer{position:relative;background:radial-gradient(circle at 50% 38%,#18304b 0%,#0a1523 58%,#07101a 100%);border-radius:14px;border:1px solid var(--line);overflow:hidden;min-width:0}canvas{width:100%;height:100%;display:block}.hud{position:absolute;left:12px;top:12px;padding:8px 10px;background:#07101ddd;border:1px solid var(--line);border-radius:9px;font-size:12px;color:var(--muted);pointer-events:none}.legend{position:absolute;bottom:12px;left:12px;font-size:11px;color:var(--muted);background:#07101ddd;padding:7px 9px;border-radius:8px;border:1px solid var(--line);pointer-events:none}.rotation-box{position:absolute;right:12px;top:12px;width:196px;background:#07101dea;border:1px solid var(--line);border-radius:11px;padding:10px;backdrop-filter:blur(4px)}.rotation-title{font-size:12px;font-weight:800;margin-bottom:8px;display:flex;justify-content:space-between;gap:8px}.rotation-grid{display:grid;grid-template-columns:24px 1fr 18px;gap:6px;align-items:center;margin-top:6px}.rotation-grid span{font-size:11px;color:var(--muted)}.rotation-grid input{min-width:0;padding:6px 7px;border-radius:7px;font-size:12px}.rotation-reset{margin-top:8px;padding:6px 8px;min-height:auto;font-size:11px}.run-indicator{position:absolute;left:50%;top:12px;transform:translateX(-50%);background:#07101ddd;border:1px solid var(--line);border-radius:999px;padding:7px 11px;font-size:11px;display:flex;gap:7px;align-items:center;pointer-events:none}.dot{width:8px;height:8px;border-radius:50%;background:#6f7d90}.dot.running{background:var(--good);box-shadow:0 0 10px var(--good)}
+.metricGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.metric{padding:10px 11px;border:1px solid var(--line);background:#f8fafc;border-radius:11px;min-width:0}.metric .name{font-size:10px;color:var(--muted)}.metric .value{font-size:19px;font-weight:800;margin-top:3px;word-break:break-word}.metric .unit{font-size:10px;color:var(--muted)}.status{padding:12px;border-radius:11px;border:1px solid var(--line);background:#f8fafc;margin-top:10px}.status strong{display:block;margin-bottom:5px}.small{font-size:11px;color:var(--muted);line-height:1.5}.bar{height:8px;background:#edf0f4;border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-top:7px}.bar&gt;div{height:100%;background:var(--accent);width:0%}.badge{display:inline-block;padding:3px 7px;border-radius:999px;background:#e8f5f5;color:#08767b;font-size:10px;margin-left:6px}.state-line{font-size:12px;margin-top:8px;color:var(--muted)}.hidden{display:none!important}.formula{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;color:#334155;background:#f8fafc;border:1px solid var(--line);padding:8px;border-radius:8px;margin-top:8px}.tableWrap{overflow:auto;margin-top:8px}table{width:100%;border-collapse:collapse;font-size:10px}th,td{padding:6px 5px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}th:first-child,td:first-child{text-align:left}#graph{width:100%;height:145px;border:1px solid var(--line);border-radius:9px;background:#ffffff;margin-top:8px}.pill{font-size:10px;border:1px solid var(--line);border-radius:999px;padding:3px 7px;color:#334155}.expIntro{font-size:11px;color:var(--muted);line-height:1.5;margin-top:-4px;margin-bottom:12px}.miniNote{font-size:10px;color:#6d7684;margin-top:6px}
+@media(max-width:1100px){body{overflow:auto}.app{height:auto}.app main{grid-template-columns:1fr}.viewer{height:590px}.rotation-box{width:184px}}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;app&quot;&gt;
+&lt;header&gt;&lt;div&gt;&lt;h1&gt;가상 풍동 실험실 &lt;span class=&quot;badge&quot;&gt;고등학교 물리·공학 탐구&lt;/span&gt;&lt;/h1&gt;&lt;/div&gt;&lt;div class=&quot;sub&quot;&gt;베르누이 · 날개와 실속 · 마그누스 · 자유 STL 풍동&lt;/div&gt;&lt;/header&gt;
+&lt;main&gt;
+&lt;section class=&quot;panel pad&quot;&gt;
+  &lt;h2&gt;실험 선택&lt;/h2&gt;
+  &lt;div class=&quot;row&quot;&gt;&lt;label&gt;실험 모듈&lt;/label&gt;&lt;select id=&quot;experimentType&quot;&gt;&lt;option value=&quot;bernoulli&quot;&gt;1. 베르누이 기본 실험&lt;/option&gt;&lt;option value=&quot;wing&quot;&gt;2. 날개 양력·받음각·실속&lt;/option&gt;&lt;option value=&quot;magnus&quot;&gt;3. 마그누스 효과&lt;/option&gt;&lt;option value=&quot;free&quot;&gt;4. 자유 풍동 / STL&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+  &lt;div id=&quot;expIntro&quot; class=&quot;expIntro&quot;&gt;&lt;/div&gt;
+
+  &lt;div id=&quot;stlBlock&quot; class=&quot;filebox hidden&quot;&gt;STL 모델 불러오기&lt;input id=&quot;stlFile&quot; type=&quot;file&quot; accept=&quot;.stl&quot; /&gt;&lt;div id=&quot;fileInfo&quot; class=&quot;small&quot; style=&quot;margin-top:7px&quot;&gt;기본 샘플 형상을 사용합니다.&lt;/div&gt;&lt;/div&gt;
+
+  &lt;div class=&quot;sectionTitle&quot;&gt;공통 조건&lt;/div&gt;
+  &lt;div class=&quot;row&quot;&gt;&lt;label&gt;&lt;span&gt;풍속&lt;/span&gt;&lt;span id=&quot;speedTxt&quot;&gt;20 m/s&lt;/span&gt;&lt;/label&gt;&lt;input id=&quot;speed&quot; type=&quot;range&quot; min=&quot;0&quot; max=&quot;100&quot; step=&quot;1&quot; value=&quot;20&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;row&quot; id=&quot;massRow&quot;&gt;&lt;label&gt;질량 (kg)&lt;/label&gt;&lt;input id=&quot;mass&quot; type=&quot;number&quot; min=&quot;0.01&quot; step=&quot;0.05&quot; value=&quot;1&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;row&quot; id=&quot;areaRow&quot;&gt;&lt;label&gt;기준 면적 (m²)&lt;/label&gt;&lt;input id=&quot;area&quot; type=&quot;number&quot; min=&quot;0.0001&quot; step=&quot;0.01&quot; value=&quot;0.18&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;row&quot; id=&quot;cdRow&quot;&gt;&lt;label&gt;기본 항력계수 Cd₀&lt;/label&gt;&lt;input id=&quot;cd0&quot; type=&quot;number&quot; min=&quot;0.005&quot; step=&quot;0.005&quot; value=&quot;0.05&quot;&gt;&lt;/div&gt;
+
+  &lt;div id=&quot;bernoulliControls&quot; class=&quot;hidden&quot;&gt;
+    &lt;div class=&quot;sectionTitle&quot;&gt;베르누이 조건&lt;/div&gt;
+    &lt;div class=&quot;row&quot;&gt;&lt;label&gt;&lt;span&gt;목 부분 면적비 A₂/A₁&lt;/span&gt;&lt;span id=&quot;throatTxt&quot;&gt;0.50&lt;/span&gt;&lt;/label&gt;&lt;input id=&quot;throatRatio&quot; type=&quot;range&quot; min=&quot;0.2&quot; max=&quot;0.95&quot; step=&quot;0.05&quot; value=&quot;0.5&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;row&quot;&gt;&lt;label&gt;입구 정압 (kPa)&lt;/label&gt;&lt;input id=&quot;staticP&quot; type=&quot;number&quot; min=&quot;80&quot; max=&quot;130&quot; step=&quot;0.1&quot; value=&quot;101.3&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div id=&quot;wingControls&quot; class=&quot;hidden&quot;&gt;
+    &lt;div class=&quot;sectionTitle&quot;&gt;날개 조건&lt;/div&gt;
+    &lt;div class=&quot;row&quot;&gt;&lt;label&gt;&lt;span&gt;받음각&lt;/span&gt;&lt;span id=&quot;angleTxt&quot;&gt;5°&lt;/span&gt;&lt;/label&gt;&lt;input id=&quot;angle&quot; type=&quot;range&quot; min=&quot;-12&quot; max=&quot;25&quot; step=&quot;1&quot; value=&quot;5&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div id=&quot;magnusControls&quot; class=&quot;hidden&quot;&gt;
+    &lt;div class=&quot;sectionTitle&quot;&gt;회전 조건&lt;/div&gt;
+    &lt;div class=&quot;row&quot;&gt;&lt;label&gt;&lt;span&gt;회전 속도&lt;/span&gt;&lt;span id=&quot;rpmTxt&quot;&gt;1800 RPM&lt;/span&gt;&lt;/label&gt;&lt;input id=&quot;rpm&quot; type=&quot;range&quot; min=&quot;-4000&quot; max=&quot;4000&quot; step=&quot;100&quot; value=&quot;1800&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;row&quot;&gt;&lt;label&gt;회전축&lt;/label&gt;&lt;select id=&quot;spinAxis&quot;&gt;&lt;option value=&quot;z&quot;&gt;Z축 · 백스핀/탑스핀&lt;/option&gt;&lt;option value=&quot;y&quot;&gt;Y축 · 사이드스핀&lt;/option&gt;&lt;option value=&quot;x&quot;&gt;X축 · 롤 회전&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+    &lt;div class=&quot;row&quot;&gt;&lt;label&gt;공 지름 (m)&lt;/label&gt;&lt;input id=&quot;diameter&quot; type=&quot;number&quot; min=&quot;0.01&quot; max=&quot;1&quot; step=&quot;0.001&quot; value=&quot;0.074&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div id=&quot;freeControls&quot; class=&quot;hidden&quot;&gt;
+    &lt;div class=&quot;sectionTitle&quot;&gt;자유 풍동 옵션&lt;/div&gt;
+    &lt;div class=&quot;row&quot;&gt;&lt;label&gt;물체 색상&lt;/label&gt;&lt;input id=&quot;objectColor&quot; type=&quot;color&quot; value=&quot;#aabed6&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;checks&quot;&gt;
+      &lt;label class=&quot;check&quot;&gt;&lt;span&gt;바닥 표시&lt;/span&gt;&lt;input id=&quot;showGround&quot; type=&quot;checkbox&quot; checked&gt;&lt;/label&gt;
+      &lt;label class=&quot;check&quot;&gt;&lt;span&gt;자유 이동 허용&lt;/span&gt;&lt;input id=&quot;freeMove&quot; type=&quot;checkbox&quot;&gt;&lt;/label&gt;
+      &lt;label class=&quot;check&quot;&gt;&lt;span&gt;물체 회전(RPM) 사용&lt;/span&gt;&lt;input id=&quot;spinEnabled&quot; type=&quot;checkbox&quot;&gt;&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;groundRow&quot; class=&quot;row&quot; style=&quot;margin-top:10px&quot;&gt;&lt;label&gt;지상고 (m)&lt;/label&gt;&lt;input id=&quot;groundClearance&quot; type=&quot;number&quot; min=&quot;0&quot; step=&quot;0.01&quot; value=&quot;0.10&quot;&gt;&lt;/div&gt;
+    &lt;div id=&quot;maxHeightRow&quot; class=&quot;row hidden&quot;&gt;&lt;label&gt;최대 시뮬레이션 높이 (m)&lt;/label&gt;&lt;input id=&quot;maxHeight&quot; type=&quot;number&quot; min=&quot;0.5&quot; max=&quot;100&quot; step=&quot;0.5&quot; value=&quot;10&quot;&gt;&lt;/div&gt;
+    &lt;div id=&quot;freeSpinRows&quot; class=&quot;hidden&quot;&gt;
+      &lt;div class=&quot;row&quot;&gt;&lt;label&gt;회전축&lt;/label&gt;&lt;select id=&quot;freeSpinAxis&quot;&gt;&lt;option value=&quot;z&quot;&gt;Z축&lt;/option&gt;&lt;option value=&quot;y&quot;&gt;Y축&lt;/option&gt;&lt;option value=&quot;x&quot;&gt;X축&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+      &lt;div class=&quot;row&quot;&gt;&lt;label&gt;회전 속도 (RPM)&lt;/label&gt;&lt;input id=&quot;freeRpm&quot; type=&quot;number&quot; min=&quot;-10000&quot; max=&quot;10000&quot; step=&quot;100&quot; value=&quot;1000&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;button-grid&quot;&gt;&lt;button class=&quot;primary&quot; id=&quot;startExperiment&quot;&gt;실험 시작&lt;/button&gt;&lt;button class=&quot;danger&quot; id=&quot;stopExperiment&quot; disabled&gt;실험 종료&lt;/button&gt;&lt;/div&gt;
+  &lt;div class=&quot;state-line&quot; id=&quot;experimentState&quot;&gt;대기 중 · 조건을 설정한 뒤 실험을 시작하세요.&lt;/div&gt;
+  &lt;button class=&quot;secondary&quot; id=&quot;resetMotion&quot;&gt;운동 / 측정 초기화&lt;/button&gt;&lt;button class=&quot;secondary&quot; id=&quot;resetView&quot;&gt;카메라 시점 초기화&lt;/button&gt;&lt;button class=&quot;secondary primary&quot; id=&quot;sendToArduLab&quot; style=&quot;margin-top:8px&quot;&gt;측정 데이터를 ArduLab 분석으로 보내기&lt;/button&gt;&lt;div id=&quot;sendState&quot; class=&quot;small&quot; style=&quot;margin-top:6px&quot;&gt;실험 데이터를 기록한 뒤 전송할 수 있습니다.&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section class=&quot;viewer&quot;&gt;
+  &lt;canvas id=&quot;canvas&quot;&gt;&lt;/canvas&gt;
+  &lt;div class=&quot;hud&quot; id=&quot;hud&quot;&gt;드래그: 카메라 회전 · 휠: 확대/축소&lt;br&gt;움직이는 점: 연기/입자 흐름&lt;/div&gt;
+  &lt;div class=&quot;run-indicator&quot;&gt;&lt;span class=&quot;dot&quot; id=&quot;runDot&quot;&gt;&lt;/span&gt;&lt;span id=&quot;runText&quot;&gt;WIND OFF&lt;/span&gt;&lt;/div&gt;
+  &lt;div class=&quot;rotation-box&quot; id=&quot;rotationBox&quot;&gt;
+    &lt;div class=&quot;rotation-title&quot;&gt;&lt;span&gt;물체 자세&lt;/span&gt;&lt;span&gt;0–360°&lt;/span&gt;&lt;/div&gt;
+    &lt;div class=&quot;rotation-grid&quot;&gt;&lt;span&gt;X&lt;/span&gt;&lt;input id=&quot;objRotX&quot; type=&quot;number&quot; min=&quot;0&quot; max=&quot;360&quot; step=&quot;1&quot; value=&quot;0&quot;&gt;&lt;span&gt;°&lt;/span&gt;&lt;/div&gt;
+    &lt;div class=&quot;rotation-grid&quot;&gt;&lt;span&gt;Y&lt;/span&gt;&lt;input id=&quot;objRotY&quot; type=&quot;number&quot; min=&quot;0&quot; max=&quot;360&quot; step=&quot;1&quot; value=&quot;0&quot;&gt;&lt;span&gt;°&lt;/span&gt;&lt;/div&gt;
+    &lt;div class=&quot;rotation-grid&quot;&gt;&lt;span&gt;Z&lt;/span&gt;&lt;input id=&quot;objRotZ&quot; type=&quot;number&quot; min=&quot;0&quot; max=&quot;360&quot; step=&quot;1&quot; value=&quot;0&quot;&gt;&lt;span&gt;°&lt;/span&gt;&lt;/div&gt;
+    &lt;button class=&quot;rotation-reset&quot; id=&quot;resetObjectRotation&quot;&gt;0°, 0°, 0°로 초기화&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;legend&quot; id=&quot;legend&quot;&gt;FLOW → +X&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section class=&quot;panel pad&quot;&gt;
+  &lt;h2&gt;측정 결과 &lt;span class=&quot;pill&quot; id=&quot;resultMode&quot;&gt;베르누이&lt;/span&gt;&lt;/h2&gt;
+  &lt;div id=&quot;standardMetrics&quot; class=&quot;metricGrid&quot;&gt;
+    &lt;div class=&quot;metric&quot;&gt;&lt;div class=&quot;name&quot;&gt;항력 Fx&lt;/div&gt;&lt;div class=&quot;value&quot; id=&quot;dragVal&quot;&gt;0.00&lt;/div&gt;&lt;div class=&quot;unit&quot;&gt;N&lt;/div&gt;&lt;/div&gt;
+    &lt;div class=&quot;metric&quot;&gt;&lt;div class=&quot;name&quot;&gt;수직력 Fz&lt;/div&gt;&lt;div class=&quot;value&quot; id=&quot;fzVal&quot;&gt;0.00&lt;/div&gt;&lt;div class=&quot;unit&quot;&gt;N&lt;/div&gt;&lt;/div&gt;
+    &lt;div class=&quot;metric&quot;&gt;&lt;div class=&quot;name&quot;&gt;횡력 Fy&lt;/div&gt;&lt;div class=&quot;value&quot; id=&quot;fyVal&quot;&gt;0.00&lt;/div&gt;&lt;div class=&quot;unit&quot;&gt;N&lt;/div&gt;&lt;/div&gt;
+    &lt;div class=&quot;metric&quot;&gt;&lt;div class=&quot;name&quot;&gt;합력&lt;/div&gt;&lt;div class=&quot;value&quot; id=&quot;resultantVal&quot;&gt;0.00&lt;/div&gt;&lt;div class=&quot;unit&quot;&gt;N&lt;/div&gt;&lt;/div&gt;
+    &lt;div class=&quot;metric&quot;&gt;&lt;div class=&quot;name&quot;&gt;Cl / Cd&lt;/div&gt;&lt;div class=&quot;value&quot; id=&quot;coeffVal&quot;&gt;0.000 / 0.000&lt;/div&gt;&lt;/div&gt;
+    &lt;div class=&quot;metric&quot;&gt;&lt;div class=&quot;name&quot;&gt;높이&lt;/div&gt;&lt;div class=&quot;value&quot; id=&quot;heightVal&quot;&gt;0.00&lt;/div&gt;&lt;div class=&quot;unit&quot;&gt;m&lt;/div&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div id=&quot;bernoulliMetrics&quot; class=&quot;hidden&quot;&gt;
+    &lt;div class=&quot;metricGrid&quot;&gt;&lt;div class=&quot;metric&quot;&gt;&lt;div class=&quot;name&quot;&gt;입구 유속 v₁&lt;/div&gt;&lt;div class=&quot;value&quot; id=&quot;v1Val&quot;&gt;0.0&lt;/div&gt;&lt;div class=&quot;unit&quot;&gt;m/s&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;metric&quot;&gt;&lt;div class=&quot;name&quot;&gt;목 유속 v₂&lt;/div&gt;&lt;div class=&quot;value&quot; id=&quot;v2Val&quot;&gt;0.0&lt;/div&gt;&lt;div class=&quot;unit&quot;&gt;m/s&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;metric&quot;&gt;&lt;div class=&quot;name&quot;&gt;입구 압력 P₁&lt;/div&gt;&lt;div class=&quot;value&quot; id=&quot;p1Val&quot;&gt;0.0&lt;/div&gt;&lt;div class=&quot;unit&quot;&gt;kPa&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;metric&quot;&gt;&lt;div class=&quot;name&quot;&gt;목 압력 P₂&lt;/div&gt;&lt;div class=&quot;value&quot; id=&quot;p2Val&quot;&gt;0.0&lt;/div&gt;&lt;div class=&quot;unit&quot;&gt;kPa&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class=&quot;formula&quot; id=&quot;bernoulliFormula&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;status&quot;&gt;&lt;strong id=&quot;stateTitle&quot;&gt;대기 중&lt;/strong&gt;&lt;div id=&quot;stateDetail&quot; class=&quot;small&quot;&gt;실험 시작 전입니다.&lt;/div&gt;&lt;div class=&quot;bar&quot;&gt;&lt;div id=&quot;forceBar&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+
+  &lt;div class=&quot;sectionTitle&quot;&gt;실시간 데이터&lt;/div&gt;
+  &lt;canvas id=&quot;graph&quot;&gt;&lt;/canvas&gt;
+  &lt;div class=&quot;small&quot; id=&quot;graphHint&quot;&gt;실험 중 약 0.2초 간격으로 데이터를 누적합니다.&lt;/div&gt;
+  &lt;div class=&quot;tableWrap&quot;&gt;&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;t(s)&lt;/th&gt;&lt;th id=&quot;thA&quot;&gt;풍속&lt;/th&gt;&lt;th id=&quot;thB&quot;&gt;주요값&lt;/th&gt;&lt;th id=&quot;thC&quot;&gt;힘/압력&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody id=&quot;dataBody&quot;&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
+
+  &lt;div class=&quot;status&quot;&gt;&lt;strong&gt;모델 범위&lt;/strong&gt;&lt;div class=&quot;small&quot;&gt;교육용 근사 모델입니다. 개념 탐구와 변수 비교에는 적합하지만 실제 설계 검증용 CFD를 대체하지 않습니다. 날개 양력은 압력차와 운동량 변화 관점으로 함께 해석하세요.&lt;/div&gt;&lt;/div&gt;
+&lt;/section&gt;
+&lt;/main&gt;
+&lt;/div&gt;
+&lt;script&gt;
+(() =&gt; {
+const $=id=&gt;document.getElementById(id);const canvas=$(&quot;canvas&quot;),ctx=canvas.getContext(&quot;2d&quot;),graph=$(&quot;graph&quot;),gctx=graph.getContext(&quot;2d&quot;);
+let tris=makeWing(),cameraRotX=-0.38,cameraRotY=0.65,zoom=1.15,objectRot={x:0,y:0,z:0};let drag=false,px=0,py=0;let experimentRunning=false,lastResult=null,last=performance.now(),tunnelTime=0,height=0,vy=0,lastSample=0;const dataLog=[];const particles=[];const PARTICLE_COUNT=190;let loadedSTL=false;
+const intros={bernoulli:&quot;벤투리관에서 단면적 감소 → 유속 증가 → 정압 감소를 확인합니다.&quot;,wing:&quot;받음각에 따른 양력·항력 변화를 관찰하고 큰 받음각에서 실속을 탐구합니다.&quot;,magnus:&quot;회전하는 공의 비대칭 유동과 마그누스 힘의 방향·크기를 확인합니다.&quot;,free:&quot;직접 만든 STL을 넣고 자세·바닥·회전·자유 이동을 조합해 탐구합니다.&quot;};
+function makeWing(){const top=[[-1.45,-.15,.06],[1.45,-.15,.06],[-1.05,.15,0],[1.05,.15,0]],bot=top.map(p=&gt;[p[0],p[1],p[2]-.12]),v=[...top,...bot],F=[[0,1,2],[1,3,2],[4,6,5],[5,6,7],[0,4,1],[1,4,5],[2,3,6],[3,7,6],[0,2,4],[2,6,4],[1,5,3],[3,5,7]];return F.map(f=&gt;f.map(i=&gt;v[i]));}
+function makeSphere(){const out=[],lat=14,lon=24;for(let i=0;i&lt;lat;i++){const a1=-Math.PI/2+i*Math.PI/lat,a2=-Math.PI/2+(i+1)*Math.PI/lat;for(let j=0;j&lt;lon;j++){const b1=j*2*Math.PI/lon,b2=(j+1)*2*Math.PI/lon;const p=(a,b)=&gt;[Math.cos(a)*Math.cos(b),Math.sin(a),Math.cos(a)*Math.sin(b)];const q1=p(a1,b1),q2=p(a2,b1),q3=p(a2,b2),q4=p(a1,b2);out.push([q1,q2,q3],[q1,q3,q4]);}}return out;}
+function makeGeneric(){const v=[[-1,-.45,-.35],[1,-.45,-.35],[1,.45,-.35],[-1,.45,-.35],[-1,-.45,.35],[1,-.45,.35],[1,.45,.35],[-1,.45,.35]],F=[[0,1,2],[0,2,3],[4,6,5],[4,7,6],[0,4,5],[0,5,1],[1,5,6],[1,6,2],[2,6,7],[2,7,3],[3,7,4],[3,4,0]];return F.map(f=&gt;f.map(i=&gt;v[i]));}
+function parseSTL(buf){const dv=new DataView(buf);if(buf.byteLength&gt;=84){const n=dv.getUint32(80,true);if(84+n*50===buf.byteLength){const out=[];let o=84;for(let i=0;i&lt;n;i++){o+=12;const t=[];for(let k=0;k&lt;3;k++){t.push([dv.getFloat32(o,true),dv.getFloat32(o+4,true),dv.getFloat32(o+8,true)]);o+=12}out.push(t);o+=2}return normalize(out)}}const txt=new TextDecoder().decode(buf),verts=[...txt.matchAll(/vertex\s+([+\-\deE.]+)\s+([+\-\deE.]+)\s+([+\-\deE.]+)/g)].map(m=&gt;[+m[1],+m[2],+m[3]]),out=[];for(let i=0;i+2&lt;verts.length;i+=3)out.push([verts[i],verts[i+1],verts[i+2]]);if(!out.length)throw new Error(&quot;STL 삼각형을 읽지 못했습니다.&quot;);return normalize(out)}
+function normalize(t){const pts=t.flat(),mn=[Infinity,Infinity,Infinity],mx=[-Infinity,-Infinity,-Infinity];for(const p of pts)for(let j=0;j&lt;3;j++){mn[j]=Math.min(mn[j],p[j]);mx[j]=Math.max(mx[j],p[j])}const c=mn.map((v,j)=&gt;(v+mx[j])/2),span=Math.max(...mx.map((v,j)=&gt;v-mn[j]))||1;return t.map(tr=&gt;tr.map(p=&gt;p.map((v,j)=&gt;(v-c[j])/span*2.6)))}
+function clamp(n,a,b){n=Number(n);return Number.isFinite(n)?Math.max(a,Math.min(b,n)):a}function clamp360(v){v=Number(v);if(!Number.isFinite(v))return 0;v%=360;if(v&lt;0)v+=360;return v}
+function syncObjectRotation(){objectRot.x=clamp360($(&quot;objRotX&quot;).value);objectRot.y=clamp360($(&quot;objRotY&quot;).value);objectRot.z=clamp360($(&quot;objRotZ&quot;).value);$(&quot;objRotX&quot;).value=Math.round(objectRot.x);$(&quot;objRotY&quot;).value=Math.round(objectRot.y);$(&quot;objRotZ&quot;).value=Math.round(objectRot.z)}
+function rotateObjectPoint(p,spinAngle=0,spinAxis=null){let[x,y,z]=p;const rot=(axis,a)=&gt;{const c=Math.cos(a),s=Math.sin(a);if(axis===&#x27;x&#x27;){const y1=y*c-z*s,z1=y*s+z*c;y=y1;z=z1}else if(axis===&#x27;y&#x27;){const x1=x*c+z*s,z1=-x*s+z*c;x=x1;z=z1}else{const x1=x*c-y*s,y1=x*s+y*c;x=x1;y=y1}};rot(&#x27;x&#x27;,objectRot.x*Math.PI/180);rot(&#x27;y&#x27;,objectRot.y*Math.PI/180);rot(&#x27;z&#x27;,objectRot.z*Math.PI/180);if(spinAxis)rot(spinAxis,spinAngle);return[x,y,z]}
+function mode(){return $(&quot;experimentType&quot;).value}
+function currentSpin(){if(mode()===&#x27;magnus&#x27;)return{enabled:true,axis:$(&quot;spinAxis&quot;).value,rpm:clamp($(&quot;rpm&quot;).value,-4000,4000)};if(mode()===&#x27;free&#x27;&amp;&amp;$(&quot;spinEnabled&quot;).checked)return{enabled:true,axis:$(&quot;freeSpinAxis&quot;).value,rpm:clamp($(&quot;freeRpm&quot;).value,-10000,10000)};return{enabled:false,axis:&#x27;z&#x27;,rpm:0}}
+function standardAero(){const V=clamp($(&quot;speed&quot;).value,0,100),m=Math.max(.001,clamp($(&quot;mass&quot;).value,.001,100000)),S=Math.max(.000001,clamp($(&quot;area&quot;).value,.000001,10000)),cd0=Math.max(.001,clamp($(&quot;cd0&quot;).value,.001,5)),rho=1.225,q=.5*rho*V*V,exp=mode();let cl=0,cd=cd0,fy=0,fz=0,state=&#x27;&#x27;;
+ if(exp===&#x27;wing&#x27;){const a=clamp($(&quot;angle&quot;).value,-30,40),aa=Math.abs(a),sgn=a&gt;=0?1:-1;cl=2*Math.PI*(Math.min(aa,14)*Math.PI/180)*sgn;if(aa&gt;14)cl*=Math.max(.18,1-(aa-14)/22);cd=cd0+cl*cl/(Math.PI*6*.8)+(aa&gt;14?(aa-14)*.012:0);fz=q*S*cl;state=aa&gt;14?&#x27;실속 영역 · 양력 증가가 둔화되고 항력이 크게 증가&#x27;:fz&gt;m*9.80665?&#x27;양력이 중량보다 큼 · 상승 가능&#x27;:&#x27;양력이 중량보다 작음&#x27;;}
+ else if(exp===&#x27;magnus&#x27;){const d=Math.max(.001,clamp($(&quot;diameter&quot;).value,.001,5)),rpm=clamp($(&quot;rpm&quot;).value,-4000,4000),omega=rpm*2*Math.PI/60,R=d/2,spin=V&gt;0?omega*R/V:0,cm=Math.max(-1.2,Math.min(1.2,1.35*spin/(1+Math.abs(spin)))),A=Math.PI*R*R;cd=.38+.08*Math.min(2,Math.abs(spin));const mag=q*A*cm;if($(&quot;spinAxis&quot;).value===&#x27;z&#x27;)fz=mag;else if($(&quot;spinAxis&quot;).value===&#x27;y&#x27;)fy=mag;state=`스핀 파라미터 ${spin.toFixed(2)} · 회전 방향에 따라 힘 방향 반전`;return{V,m,S:A,q,cl:cm,cd,drag:q*A*cd,fy,fz,weight:m*9.80665,state,spin,cm,rpm,axis:$(&quot;spinAxis&quot;).value};}
+ else {const yaw=objectRot.z*Math.PI/180,pitch=objectRot.y*Math.PI/180,alignment=Math.max(.12,Math.abs(Math.cos(yaw)*Math.cos(pitch))),effectiveArea=S*(.45+.55*alignment),effectivePitch=Math.asin(Math.max(-1,Math.min(1,Math.sin(objectRot.y*Math.PI/180))))*180/Math.PI,aa=Math.abs(effectivePitch),sgn=effectivePitch&gt;=0?1:-1;cl=2*Math.PI*(Math.min(aa,12)*Math.PI/180)*sgn*.55;if(aa&gt;12)cl*=Math.max(.2,1-(aa-12)/35);cd=cd0+cl*cl/(Math.PI*5*.75)+(1-alignment)*.45;fz=q*effectiveArea*cl;const spin=currentSpin();if(spin.enabled&amp;&amp;V&gt;0){const omega=spin.rpm*2*Math.PI/60,spinParam=omega*.05/V,cm=Math.max(-.8,Math.min(.8,.9*spinParam/(1+Math.abs(spinParam)))),mf=q*effectiveArea*cm;if(spin.axis===&#x27;z&#x27;)fz+=mf;else if(spin.axis===&#x27;y&#x27;)fy+=mf;}state=$(&quot;freeMove&quot;).checked?&#x27;자유 이동 활성 · 수직력과 중량으로 높이 계산&#x27;:&#x27;물체 고정 · 힘만 측정&#x27;;return{V,m,S:effectiveArea,q,cl,cd,drag:q*effectiveArea*cd,fy,fz,weight:m*9.80665,state};}
+ return{V,m,S,q,cl,cd,drag:q*S*cd,fy,fz,weight:m*9.80665,state};}
+function bernoulli(){const rho=1.225,v1=clamp($(&quot;speed&quot;).value,0,100),ratio=clamp($(&quot;throatRatio&quot;).value,.2,.95),v2=v1/ratio,p1=clamp($(&quot;staticP&quot;).value,80,130)*1000,p2=p1+.5*rho*(v1*v1-v2*v2),total1=p1+.5*rho*v1*v1,total2=p2+.5*rho*v2*v2;return{V:v1,ratio,v1,v2,p1,p2,total1,total2,state:&#x27;연속방정식 A₁v₁=A₂v₂ · 수평 유동의 베르누이 근사&#x27;} }
+function result(){return mode()===&#x27;bernoulli&#x27;?bernoulli():standardAero()}
+function updateControls(){const m=mode();$(&quot;bernoulliControls&quot;).classList.toggle(&#x27;hidden&#x27;,m!==&#x27;bernoulli&#x27;);$(&quot;wingControls&quot;).classList.toggle(&#x27;hidden&#x27;,m!==&#x27;wing&#x27;);$(&quot;magnusControls&quot;).classList.toggle(&#x27;hidden&#x27;,m!==&#x27;magnus&#x27;);$(&quot;freeControls&quot;).classList.toggle(&#x27;hidden&#x27;,m!==&#x27;free&#x27;);$(&quot;stlBlock&quot;).classList.toggle(&#x27;hidden&#x27;,m!==&#x27;free&#x27;);$(&quot;rotationBox&quot;).classList.toggle(&#x27;hidden&#x27;,m===&#x27;bernoulli&#x27;||m===&#x27;magnus&#x27;);$(&quot;massRow&quot;).classList.toggle(&#x27;hidden&#x27;,m===&#x27;bernoulli&#x27;);$(&quot;areaRow&quot;).classList.toggle(&#x27;hidden&#x27;,m===&#x27;bernoulli&#x27;||m===&#x27;magnus&#x27;);$(&quot;cdRow&quot;).classList.toggle(&#x27;hidden&#x27;,m===&#x27;bernoulli&#x27;||m===&#x27;magnus&#x27;);$(&quot;standardMetrics&quot;).classList.toggle(&#x27;hidden&#x27;,m===&#x27;bernoulli&#x27;);$(&quot;bernoulliMetrics&quot;).classList.toggle(&#x27;hidden&#x27;,m!==&#x27;bernoulli&#x27;);$(&quot;expIntro&quot;).textContent=intros[m];$(&quot;resultMode&quot;).textContent={bernoulli:&#x27;베르누이&#x27;,wing:&#x27;날개&#x27;,magnus:&#x27;마그누스&#x27;,free:&#x27;자유 풍동&#x27;}[m];if(m===&#x27;wing&#x27;&amp;&amp;!loadedSTL)tris=makeWing();if(m===&#x27;magnus&#x27;)tris=makeSphere();if(m===&#x27;free&#x27;&amp;&amp;!loadedSTL)tris=makeGeneric();resetMeasurements();}
+function resetMeasurements(){height=0;vy=0;lastResult=null;dataLog.length=0;lastSample=0;$(&quot;dataBody&quot;).innerHTML=&#x27;&#x27;;drawGraph();}
+function setRunState(run){experimentRunning=run;$(&quot;startExperiment&quot;).disabled=run;$(&quot;stopExperiment&quot;).disabled=!run;$(&quot;runDot&quot;).classList.toggle(&#x27;running&#x27;,run);$(&quot;runText&quot;).textContent=run?&#x27;WIND ON&#x27;:&#x27;WIND OFF&#x27;;$(&quot;experimentState&quot;).textContent=run?&#x27;실험 진행 중 · 유동과 측정값을 기록합니다.&#x27;:&#x27;실험 종료 · 마지막 측정 결과가 유지됩니다.&#x27;;if(run){lastResult=null;tunnelTime=0;lastSample=0;dataLog.length=0;$(&quot;dataBody&quot;).innerHTML=&#x27;&#x27;;initParticles();}}
+function updateUI(r,live){$(&quot;speedTxt&quot;).textContent=`${clamp($(&quot;speed&quot;).value,0,100).toFixed(0)} m/s`;$(&quot;angleTxt&quot;).textContent=`${clamp($(&quot;angle&quot;).value,-12,25).toFixed(0)}°`;$(&quot;rpmTxt&quot;).textContent=`${clamp($(&quot;rpm&quot;).value,-4000,4000).toFixed(0)} RPM`;$(&quot;throatTxt&quot;).textContent=clamp($(&quot;throatRatio&quot;).value,.2,.95).toFixed(2);if(!live&amp;&amp;!lastResult){$(&quot;stateTitle&quot;).textContent=&#x27;대기 중&#x27;;$(&quot;stateDetail&quot;).textContent=&#x27;실험 시작 전입니다.&#x27;;return}const s=live?r:lastResult;if(mode()===&#x27;bernoulli&#x27;){$(&quot;v1Val&quot;).textContent=s.v1.toFixed(1);$(&quot;v2Val&quot;).textContent=s.v2.toFixed(1);$(&quot;p1Val&quot;).textContent=(s.p1/1000).toFixed(2);$(&quot;p2Val&quot;).textContent=(s.p2/1000).toFixed(2);$(&quot;bernoulliFormula&quot;).textContent=`P₁ + ½ρv₁² = ${(s.total1/1000).toFixed(3)} kPa   ≈   P₂ + ½ρv₂² = ${(s.total2/1000).toFixed(3)} kPa`;$(&quot;stateTitle&quot;).textContent=&#x27;베르누이 관계 확인&#x27;;$(&quot;stateDetail&quot;).textContent=`면적비 ${s.ratio.toFixed(2)}에서 목 유속은 입구의 ${(s.v2/(s.v1||1)).toFixed(2)}배, 압력은 ${((s.p2-s.p1)/1000).toFixed(2)} kPa 변합니다.`;$(&quot;forceBar&quot;).style.width=Math.min(100,(s.v2/100)*100)+&#x27;%&#x27;;}
+ else{const drag=s.drag||0,fy=s.fy||0,fz=s.fz||0,res=Math.hypot(drag,fy,fz);$(&quot;dragVal&quot;).textContent=drag.toFixed(2);$(&quot;fyVal&quot;).textContent=fy.toFixed(2);$(&quot;fzVal&quot;).textContent=fz.toFixed(2);$(&quot;resultantVal&quot;).textContent=res.toFixed(2);$(&quot;coeffVal&quot;).textContent=`${(s.cl||0).toFixed(3)} / ${(s.cd||0).toFixed(3)}`;$(&quot;heightVal&quot;).textContent=height.toFixed(2);$(&quot;stateTitle&quot;).textContent=s.state;$(&quot;stateDetail&quot;).textContent=mode()===&#x27;magnus&#x27;?`회전 ${s.rpm.toFixed(0)} RPM · 마그누스 힘 성분 Fy=${fy.toFixed(2)} N, Fz=${fz.toFixed(2)} N`:`수직력 ${fz.toFixed(2)} N / 중량 ${s.weight.toFixed(2)} N`;$(&quot;forceBar&quot;).style.width=Math.min(100,Math.abs(fz)/(s.weight||1)*60)+&#x27;%&#x27;;}}
+function sampleData(r){if(tunnelTime-lastSample&lt;.2)return;lastSample=tunnelTime;if(dataLog.length&gt;=80)dataLog.shift();if(mode()===&#x27;bernoulli&#x27;)dataLog.push({t:tunnelTime,a:r.v1,b:r.v2,c:r.p2/1000});else if(mode()===&#x27;magnus&#x27;)dataLog.push({t:tunnelTime,a:r.V,b:r.rpm,c:(r.fy||r.fz)});else if(mode()===&#x27;wing&#x27;)dataLog.push({t:tunnelTime,a:r.V,b:clamp($(&quot;angle&quot;).value,-12,25),c:r.fz});else dataLog.push({t:tunnelTime,a:r.V,b:objectRot.y,c:r.fz});renderTable();drawGraph();}
+function renderTable(){const rows=dataLog.slice(-8).reverse();$(&quot;dataBody&quot;).innerHTML=rows.map(d=&gt;`&lt;tr&gt;&lt;td&gt;${d.t.toFixed(1)}&lt;/td&gt;&lt;td&gt;${d.a.toFixed(2)}&lt;/td&gt;&lt;td&gt;${d.b.toFixed(2)}&lt;/td&gt;&lt;td&gt;${d.c.toFixed(2)}&lt;/td&gt;&lt;/tr&gt;`).join(&#x27;&#x27;);const m=mode();$(&quot;thA&quot;).textContent=m===&#x27;bernoulli&#x27;?&#x27;v₁&#x27;: &#x27;풍속&#x27;;$(&quot;thB&quot;).textContent=m===&#x27;bernoulli&#x27;?&#x27;v₂&#x27;:m===&#x27;magnus&#x27;?&#x27;RPM&#x27;:m===&#x27;wing&#x27;?&#x27;받음각&#x27;:&#x27;Y자세&#x27;;$(&quot;thC&quot;).textContent=m===&#x27;bernoulli&#x27;?&#x27;P₂(kPa)&#x27;:m===&#x27;magnus&#x27;?&#x27;마그누스힘&#x27;:&#x27;Fz(N)&#x27;;}
+function drawGraph(){const rect=graph.getBoundingClientRect(),dpr=Math.max(1,devicePixelRatio||1),W=Math.max(10,Math.floor(rect.width*dpr)),H=Math.max(10,Math.floor(rect.height*dpr));if(graph.width!==W||graph.height!==H){graph.width=W;graph.height=H}gctx.setTransform(dpr,0,0,dpr,0,0);const w=rect.width,h=rect.height;gctx.clearRect(0,0,w,h);gctx.strokeStyle=&#x27;rgba(130,170,210,.22)&#x27;;gctx.lineWidth=1;for(let i=1;i&lt;5;i++){gctx.beginPath();gctx.moveTo(0,h*i/5);gctx.lineTo(w,h*i/5);gctx.stroke()}if(dataLog.length&lt;2)return;const vals=dataLog.map(d=&gt;d.c),mn=Math.min(...vals),mx=Math.max(...vals),span=mx-mn||1;gctx.strokeStyle=&#x27;#7ddcff&#x27;;gctx.lineWidth=2;gctx.beginPath();dataLog.forEach((d,i)=&gt;{const x=8+(w-16)*i/(dataLog.length-1),y=h-8-(h-16)*(d.c-mn)/span;i?gctx.lineTo(x,y):gctx.moveTo(x,y)});gctx.stroke();gctx.fillStyle=&#x27;#9eb2cb&#x27;;gctx.font=&#x27;10px system-ui&#x27;;gctx.fillText(`min ${mn.toFixed(2)}`,6,h-5);gctx.fillText(`max ${mx.toFixed(2)}`,6,12)}
+function proj(p,w,h,spinAngle=0,spinAxis=null,yOffset=0){let[x,y,z]=rotateObjectPoint(p,spinAngle,spinAxis);y+=yOffset;let c=Math.cos(cameraRotY),s=Math.sin(cameraRotY),x1=x*c+z*s,z1=-x*s+z*c;c=Math.cos(cameraRotX);s=Math.sin(cameraRotX);let y1=y*c-z1*s,z2=y*s+z1*c;const f=260*zoom/(3.5+z2);return[w/2+x1*f,h/2-y1*f,z2]}
+function resetParticle(p,randomX=true){p.x=randomX?Math.random():0;p.lane=Math.random()*2-1;p.depth=Math.random()*2-1;p.phase=Math.random()*Math.PI*2;p.size=.7+Math.random()*1.5;p.speed=.65+Math.random()*.55}function initParticles(){particles.length=0;for(let i=0;i&lt;PARTICLE_COUNT;i++){const p={};resetParticle(p,true);particles.push(p)}}
+function renderGround(w,h){if(mode()!==&#x27;free&#x27;||!$(&quot;showGround&quot;).checked)return;const base=h*.72;ctx.save();ctx.strokeStyle=&#x27;rgba(150,180,205,.28)&#x27;;ctx.lineWidth=1;for(let i=0;i&lt;=12;i++){const y=base+i*9;ctx.beginPath();ctx.moveTo(w*.08,y);ctx.lineTo(w*.94,y);ctx.stroke()}for(let i=0;i&lt;=14;i++){const x=w*.08+(w*.86)*i/14;ctx.beginPath();ctx.moveTo(w/2+(x-w/2)*.45,base);ctx.lineTo(x,h*.95);ctx.stroke()}ctx.strokeStyle=&#x27;rgba(210,230,245,.55)&#x27;;ctx.beginPath();ctx.moveTo(w*.06,base);ctx.lineTo(w*.95,base);ctx.stroke();ctx.fillStyle=&#x27;rgba(210,230,245,.65)&#x27;;ctx.font=&#x27;11px system-ui&#x27;;ctx.fillText(&#x27;Z = 0 기준면&#x27;,w*.08,base-7);ctx.restore()}
+function renderTunnel(w,h){ctx.strokeStyle=&#x27;rgba(120,160,200,.13)&#x27;;ctx.lineWidth=1;const top=h*.14,bottom=h*.86,left=w*.05,right=w*.96;ctx.strokeRect(left,top,right-left,bottom-top);for(let i=1;i&lt;7;i++){const y=top+(bottom-top)*i/7;ctx.beginPath();ctx.moveTo(left,y);ctx.lineTo(right,y);ctx.stroke()}}
+function renderVenturi(r,w,h){const x0=w*.12,x1=w*.88,cy=h*.5,outer=h*.24,th=outer*r.ratio;ctx.fillStyle=&#x27;rgba(70,115,150,.18)&#x27;;ctx.strokeStyle=&#x27;rgba(205,230,248,.6)&#x27;;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x0,cy-outer);ctx.lineTo(w*.38,cy-outer);ctx.lineTo(w*.47,cy-th);ctx.lineTo(w*.58,cy-th);ctx.lineTo(w*.68,cy-outer);ctx.lineTo(x1,cy-outer);ctx.lineTo(x1,cy+outer);ctx.lineTo(w*.68,cy+outer);ctx.lineTo(w*.58,cy+th);ctx.lineTo(w*.47,cy+th);ctx.lineTo(w*.38,cy+outer);ctx.lineTo(x0,cy+outer);ctx.closePath();ctx.fill();ctx.stroke();ctx.fillStyle=&#x27;#cfe9ff&#x27;;ctx.font=&#x27;12px system-ui&#x27;;ctx.fillText(`A₁, v₁=${r.v1.toFixed(1)} m/s`,x0,cy-outer-12);ctx.fillText(`A₂, v₂=${r.v2.toFixed(1)} m/s`,w*.46,cy-th-12);ctx.fillStyle=&#x27;#9eb2cb&#x27;;ctx.fillText(`P₁ ${(r.p1/1000).toFixed(2)} kPa`,x0,cy+outer+20);ctx.fillText(`P₂ ${(r.p2/1000).toFixed(2)} kPa`,w*.46,cy+th+20)}
+function renderParticles(r,w,h,dt){if(!experimentRunning)return;const V=r.V||0,speedFactor=.08+V/60;for(const p of particles){p.x+=dt*speedFactor*p.speed;if(p.x&gt;1.04)resetParticle(p,false);let sx=w*.04+p.x*w*.92,sy=h*.5+p.lane*h*.28;const near=Math.exp(-Math.pow((p.x-.52)/.17,2)),wake=p.x&gt;.55?Math.min(1,(p.x-.55)/.3):0;let bend=0,turb=0;if(mode()===&#x27;wing&#x27;||mode()===&#x27;free&#x27;){bend=(r.cl||0)*20*near*(.3+.7*Math.abs(p.lane));turb=wake*Math.sin(tunnelTime*8+p.phase+p.x*17)*8*(.4+Math.abs(r.cl||0));sy-=bend;sy+=turb}else if(mode()===&#x27;magnus&#x27;){const force=(r.fz||r.fy||0),dir=Math.sign(force||1);const swirl=Math.sin((p.x-.5)*12+p.phase+tunnelTime*2)*near*14*Math.min(1,Math.abs(r.spin||0));sy-=dir*near*18*Math.min(1,Math.abs(r.spin||0))+swirl*.2;sy+=wake*Math.sin(tunnelTime*9+p.phase+p.x*14)*6}else if(mode()===&#x27;bernoulli&#x27;){const squeeze=Math.exp(-Math.pow((p.x-.52)/.16,2));sy=h*.5+p.lane*h*(.23-.13*squeeze*r.ratio);}
+ const alpha=.25+.58*(1-Math.abs(p.depth)*.45);ctx.fillStyle=`rgba(120,205,255,${alpha.toFixed(3)})`;ctx.beginPath();ctx.arc(sx,sy,p.size,0,Math.PI*2);ctx.fill();ctx.strokeStyle=`rgba(95,175,245,${(alpha*.38).toFixed(3)})`;ctx.beginPath();ctx.moveTo(sx-7-V*.04,sy);ctx.lineTo(sx,sy);ctx.stroke()}}
+function hexToRgb(hex){const n=parseInt(hex.slice(1),16);return[(n&gt;&gt;16)&amp;255,(n&gt;&gt;8)&amp;255,n&amp;255]}
+function renderModel(r,w,h){if(mode()===&#x27;bernoulli&#x27;){renderVenturi(r,w,h);return}const spin=currentSpin(),spinAngle=spin.enabled?tunnelTime*spin.rpm*2*Math.PI/60:0,visualHeight=mode()===&#x27;free&#x27;&amp;&amp;$(&quot;freeMove&quot;).checked?Math.min(.85,height/Math.max(.1,clamp($(&quot;maxHeight&quot;).value,.5,100)))*1.25:0;const drawable=tris.map(t=&gt;{const p=t.map(v=&gt;proj(v,w,h,spinAngle,spin.enabled?spin.axis:null,visualHeight));return{p,z:(p[0][2]+p[1][2]+p[2][2])/3}}).sort((a,b)=&gt;a.z-b.z);const rgb=mode()===&#x27;free&#x27;?hexToRgb($(&quot;objectColor&quot;).value):mode()===&#x27;magnus&#x27;?[230,232,236]:[170,194,218];for(const d of drawable){ctx.beginPath();ctx.moveTo(d.p[0][0],d.p[0][1]);ctx.lineTo(d.p[1][0],d.p[1][1]);ctx.lineTo(d.p[2][0],d.p[2][1]);ctx.closePath();const shade=Math.max(.5,Math.min(1.18,.88-d.z*.11));ctx.fillStyle=`rgb(${Math.min(255,rgb[0]*shade)},${Math.min(255,rgb[1]*shade)},${Math.min(255,rgb[2]*shade)})`;ctx.fill();ctx.strokeStyle=&#x27;rgba(245,250,255,.28)&#x27;;ctx.lineWidth=.7;ctx.stroke()}if(mode()===&#x27;magnus&#x27;){ctx.strokeStyle=&#x27;rgba(255,120,120,.85)&#x27;;ctx.lineWidth=3;ctx.beginPath();ctx.arc(w*.5,h*.5,42,-.7,4.7);ctx.stroke()}}
+function arrow(x1,y1,x2,y2,color,label){ctx.strokeStyle=color;ctx.fillStyle=color;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();const a=Math.atan2(y2-y1,x2-x1),len=10;ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-len*Math.cos(a-.5),y2-len*Math.sin(a-.5));ctx.lineTo(x2-len*Math.cos(a+.5),y2-len*Math.sin(a+.5));ctx.closePath();ctx.fill();ctx.font=&#x27;12px system-ui&#x27;;ctx.fillText(label,x2+6,y2-6)}
+function renderForces(r,w,h){if(mode()===&#x27;bernoulli&#x27;||(!experimentRunning&amp;&amp;!lastResult))return;const s=experimentRunning?r:lastResult,cx=w*.5,cy=h*.5;arrow(cx,cy,cx-85,cy,&#x27;#ffc65b&#x27;,&#x27;Fx 항력&#x27;);if(Math.abs(s.fz||0)&gt;.01){const len=Math.max(-120,Math.min(120,-(s.fz/(s.weight||Math.abs(s.fz)||1))*70));arrow(cx,cy,cx,cy+len,&#x27;#66dd91&#x27;,&#x27;Fz&#x27;)}if(Math.abs(s.fy||0)&gt;.01){const len=Math.max(-105,Math.min(105,(s.fy/(s.weight||Math.abs(s.fy)||1))*65));arrow(cx,cy,cx+len,cy,&#x27;#ff8dac&#x27;,&#x27;Fy&#x27;)}}
+function render(r,dt){const rect=canvas.getBoundingClientRect(),dpr=Math.max(1,devicePixelRatio||1),W=Math.floor(rect.width*dpr),H=Math.floor(rect.height*dpr);if(canvas.width!==W||canvas.height!==H){canvas.width=W;canvas.height=H}ctx.setTransform(dpr,0,0,dpr,0,0);const w=rect.width,h=rect.height;ctx.clearRect(0,0,w,h);renderTunnel(w,h);renderGround(w,h);renderParticles(r,w,h,dt);renderModel(r,w,h);renderForces(r,w,h)}
+function tick(now){const dt=Math.min(.05,(now-last)/1000);last=now;const r=result();if(experimentRunning){tunnelTime+=dt;lastResult={...r};if(mode()===&#x27;free&#x27;&amp;&amp;$(&quot;freeMove&quot;).checked){const m=Math.max(.001,r.m),acc=((r.fz||0)-r.weight)/m,maxH=clamp($(&quot;maxHeight&quot;).value,.5,100);if(height&lt;=0&amp;&amp;acc&lt;=0){height=0;vy=0}else{vy+=acc*dt;height+=vy*dt;if(height&lt;0){height=0;vy=0}if(height&gt;=maxH){height=maxH;vy=0}}}else height=0;sampleData(r)}updateUI(r,experimentRunning);render(r,dt);requestAnimationFrame(tick)}
+$(&quot;experimentType&quot;).addEventListener(&#x27;change&#x27;,updateControls);$(&quot;stlFile&quot;).addEventListener(&#x27;change&#x27;,async e=&gt;{const f=e.target.files[0];if(!f)return;try{tris=parseSTL(await f.arrayBuffer());loadedSTL=true;$(&quot;fileInfo&quot;).textContent=`${f.name} · ${tris.length.toLocaleString()} triangles`;cameraRotX=-.38;cameraRotY=.65;zoom=1.15;objectRot={x:0,y:0,z:0};$(&quot;objRotX&quot;).value=$(&quot;objRotY&quot;).value=$(&quot;objRotZ&quot;).value=0;resetMeasurements()}catch(err){$(&quot;fileInfo&quot;).textContent=&#x27;오류: &#x27;+err.message}});
+[&#x27;objRotX&#x27;,&#x27;objRotY&#x27;,&#x27;objRotZ&#x27;].forEach(id=&gt;$(id).addEventListener(&#x27;input&#x27;,syncObjectRotation));$(&quot;spinEnabled&quot;).addEventListener(&#x27;change&#x27;,()=&gt;$(&quot;freeSpinRows&quot;).classList.toggle(&#x27;hidden&#x27;,!$(&quot;spinEnabled&quot;).checked));$(&quot;showGround&quot;).addEventListener(&#x27;change&#x27;,()=&gt;$(&quot;groundRow&quot;).classList.toggle(&#x27;hidden&#x27;,!$(&quot;showGround&quot;).checked));$(&quot;freeMove&quot;).addEventListener(&#x27;change&#x27;,()=&gt;$(&quot;maxHeightRow&quot;).classList.toggle(&#x27;hidden&#x27;,!$(&quot;freeMove&quot;).checked));$(&quot;resetObjectRotation&quot;).onclick=()=&gt;{objectRot={x:0,y:0,z:0};$(&quot;objRotX&quot;).value=$(&quot;objRotY&quot;).value=$(&quot;objRotZ&quot;).value=0};$(&quot;startExperiment&quot;).onclick=()=&gt;setRunState(true);$(&quot;stopExperiment&quot;).onclick=()=&gt;setRunState(false);$(&quot;resetMotion&quot;).onclick=resetMeasurements;$(&quot;resetView&quot;).onclick=()=&gt;{cameraRotX=-.38;cameraRotY=.65;zoom=1.15};
+canvas.addEventListener(&#x27;pointerdown&#x27;,e=&gt;{drag=true;px=e.clientX;py=e.clientY;canvas.setPointerCapture(e.pointerId)});canvas.addEventListener(&#x27;pointerup&#x27;,()=&gt;drag=false);canvas.addEventListener(&#x27;pointercancel&#x27;,()=&gt;drag=false);canvas.addEventListener(&#x27;pointermove&#x27;,e=&gt;{if(!drag)return;cameraRotY+=(e.clientX-px)*.008;cameraRotX+=(e.clientY-py)*.008;px=e.clientX;py=e.clientY});canvas.addEventListener(&#x27;wheel&#x27;,e=&gt;{e.preventDefault();zoom=Math.max(.45,Math.min(3,zoom*(e.deltaY&gt;0?.9:1.1)))},{passive:false});
+function sendWindDataToParent(){
+ const m=mode();
+ if(!dataLog.length){$(&quot;sendState&quot;).textContent=&#x27;전송할 기록 데이터가 없습니다. 실험을 먼저 실행하세요.&#x27;;return;}
+ let vars=[],rows=[];
+ if(m===&#x27;bernoulli&#x27;){
+   vars=[&#x27;time&#x27;,&#x27;v1_mps&#x27;,&#x27;v2_mps&#x27;,&#x27;P2_kPa&#x27;];
+   rows=dataLog.map(d=&gt;({time:d.t,v1_mps:d.a,v2_mps:d.b,P2_kPa:d.c}));
+ }else if(m===&#x27;magnus&#x27;){
+   vars=[&#x27;time&#x27;,&#x27;wind_speed_mps&#x27;,&#x27;rpm&#x27;,&#x27;magnus_force_N&#x27;];
+   rows=dataLog.map(d=&gt;({time:d.t,wind_speed_mps:d.a,rpm:d.b,magnus_force_N:d.c}));
+ }else if(m===&#x27;wing&#x27;){
+   vars=[&#x27;time&#x27;,&#x27;wind_speed_mps&#x27;,&#x27;angle_deg&#x27;,&#x27;lift_N&#x27;];
+   rows=dataLog.map(d=&gt;({time:d.t,wind_speed_mps:d.a,angle_deg:d.b,lift_N:d.c}));
+ }else{
+   vars=[&#x27;time&#x27;,&#x27;wind_speed_mps&#x27;,&#x27;pitch_deg&#x27;,&#x27;Fz_N&#x27;];
+   rows=dataLog.map(d=&gt;({time:d.t,wind_speed_mps:d.a,pitch_deg:d.b,Fz_N:d.c}));
+ }
+ parent.postMessage({type:&#x27;ARDULAB_WIND_DATA&#x27;,mode:m,vars,rows},&#x27;*&#x27;);
+ $(&quot;sendState&quot;).textContent=`${rows.length}개 측정값을 ArduLab 분석으로 보냈습니다.`;
+}
+$(&quot;sendToArduLab&quot;).onclick=sendWindDataToParent;
+initParticles();updateControls();requestAnimationFrame(tick);
+})();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;"></iframe></div>
 </section>
 
 <section class="card">
@@ -1333,10 +1534,23 @@ let mediaDataApplied=false;
 function setInputMode(mode){
   document.querySelectorAll('.modeBtn').forEach(b=>b.classList.toggle('active', b.dataset.inputMode===mode));
   document.querySelectorAll('.inputPanel').forEach(p=>p.classList.remove('active'));
-  const panel = mode==='arduino' ? $('arduinoInputPanel') : mode==='media' ? $('mediaInputPanel') : $('fileInputPanel');
+  const panel = mode==='arduino' ? $('arduinoInputPanel') : mode==='media' ? $('mediaInputPanel') : mode==='wind' ? $('windInputPanel') : $('fileInputPanel');
   if(panel) panel.classList.add('active');
 }
 document.querySelectorAll('.modeBtn').forEach(b=>b.onclick=()=>setInputMode(b.dataset.inputMode));
+window.addEventListener('message',e=>{
+  const msg=e.data;
+  if(!msg||msg.type!=='ARDULAB_WIND_DATA'||!Array.isArray(msg.rows)||!msg.rows.length)return;
+  dataRows=msg.rows.map(r=>{const out={};for(const [k,v] of Object.entries(r)){const n=Number(v);out[k]=Number.isFinite(n)?n:v}return out});
+  excluded.clear();
+  sourceVars=(Array.isArray(msg.vars)?msg.vars:Object.keys(dataRows[0]||{})).filter(v=>v!=='time');
+  allVars=[];tableVars=[];calculatedDefinitions={};selectedRange=null;graphState=null;intervalState=null;
+  syncVars(false);updateCounts();renderTable();
+  $('sampling').textContent='가상 풍동';
+  $('status').textContent='풍동 데이터 불러옴';
+  $('schemaMsg').textContent=`가상 풍동에서 ${dataRows.length}개 측정값을 가져왔습니다. 아래 그래프/분석 기능을 바로 사용할 수 있습니다.`;
+  if(typeof scheduleSave==='function')scheduleSave();
+});
 
 // ============================================================
 // 사진·영상 분석
