@@ -372,7 +372,7 @@ input[type=&quot;range&quot;]{appearance:none;height:5px;border-radius:999px;bac
     &lt;div class=&quot;rotation-grid&quot;&gt;&lt;span&gt;Z&lt;/span&gt;&lt;input id=&quot;objRotZ&quot; type=&quot;number&quot; min=&quot;0&quot; max=&quot;360&quot; step=&quot;1&quot; value=&quot;0&quot;&gt;&lt;span&gt;°&lt;/span&gt;&lt;/div&gt;
     &lt;button class=&quot;rotation-reset&quot; id=&quot;resetObjectRotation&quot;&gt;0°, 0°, 0°로 초기화&lt;/button&gt;
   &lt;/div&gt;
-  &lt;div class=&quot;legend&quot; id=&quot;legend&quot;&gt;FLOW → +X · 유선/화살표는 실제 속도장 방향 · 진한 선 = 빠른 유속 · 자유 STL 표면 농도 = 압력/항력 기여&lt;/div&gt;&lt;div class=&quot;view-controls&quot;&gt;&lt;button id=&quot;viewFront&quot;&gt;정면&lt;/button&gt;&lt;button id=&quot;viewSide&quot;&gt;측면&lt;/button&gt;&lt;button id=&quot;viewTop&quot;&gt;위&lt;/button&gt;&lt;button id=&quot;viewIso&quot;&gt;사선&lt;/button&gt;&lt;button id=&quot;viewZoomIn&quot;&gt;＋ 확대&lt;/button&gt;&lt;button id=&quot;viewZoomOut&quot;&gt;－ 축소&lt;/button&gt;&lt;/div&gt;
+  &lt;div class=&quot;legend&quot; id=&quot;legend&quot;&gt;FLOW → +X · 진한 유선 = 큰 절대 유속(m/s) · 화살표 이동속도 = 유속 · 자유 STL 표면 농도 = 압력/항력 기여&lt;/div&gt;&lt;div class=&quot;view-controls&quot;&gt;&lt;button id=&quot;viewFront&quot;&gt;정면&lt;/button&gt;&lt;button id=&quot;viewSide&quot;&gt;측면&lt;/button&gt;&lt;button id=&quot;viewTop&quot;&gt;위&lt;/button&gt;&lt;button id=&quot;viewIso&quot;&gt;사선&lt;/button&gt;&lt;button id=&quot;viewZoomIn&quot;&gt;＋ 확대&lt;/button&gt;&lt;button id=&quot;viewZoomOut&quot;&gt;－ 축소&lt;/button&gt;&lt;/div&gt;
 &lt;/section&gt;
 
 &lt;section class=&quot;panel pad&quot;&gt;
@@ -398,7 +398,7 @@ input[type=&quot;range&quot;]{appearance:none;height:5px;border-radius:999px;bac
   &lt;div class=&quot;small&quot; id=&quot;graphHint&quot;&gt;실험 중 조작변수를 바꾼 뒤 ‘현재 측정값 기록’을 눌러 데이터를 누적합니다.&lt;/div&gt;
   &lt;div class=&quot;tableWrap&quot;&gt;&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;t(s)&lt;/th&gt;&lt;th id=&quot;thA&quot;&gt;풍속&lt;/th&gt;&lt;th id=&quot;thB&quot;&gt;주요값&lt;/th&gt;&lt;th id=&quot;thC&quot;&gt;힘/압력&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody id=&quot;dataBody&quot;&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
 
-  &lt;div class=&quot;status&quot;&gt;&lt;strong&gt;모델 범위&lt;/strong&gt;&lt;div class=&quot;small&quot;&gt;교육용 형상 기반 근사 유동 모델입니다. 유선과 화살표는 같은 국소 속도장에서 계산하며, 고체를 통과하지 않도록 경계를 우회합니다. 자유 풍동/STL에서는 삼각형 면의 방향을 이용해 정면 충돌 정도·압력항력 기여와 후류 크기를 근사합니다. 날개는 받음각·순환·실속 후류, 마그누스 구는 구 주위 잠재유동·회전 순환을 반영합니다. 정밀 CFD나 실제 설계 검증을 대체하지 않습니다.&lt;/div&gt;&lt;/div&gt;
+  &lt;div class=&quot;status&quot;&gt;&lt;strong&gt;모델 범위&lt;/strong&gt;&lt;div class=&quot;small&quot;&gt;교육용 형상 기반 근사 유동 모델입니다. 유선과 화살표는 같은 국소 속도장에서 계산하며, 고체를 통과하지 않도록 경계를 우회합니다. 자유 풍동/STL에서는 삼각형 면의 방향을 이용해 정면 충돌 정도·압력항력 기여와 후류 크기를 근사합니다. 날개는 NACA 2412 형상에서 비관통·받음각·순환·실속 후류를 근사하며, 양(+)의 받음각에서는 부착 흐름 구간에서 윗면 유속이 아랫면보다 커지고 뒤쪽 유동에 하향 편향이 나타나도록 구성합니다. 마그누스 구는 구 주위 잠재유동·회전 순환을 반영합니다. 정밀 CFD나 실제 설계 검증을 대체하지 않습니다.&lt;/div&gt;&lt;/div&gt;
 &lt;/section&gt;
 &lt;/main&gt;
 &lt;/div&gt;
@@ -500,6 +500,46 @@ function obstacleField(x,y,U,a,b,circ=0,alpha=0){
  }
  const c2=Math.cos(alpha),s2=Math.sin(alpha);return [u*c2-v*s2,u*s2+v*c2,q,X,Y];
 }
+function naca2412Profile(X){
+ const chord=2.9,xn=clamp(X/chord+.5,0,1),m=.02,p=.4,t=.12;
+ const yt=5*t*(.2969*Math.sqrt(Math.max(xn,1e-7))-.126*xn-.3516*xn*xn+.2843*xn*xn*xn-.1015*xn*xn*xn*xn);
+ let yc=0,dy=0;if(xn&lt;p){yc=m/(p*p)*(2*p*xn-xn*xn);dy=2*m/(p*p)*(p-xn)}else{yc=m/((1-p)*(1-p))*((1-2*p)+2*p*xn-xn*xn);dy=2*m/((1-p)*(1-p))*(p-xn)}
+ const th=Math.atan(dy),zu=(yc+yt*Math.cos(th))*3.0,zl=(yc-yt*Math.cos(th))*3.0,zc=yc*3.0;
+ return{xn,zu,zl,zc};
+}
+function nacaSurfaceSlope(X,upper){const e=.006,a=naca2412Profile(clamp(X-e,-1.45,1.45)),b=naca2412Profile(clamp(X+e,-1.45,1.45));return((upper?b.zu:b.zl)-(upper?a.zu:a.zl))/(2*e)}
+function wingFlow3(p,r,U){
+ const alpha=clamp($(&quot;angle&quot;).value,-12,25)*Math.PI/180,adeg=alpha*180/Math.PI,ca=Math.cos(-alpha),sa=Math.sin(-alpha),X=p.x*ca-p.y*sa,Y=p.x*sa+p.y*ca;
+ // In the wing-fixed frame the free stream approaches at -alpha.
+ let ub=U*Math.cos(alpha),vb=-U*Math.sin(alpha),stall=clamp((Math.abs(adeg)-13)/10,0,1);
+ const xmin=-1.45,xmax=1.45;
+ if(X&lt;xmin){
+   // Smooth pre-leading-edge stagnation/splitting region.
+   const dx=(X-xmin),rr=Math.hypot(dx,Y),lead=Math.exp(-(dx*dx/(.34*.34)+Y*Y/(.30*.30)));
+   const side=Math.sign(Y||(-alpha||1));ub*=1-.62*lead;vb+=side*U*.82*lead*Math.exp(-Math.abs(Y)/.36);
+ }else if(X&lt;=xmax){
+   const g=naca2412Profile(X),upper=Y&gt;=g.zc,surf=upper?g.zu:g.zl,slope=nacaSurfaceSlope(X,upper),d=Math.abs(Y-surf),near=Math.exp(-d/.22),edge=Math.sin(Math.PI*g.xn); // zero at geometric tips, strong over the body
+   const tm=Math.hypot(1,slope),tx=1/tm,ty=slope/tm,base=Math.max(.12*U,ub*tx+vb*ty);
+   // Positive AoA/circulation: upper surface accelerates, lower surface is relatively slower.
+   const alphaGain=clamp(adeg/18,-1.25,1.25),camberGain=.08*(1-g.xn),sideGain=upper?(1+.42*alphaGain+camberGain):(1-.20*alphaGain-.02*camberGain);
+   const suctionPeak=upper?1+.20*Math.exp(-Math.pow((g.xn-.16)/.16,2))*Math.max(0,alphaGain):1;
+   let target=base*clamp(sideGain*suctionPeak,.48,1.72);
+   // At high AoA, downstream upper-surface flow loses attachment instead of being forced to remain tangent.
+   const sep=upper*stall*clamp((g.xn-.48)/.42,0,1),attach=near*edge*(1-.88*sep);
+   ub=ub*(1-attach)+target*tx*attach;vb=vb*(1-attach)+target*ty*attach;
+   // Outside the very near-wall layer, bend streamlines smoothly around the airfoil rather than through it.
+   const bend=Math.exp(-d/.48)*edge*(1-.55*sep),desiredVy=target*ty;
+   vb=vb*(1-.48*bend)+desiredVy*.48*bend;
+   if(sep&gt;0){const osc=Math.sin(9*X-11*tunnelTime+p.phase)+.45*Math.sin(17*X+7*tunnelTime);ub*=1-.28*sep;vb+=U*.24*sep*osc}
+ }else{
+   // Lift-producing flow leaves the trailing edge with a downward velocity component (downwash).
+   const dx=X-xmax,core=Math.exp(-Math.pow(Y/.55,2))*Math.exp(-dx/2.0),down=-U*clamp((r.cl||0)*.12,-.34,.34)*core;
+   vb+=down;ub*=1-.06*Math.abs(r.cl||0)*core;
+   if(stall&gt;0){const wake=Math.exp(-Math.pow((Y+.08*Math.sign(alpha||1))/.48,2))*Math.exp(-dx/1.5),osc=Math.sin(8*X-12*tunnelTime+p.phase)+.35*Math.sin(15*X+6*tunnelTime);ub*=1-.30*stall*wake;vb+=U*.28*stall*wake*osc}
+ }
+ const c=Math.cos(alpha),ss=Math.sin(alpha);return[ub*c-vb*ss,0,ub*ss+vb*c];
+}
+
 function sphereFlow3(p,r,U,a){
  const y=p.depth*.75,z=p.y,R2=Math.max(a*a*1.015,p.x*p.x+y*y+z*z),R=Math.sqrt(R2),a3=a*a*a,fac=a3/(2*R*R*R),dot=U*p.x/R2;
  let ux=U+fac*(U-3*dot*p.x),uy=fac*(-3*dot*y),uz=fac*(-3*dot*z);
@@ -520,8 +560,8 @@ function freeBodyFlow3(p,r,U){
  const downstream=X&gt;a*.25,rad=Math.sqrt((Y/b)**2+(Z/cc)**2);if(downstream){const spread=.85+.75*aero.wake,wake=Math.exp(-rad*rad*(2.35/spread))*Math.min(1,(X-a*.25)/(a*1.65)),osc=.08*aero.wake*Math.sin(8*X-8*tunnelTime+p.phase)+.035*aero.wake*Math.sin(15*X+5*tunnelTime);v[0]*=1-(.16+.34*aero.wake)*wake;v[1]+=U*wake*osc*(Z&gt;=0?1:-1);v[2]+=U*wake*osc*(Y&gt;=0?-1:1)}
  return rotateVectorByObject(v)
 }
-function flowVector(p,r){const V=Math.max(0,r.V||0),U=V/28,md=mode();if(V&lt;=0)return[0,0,0];if(md===&#x27;bernoulli&#x27;){const ratio=r.ratio,half=venturiHalfAtX(p.x,ratio),eps=.01,half2=venturiHalfAtX(Math.min(2.75,p.x+eps),ratio),dh=(half2-half)/eps,speed=U*1.15/Math.max(.05,half),vertical=speed*(p.y/Math.max(.05,half))*dh;return[speed,0,vertical]}if(md===&#x27;magnus&#x27;)return sphereFlow3(p,r,U,1.02);if(md===&#x27;wing&#x27;){const alpha=clamp($(&quot;angle&quot;).value,-12,25)*Math.PI/180,circ=Math.max(-1.5,Math.min(1.5,r.cl||0));let [u,v,q,X,Y]=obstacleField(p.x,p.y,U,1.48,.22,circ,alpha),stall=Math.max(0,Math.min(1,(Math.abs(alpha*180/Math.PI)-13)/10));if(p.x&gt;1.18){const wake=Math.exp(-Math.pow((p.y+.10*Math.sign(alpha||1))/.42,2))*Math.min(1,(p.x-1.18)/1.05);v+=stall*U*wake*(.55*Math.sin(8*p.x-12*tunnelTime+p.phase)+.28*Math.sin(17*p.x+8*tunnelTime));u*=1-.25*stall*wake}return[u,0,v]}return freeBodyFlow3(p,r,U)}
-function pushOutsideObstacle(p){const md=mode();if(md===&#x27;bernoulli&#x27;){const half=venturiHalfAtX(p.x,clamp($(&#x27;throatRatio&#x27;).value,.2,1))*.94;p.y=clamp(p.y,-half,half);return}if(md===&#x27;magnus&#x27;){const a=1.035,y=p.depth*.75,r=Math.hypot(p.x,y,p.y);if(r&lt;a){const k=a/(r||.001);p.x*=k;p.depth*=k;p.y*=k}return}if(md===&#x27;wing&#x27;){let a=1.49,b=.225,alpha=clamp($(&quot;angle&quot;).value,-12,25)*Math.PI/180,ca=Math.cos(-alpha),sa=Math.sin(-alpha),X=p.x*ca-p.y*sa,Y=p.x*sa+p.y*ca,q=ellipseBoundary(X,Y,a,b);if(q&lt;1){const k=1.015/Math.sqrt(Math.max(q,.001));X*=k;Y*=k;const c=Math.cos(alpha),si=Math.sin(alpha);p.x=X*c-Y*si;p.y=X*si+Y*c}return}modelBounds=modelBounds||calcModelBounds();const c=modelBounds.c,h=modelBounds.h,loc=invRotateByObject([p.x,p.depth*.75,p.y-groundShiftZ]),X=loc[0]-c[0],Y=loc[1]-c[1],Z=loc[2]-c[2],a=Math.max(.45,h[0]*1.03),b=Math.max(.34,h[1]*1.05),cc=Math.max(.30,h[2]*1.08),q=X*X/(a*a)+Y*Y/(b*b)+Z*Z/(cc*cc);if(q&lt;1){const k=1.025/Math.sqrt(Math.max(q,.001)),fixed=rotateByObject([c[0]+X*k,c[1]+Y*k,c[2]+Z*k]);p.x=fixed[0];p.depth=fixed[1]/.75;p.y=fixed[2]+groundShiftZ}p.y=Math.max(FLOOR_Z+.035,p.y)}
+function flowVector(p,r){const V=Math.max(0,r.V||0),U=V/28,md=mode();if(V&lt;=0)return[0,0,0];if(md===&#x27;bernoulli&#x27;){const ratio=r.ratio,half=venturiHalfAtX(p.x,ratio),eps=.01,half2=venturiHalfAtX(Math.min(2.75,p.x+eps),ratio),dh=(half2-half)/eps,speed=U*1.15/Math.max(.05,half),vertical=speed*(p.y/Math.max(.05,half))*dh;return[speed,0,vertical]}if(md===&#x27;magnus&#x27;)return sphereFlow3(p,r,U,1.02);if(md===&#x27;wing&#x27;)return wingFlow3(p,r,U);return freeBodyFlow3(p,r,U)}
+function pushOutsideObstacle(p){const md=mode();if(md===&#x27;bernoulli&#x27;){const half=venturiHalfAtX(p.x,clamp($(&#x27;throatRatio&#x27;).value,.2,1))*.94;p.y=clamp(p.y,-half,half);return}if(md===&#x27;magnus&#x27;){const a=1.035,y=p.depth*.75,r=Math.hypot(p.x,y,p.y);if(r&lt;a){const k=a/(r||.001);p.x*=k;p.depth*=k;p.y*=k}return}if(md===&#x27;wing&#x27;){const alpha=clamp($(&quot;angle&quot;).value,-12,25)*Math.PI/180,ca=Math.cos(-alpha),sa=Math.sin(-alpha);let X=p.x*ca-p.y*sa,Y=p.x*sa+p.y*ca;if(X&gt;=-1.45&amp;&amp;X&lt;=1.45){const g=naca2412Profile(X),pad=.018;if(Y&gt;g.zl-pad&amp;&amp;Y&lt;g.zu+pad){Y=(Y&gt;=g.zc?g.zu+pad:g.zl-pad);const c=Math.cos(alpha),si=Math.sin(alpha);p.x=X*c-Y*si;p.y=X*si+Y*c}}return}modelBounds=modelBounds||calcModelBounds();const c=modelBounds.c,h=modelBounds.h,loc=invRotateByObject([p.x,p.depth*.75,p.y-groundShiftZ]),X=loc[0]-c[0],Y=loc[1]-c[1],Z=loc[2]-c[2],a=Math.max(.45,h[0]*1.03),b=Math.max(.34,h[1]*1.05),cc=Math.max(.30,h[2]*1.08),q=X*X/(a*a)+Y*Y/(b*b)+Z*Z/(cc*cc);if(q&lt;1){const k=1.025/Math.sqrt(Math.max(q,.001)),fixed=rotateByObject([c[0]+X*k,c[1]+Y*k,c[2]+Z*k]);p.x=fixed[0];p.depth=fixed[1]/.75;p.y=fixed[2]+groundShiftZ}p.y=Math.max(FLOOR_Z+.035,p.y)}
 function streamlineSeedSet(){
  const md=mode(),seeds=[];
  if(md===&#x27;bernoulli&#x27;){
@@ -535,7 +575,9 @@ function streamlineSeedSet(){
  return seeds;
 }
 function streamlineColor(speed,U,alpha=.82){
- const sf=clamp((speed/Math.max(.001,U)-.32)/1.75,0,1),hue=202+48*sf,light=58-24*sf,sat=70+22*sf;
+ const Vref=Math.max(.001,clamp($(&quot;speed&quot;).value,0,100)),localMS=speed/Math.max(.001,U)*Vref;
+ // Fixed 0–100 m/s visual scale: changing tunnel speed changes colour, while local acceleration/deceleration remains visible.
+ const sf=clamp(localMS/100,0,1),sat=62+34*sf,light=78-50*sf,hue=207+18*sf;
  return `hsla(${hue},${sat}%,${light}%,${alpha})`;
 }
 function drawStreamArrow(a,b,color,size=5.5){
@@ -570,7 +612,7 @@ function renderStreamlines(r,w,h,dt){
    // Animated arrowheads travel along each instantaneous streamline; no material particles accumulate at stagnation points.
    const spacing=mode()===&#x27;bernoulli&#x27;?34:42,phase=((si*13-tunnelTime*Math.max(.22,V/18)*18)%spacing+spacing)%spacing;
    for(let i=2;i&lt;pts.length;i++){
-     if(((i*3+phase)%spacing)&lt;3){const a=pts[i-1].q,b=pts[i].q;drawStreamArrow(a,b,streamlineColor(pts[i].sp,U,.96),(Math.abs(pts[i].p.depth)&lt;.18?5.8:4.8)*(0.78+0.34*clamp(pts[i].sp/U,.45,1.8)))}
+     if(((i*3+phase)%spacing)&lt;3){const a=pts[i-1].q,b=pts[i].q;drawStreamArrow(a,b,streamlineColor(pts[i].sp,U,.96),(Math.abs(pts[i].p.depth)&lt;.18?5.8:4.8)*(0.86+0.18*clamp(pts[i].sp/U,.45,1.8)))}
    }
  }
  ctx.restore();
@@ -585,7 +627,8 @@ function renderModel(r,w,h){if(mode()===&#x27;bernoulli&#x27;){renderVenturi(r,w
  const rgb=mode()===&#x27;free&#x27;?hexToRgb($(&#x27;objectColor&#x27;).value):mode()===&#x27;magnus&#x27;?[232,238,244]:[162,196,222];for(const d of drawable){ctx.beginPath();ctx.moveTo(d.p[0][0],d.p[0][1]);ctx.lineTo(d.p[1][0],d.p[1][1]);ctx.lineTo(d.p[2][0],d.p[2][1]);ctx.closePath();const shade=Math.max(.46,Math.min(1.2,.91-d.z*.105));let base=[Math.min(255,rgb[0]*shade),Math.min(255,rgb[1]*shade),Math.min(255,rgb[2]*shade)];if(mode()===&#x27;free&#x27;&amp;&amp;experimentRunning){const cp=trianglePressureProxy(d.tr),hot=mixRgb(base,[238,112,58],clamp(cp*.78,0,.78));base=hot}ctx.fillStyle=`rgb(${base[0]},${base[1]},${base[2]})`;ctx.fill();ctx.strokeStyle=mode()===&#x27;magnus&#x27;?&#x27;rgba(36,67,84,.42)&#x27;:&#x27;rgba(42,68,82,.45)&#x27;;ctx.lineWidth=.9;ctx.stroke()}if(mode()===&#x27;magnus&#x27;)renderSpinMarkings(w,h,spinAngle,spin.axis,spin.rpm)}
 function arrow(x1,y1,x2,y2,color,label){ctx.strokeStyle=color;ctx.fillStyle=color;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();const a=Math.atan2(y2-y1,x2-x1),len=10;ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-len*Math.cos(a-.5),y2-len*Math.sin(a-.5));ctx.lineTo(x2-len*Math.cos(a+.5),y2-len*Math.sin(a+.5));ctx.closePath();ctx.fill();ctx.font=&#x27;12px system-ui&#x27;;ctx.fillText(label,x2+6,y2-6)}
 function renderForces(r,w,h){if(mode()===&#x27;bernoulli&#x27;||(!experimentRunning&amp;&amp;!lastResult))return;const s=experimentRunning?r:lastResult,cx=w*.5,cy=h*.5,dragLen=45+70*clamp((s.cd||0)/1.2,0,1);arrow(cx,cy,cx-dragLen,cy,&#x27;#ffc65b&#x27;,&#x27;항력 D&#x27;);if(Math.abs(s.fz||0)&gt;.01){const len=Math.max(-120,Math.min(120,-(s.fz/(s.weight||Math.abs(s.fz)||1))*70));arrow(cx,cy,cx,cy+len,&#x27;#66dd91&#x27;,mode()===&#x27;magnus&#x27;?&#x27;마그누스 힘&#x27;:&#x27;수직력&#x27;)}if(Math.abs(s.fy||0)&gt;.01){const len=Math.max(-105,Math.min(105,(s.fy/(s.weight||Math.abs(s.fy)||1))*65));arrow(cx,cy,cx+len,cy,&#x27;#ff8dac&#x27;,&#x27;측면력&#x27;)}}
-function render(r,dt){const rect=canvas.getBoundingClientRect(),dpr=Math.max(1,devicePixelRatio||1),W=Math.floor(rect.width*dpr),H=Math.floor(rect.height*dpr);if(canvas.width!==W||canvas.height!==H){canvas.width=W;canvas.height=H}ctx.setTransform(dpr,0,0,dpr,0,0);const w=rect.width,h=rect.height;ctx.clearRect(0,0,w,h);ctx.fillStyle=&#x27;#f7fcff&#x27;;ctx.fillRect(0,0,w,h);if(mode()!==&#x27;bernoulli&#x27;){renderTunnel(w,h);renderGround(w,h)}renderStreamlines(r,w,h,dt);renderModel(r,w,h);renderForces(r,w,h)}
+function renderVelocityLegend(w,h,r){if((r.V||0)&lt;=0)return;ctx.save();const x=18,y=18,L=132,H=9,g=ctx.createLinearGradient(x,0,x+L,0);for(let i=0;i&lt;=5;i++){const ms=i*20,gc=streamlineColor((ms/Math.max(.001,r.V))*Math.max(.001,r.V/28),Math.max(.001,r.V/28),1);g.addColorStop(i/5,gc)}ctx.fillStyle=&#x27;rgba(255,255,255,.90)&#x27;;ctx.strokeStyle=&#x27;rgba(35,72,96,.18)&#x27;;ctx.lineWidth=1;ctx.beginPath();ctx.roundRect(x-8,y-8,L+72,35,8);ctx.fill();ctx.stroke();ctx.fillStyle=g;ctx.fillRect(x,y,L,H);ctx.strokeStyle=&#x27;rgba(25,70,110,.28)&#x27;;ctx.strokeRect(x,y,L,H);ctx.fillStyle=&#x27;#38596c&#x27;;ctx.font=&#x27;700 10px system-ui&#x27;;ctx.fillText(&#x27;0&#x27;,x,y+23);ctx.fillText(&#x27;50&#x27;,x+L*.49,y+23);ctx.fillText(&#x27;100 m/s&#x27;,x+L-5,y+23);ctx.restore()}
+function render(r,dt){const rect=canvas.getBoundingClientRect(),dpr=Math.max(1,devicePixelRatio||1),W=Math.floor(rect.width*dpr),H=Math.floor(rect.height*dpr);if(canvas.width!==W||canvas.height!==H){canvas.width=W;canvas.height=H}ctx.setTransform(dpr,0,0,dpr,0,0);const w=rect.width,h=rect.height;ctx.clearRect(0,0,w,h);ctx.fillStyle=&#x27;#f7fcff&#x27;;ctx.fillRect(0,0,w,h);if(mode()!==&#x27;bernoulli&#x27;){renderTunnel(w,h);renderGround(w,h)}renderStreamlines(r,w,h,dt);renderModel(r,w,h);renderForces(r,w,h);renderVelocityLegend(w,h,r)}
 function tick(now){const dt=Math.min(.05,(now-last)/1000);last=now;const r=result();if(experimentRunning){tunnelTime+=dt;lastResult={...r};if(mode()===&#x27;free&#x27;&amp;&amp;$(&quot;freeMove&quot;).checked){const m=Math.max(.001,r.m),acc=((r.fz||0)-r.weight)/m,maxH=clamp($(&quot;maxHeight&quot;).value,.5,100);if(height&lt;=0&amp;&amp;acc&lt;=0){height=0;vy=0}else{vy+=acc*dt;height+=vy*dt;if(height&lt;0){height=0;vy=0}if(height&gt;=maxH){height=maxH;vy=0}}}else height=0;}updateUI(r,experimentRunning);render(r,dt);requestAnimationFrame(tick)}
 $(&quot;experimentType&quot;).addEventListener(&#x27;change&#x27;,updateControls);$(&quot;stlFile&quot;).addEventListener(&#x27;change&#x27;,async e=&gt;{const f=e.target.files[0];if(!f)return;try{loadedFreeTris=parseSTL(await f.arrayBuffer());tris=loadedFreeTris;loadedSTL=true;invalidateAeroCache();$(&quot;fileInfo&quot;).textContent=`${f.name} · ${tris.length.toLocaleString()} triangles`;cameraRotX=-.38;cameraRotY=.65;zoom=1.15;objectRot={x:0,y:0,z:0};$(&quot;objRotX&quot;).value=$(&quot;objRotY&quot;).value=$(&quot;objRotZ&quot;).value=0;updateGroundShift();resetMeasurements()}catch(err){$(&quot;fileInfo&quot;).textContent=&#x27;오류: &#x27;+err.message}});
 [&#x27;objRotX&#x27;,&#x27;objRotY&#x27;,&#x27;objRotZ&#x27;].forEach(id=&gt;$(id).addEventListener(&#x27;input&#x27;,syncObjectRotation));$(&quot;spinEnabled&quot;).addEventListener(&#x27;change&#x27;,()=&gt;$(&quot;freeSpinRows&quot;).classList.toggle(&#x27;hidden&#x27;,!$(&quot;spinEnabled&quot;).checked));$(&quot;showGround&quot;).addEventListener(&#x27;change&#x27;,()=&gt;$(&quot;groundRow&quot;).classList.toggle(&#x27;hidden&#x27;,!$(&quot;showGround&quot;).checked));$(&quot;freeMove&quot;).addEventListener(&#x27;change&#x27;,()=&gt;$(&quot;maxHeightRow&quot;).classList.toggle(&#x27;hidden&#x27;,!$(&quot;freeMove&quot;).checked));$(&quot;resetObjectRotation&quot;).onclick=()=&gt;{objectRot={x:0,y:0,z:0};$(&quot;objRotX&quot;).value=$(&quot;objRotY&quot;).value=$(&quot;objRotZ&quot;).value=0;updateGroundShift()};$(&quot;startExperiment&quot;).onclick=startPauseContinue;$(&quot;stopExperiment&quot;).onclick=endExperiment;$(&quot;recordWind&quot;).onclick=()=&gt;sampleData(result());$(&quot;resetMotion&quot;).onclick=resetMeasurements;$(&quot;resetView&quot;).onclick=()=&gt;{cameraRotX=.34;cameraRotY=-.72;zoom=1.15};$(&#x27;viewFront&#x27;).onclick=()=&gt;{cameraRotX=0;cameraRotY=0};$(&#x27;viewSide&#x27;).onclick=()=&gt;{cameraRotX=0;cameraRotY=-Math.PI/2};$(&#x27;viewTop&#x27;).onclick=()=&gt;{cameraRotX=1.45;cameraRotY=-Math.PI/2};$(&#x27;viewIso&#x27;).onclick=()=&gt;{cameraRotX=.34;cameraRotY=-.72};$(&#x27;viewZoomIn&#x27;).onclick=()=&gt;zoom=Math.min(3,zoom*1.18);$(&#x27;viewZoomOut&#x27;).onclick=()=&gt;zoom=Math.max(.45,zoom/1.18);canvas.addEventListener(&#x27;pointerdown&#x27;,e=&gt;{drag=true;px=e.clientX;py=e.clientY;canvas.setPointerCapture?.(e.pointerId);canvas.classList.add(&#x27;dragging&#x27;)});canvas.addEventListener(&#x27;pointermove&#x27;,e=&gt;{if(!drag)return;const dx=e.clientX-px,dy=e.clientY-py;px=e.clientX;py=e.clientY;cameraRotY-=dx*.008;cameraRotX=clamp(cameraRotX+dy*.008,-1.35,1.35)});const endDrag=e=&gt;{drag=false;canvas.classList.remove(&#x27;dragging&#x27;);try{canvas.releasePointerCapture?.(e.pointerId)}catch(_){}};canvas.addEventListener(&#x27;pointerup&#x27;,endDrag);canvas.addEventListener(&#x27;pointercancel&#x27;,endDrag);canvas.addEventListener(&#x27;wheel&#x27;,e=&gt;{e.preventDefault();zoom=clamp(zoom*(e.deltaY&lt;0?1.10:1/1.10),.45,3)},{passive:false});
