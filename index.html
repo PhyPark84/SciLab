@@ -301,6 +301,10 @@ input[type=&quot;range&quot;]{appearance:none;height:5px;border-radius:999px;bac
 .badge{background:linear-gradient(135deg,#e8f7f7,#dff1f2);color:#08747a;border:1px solid #c6e5e5}
 @media(max-width:1100px){main{padding:10px}.panel,.viewer{border-radius:16px}}
 
+/* SciLab wind-tunnel: on-screen nonanimated streamline toggle */
+.streamline-switch{position:absolute;left:12px;bottom:58px;z-index:12;display:inline-flex;align-items:center;justify-content:flex-start;gap:9px;background:rgba(255,255,255,.96);border:1px solid #a4cbd4;border-radius:10px;padding:10px 12px;box-shadow:0 4px 13px #173b4c19;color:#174c5a;font-size:13px;font-weight:800;cursor:pointer;pointer-events:auto;user-select:none;max-width:calc(100% - 24px)}
+.streamline-switch input[type=checkbox]{width:17px;height:17px;accent-color:#00979d;margin:0;cursor:pointer;flex-shrink:0}
+@media(max-width:520px){.streamline-switch{bottom:84px;padding:8px 10px;font-size:12px}}
 &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
@@ -352,6 +356,10 @@ input[type=&quot;range&quot;]{appearance:none;height:5px;border-radius:999px;bac
 
 &lt;section class=&quot;viewer&quot;&gt;
   &lt;canvas id=&quot;canvas&quot;&gt;&lt;/canvas&gt;
+  &lt;label class=&quot;streamline-switch&quot; for=&quot;showStreamlines&quot; title=&quot;정지된 공기 흐름선을 표시하거나 숨깁니다.&quot;&gt;
+    &lt;input type=&quot;checkbox&quot; id=&quot;showStreamlines&quot; /&gt;
+    &lt;span&gt;유선 표시 (정지)&lt;/span&gt;
+  &lt;/label&gt;
   &lt;div class=&quot;hud&quot; id=&quot;hud&quot;&gt;마우스 드래그: 카메라 회전 · 휠: 확대/축소 · 물체 자세와 실험 변수는 바뀌지 않습니다.&lt;br&gt;바닥/천장 및 +Z 방향을 항상 표시합니다.&lt;/div&gt;
   &lt;div class=&quot;run-indicator&quot;&gt;&lt;span class=&quot;dot&quot; id=&quot;runDot&quot;&gt;&lt;/span&gt;&lt;span id=&quot;runText&quot;&gt;WIND OFF&lt;/span&gt;&lt;/div&gt;
   &lt;div class=&quot;rotation-box&quot; id=&quot;rotationBox&quot;&gt;
@@ -361,7 +369,7 @@ input[type=&quot;range&quot;]{appearance:none;height:5px;border-radius:999px;bac
     &lt;div class=&quot;rotation-grid&quot;&gt;&lt;span&gt;Z&lt;/span&gt;&lt;input id=&quot;objRotZ&quot; type=&quot;number&quot; min=&quot;0&quot; max=&quot;360&quot; step=&quot;1&quot; value=&quot;0&quot;&gt;&lt;span&gt;°&lt;/span&gt;&lt;/div&gt;
     &lt;button class=&quot;rotation-reset&quot; id=&quot;resetObjectRotation&quot;&gt;0°, 0°, 0°로 초기화&lt;/button&gt;
   &lt;/div&gt;
-  &lt;div class=&quot;legend&quot; id=&quot;legend&quot;&gt;FLOW → +X · 진한 유선 = 큰 절대 유속(m/s) · 화살표 이동속도 = 유속 · 자유 STL 표면 농도 = 압력/항력 기여&lt;/div&gt;&lt;div class=&quot;view-controls&quot;&gt;&lt;button id=&quot;viewFront&quot;&gt;정면&lt;/button&gt;&lt;button id=&quot;viewSide&quot;&gt;측면&lt;/button&gt;&lt;button id=&quot;viewTop&quot;&gt;위&lt;/button&gt;&lt;button id=&quot;viewIso&quot;&gt;사선&lt;/button&gt;&lt;button id=&quot;viewZoomIn&quot;&gt;＋ 확대&lt;/button&gt;&lt;button id=&quot;viewZoomOut&quot;&gt;－ 축소&lt;/button&gt;&lt;/div&gt;
+  &lt;div class=&quot;legend&quot; id=&quot;legend&quot;&gt;풍향 화살표 = 공기의 흐름 방향(+X) · 유선은 선택 시 정지 상태로 표시 · STL 표면 색상은 바람 노출 정도의 추정&lt;/div&gt;&lt;div class=&quot;view-controls&quot;&gt;&lt;button id=&quot;viewFront&quot;&gt;정면&lt;/button&gt;&lt;button id=&quot;viewSide&quot;&gt;측면&lt;/button&gt;&lt;button id=&quot;viewTop&quot;&gt;위&lt;/button&gt;&lt;button id=&quot;viewIso&quot;&gt;사선&lt;/button&gt;&lt;button id=&quot;viewZoomIn&quot;&gt;＋ 확대&lt;/button&gt;&lt;button id=&quot;viewZoomOut&quot;&gt;－ 축소&lt;/button&gt;&lt;/div&gt;
 &lt;/section&gt;
 
 &lt;section class=&quot;panel pad&quot;&gt;
@@ -659,33 +667,46 @@ function traceStream(seed,r,w,h){
  return pts;
 }
 function renderStreamlines(r,w,h,dt){
- const V=r.V||0;if(V&lt;=0)return;
+ // Drawing is opt-in. This overlay must never animate or display moving arrows.
+ const switchEl=$('showStreamlines');
+ if(!switchEl || !switchEl.checked)return;
+ const V=r.V||0;
+ if(V&lt;=0)return;
  const U=Math.max(.001,V/28),seeds=streamlineSeedSet();
- ctx.save();ctx.lineCap='round';ctx.lineJoin='round';
- for(let si=0;si&lt;seeds.length;si++){
-   const pts=traceStream(seeds[si],r,w,h);if(pts.length&lt;3)continue;
-   const central=Math.abs(seeds[si].depth)&lt;.1;
-   const alpha=central?.74:.30;
-   // Transparent depth planes, no dark wireframe-like grid of overlapping arrows.
-   ctx.beginPath();
-   for(let i=0;i&lt;pts.length;i++)i?ctx.lineTo(pts[i].q[0],pts[i].q[1]):ctx.moveTo(pts[i].q[0],pts[i].q[1]);
-   ctx.strokeStyle=central?'rgba(0,128,155,.12)':'rgba(56,145,182,.07)';
-   ctx.lineWidth=central?4:2.5;ctx.stroke();
-   for(let i=1;i&lt;pts.length;i++){
-     ctx.strokeStyle=streamlineColor((pts[i-1].sp+pts[i].sp)/2,U,alpha);
-     ctx.lineWidth=central?1.9:1.05;
-     ctx.beginPath();ctx.moveTo(...pts[i-1].q.slice(0,2));ctx.lineTo(...pts[i].q.slice(0,2));ctx.stroke();
+ // Some legacy educational wake formulas depend on tunnelTime.
+ // Freeze ONLY the flow visualization at t=0; restore the actual
+ // experiment time immediately so logging and measurements are unchanged.
+ const actualTime=tunnelTime;
+ tunnelTime=0;
+ ctx.save();
+ try {
+   ctx.lineCap='round';ctx.lineJoin='round';
+   for(let si=0;si&lt;seeds.length;si++){
+     const pts=traceStream(seeds[si],r,w,h);
+     if(pts.length&lt;3)continue;
+     const central=Math.abs(seeds[si].depth)&lt;.1;
+     const alpha=central?.74:.30;
+     ctx.beginPath();
+     for(let i=0;i&lt;pts.length;i++){
+       if(i===0)ctx.moveTo(pts[i].q[0],pts[i].q[1]);
+       else ctx.lineTo(pts[i].q[0],pts[i].q[1]);
+     }
+     ctx.strokeStyle=central?'rgba(0,128,155,.12)':'rgba(56,145,182,.07)';
+     ctx.lineWidth=central?4:2.5;ctx.stroke();
+     for(let i=1;i&lt;pts.length;i++){
+       ctx.strokeStyle=streamlineColor((pts[i-1].sp+pts[i].sp)/2,U,alpha);
+       ctx.lineWidth=central?1.9:1.05;
+       ctx.beginPath();
+       ctx.moveTo(pts[i-1].q[0],pts[i-1].q[1]);
+       ctx.lineTo(pts[i].q[0],pts[i].q[1]);
+       ctx.stroke();
+     }
+     // Intentionally no arrowheads on the streamline curves.
    }
-   // Only two or three moving direction markers per curve, away from the object itself.
-   const interval=central?64:94;
-   const offset=(tunnelTime*Math.max(.25,V/20)*14+si*23)%interval;
-   for(let i=5;i&lt;pts.length-2;i++){
-     if((i*3+offset)%interval&gt;=3)continue;
-     const pt=pts[i];if(Math.abs(pt.p.x)&lt;1.45)continue;
-     drawStreamArrow(pts[i-2].q,pt.q,streamlineColor(pt.sp,U,central?.9:.43),central?4.4:3.2);
-   }
+ } finally {
+   ctx.restore();
+   tunnelTime=actualTime;
  }
- ctx.restore();
 }
 function hexToRgb(hex){const n=parseInt(hex.slice(1),16);return[(n&gt;&gt;16)&amp;255,(n&gt;&gt;8)&amp;255,n&amp;255]}
 function rotateRawY(p,a){const c=Math.cos(a),s=Math.sin(a),[x,y,z]=p;return[x*c+z*s,y,-x*s+z*c]}
@@ -746,10 +767,11 @@ function render(r,dt){
  renderStreamlines(r,w,h,dt);
  if((r.V||0)&gt;0){const a=proj([-1.55,-.9,.95],w,h),b=proj([-.85,-.9,.95],w,h);ctx.save();arrow(a[0],a[1],b[0],b[1],'#087f9f','바람 방향');ctx.restore();}
  renderModel(r,w,h);
- renderForces(r,w,h);
+ // Force arrows hidden in the viewer: wind-direction arrow only.
+
  // Flow color is qualitative: do not show a misleading numeric speed legend.
  ctx.save();ctx.fillStyle='rgba(28,73,91,.83)';ctx.font='11px system-ui';
- ctx.fillText('유선: 교육용 근사 흐름  ·  빨강: 바람에 직접 노출된 정도',14,h-16);ctx.restore();
+ ctx.fillText('유선은 선택 시 정지된 선으로 표시 · 빨강: 바람에 직접 노출된 정도(추정)',14,h-16);ctx.restore();
 }
 function tick(now){const dt=Math.min(.05,(now-last)/1000);last=now;const r=result();if(experimentRunning){tunnelTime+=dt;lastResult={...r};if(mode()==='free'&amp;&amp;$(&quot;freeMove&quot;).checked){const m=Math.max(.001,r.m),acc=((r.fz||0)-r.weight)/m,maxH=clamp($(&quot;maxHeight&quot;).value,.5,100);if(height&lt;=0&amp;&amp;acc&lt;=0){height=0;vy=0}else{vy+=acc*dt;height+=vy*dt;if(height&lt;0){height=0;vy=0}if(height&gt;=maxH){height=maxH;vy=0}}}else height=0;}updateUI(r,experimentRunning);render(r,dt);requestAnimationFrame(tick)}
 $(&quot;experimentType&quot;).addEventListener('change',updateControls);$(&quot;stlFile&quot;).addEventListener('change',async e=&gt;{const f=e.target.files[0];if(!f)return;try{loadedFreeTris=parseSTL(await f.arrayBuffer());tris=loadedFreeTris;loadedSTL=true;invalidateAeroCache();$(&quot;fileInfo&quot;).textContent=`${f.name} · ${tris.length.toLocaleString()} triangles`;cameraRotX=-.38;cameraRotY=.65;zoom=1.15;objectRot={x:0,y:0,z:0};$(&quot;objRotX&quot;).value=$(&quot;objRotY&quot;).value=$(&quot;objRotZ&quot;).value=0;updateGroundShift();updateProjectedArea();resetMeasurements()}catch(err){$(&quot;fileInfo&quot;).textContent='오류: '+err.message}});
