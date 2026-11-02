@@ -549,21 +549,17 @@ function freeBodyFlow3(p,r,U){
 function flowVector(p,r){const V=Math.max(0,r.V||0),U=V/28,md=mode();if(V&lt;=0)return[0,0,0];if(md===&#x27;wing&#x27;)return wingFlow3(p,r,U);return freeBodyFlow3(p,r,U)}
 function pushOutsideObstacle(p){const md=mode();if(md===&#x27;wing&#x27;){const alpha=clamp($(&quot;angle&quot;).value,-12,25)*Math.PI/180,ca=Math.cos(-alpha),sa=Math.sin(-alpha);let X=p.x*ca-p.y*sa,Y=p.x*sa+p.y*ca;if(X&gt;=-1.45&amp;&amp;X&lt;=1.45){const g=naca2412Profile(X),pad=.018;if(Y&gt;g.zl-pad&amp;&amp;Y&lt;g.zu+pad){Y=(Y&gt;=g.zc?g.zu+pad:g.zl-pad);const c=Math.cos(alpha),si=Math.sin(alpha);p.x=X*c-Y*si;p.y=X*si+Y*c}}return}modelBounds=modelBounds||calcModelBounds();const c=modelBounds.c,h=modelBounds.h,loc=invRotateByObject([p.x,p.depth*.75,p.y-currentObjectZ()]),X=loc[0]-c[0],Y=loc[1]-c[1],Z=loc[2]-c[2],a=Math.max(.45,h[0]*1.03),b=Math.max(.34,h[1]*1.05),cc=Math.max(.30,h[2]*1.08),q=X*X/(a*a)+Y*Y/(b*b)+Z*Z/(cc*cc);if(q&lt;1){const k=1.025/Math.sqrt(Math.max(q,.001)),fixed=rotateByObject([c[0]+X*k,c[1]+Y*k,c[2]+Z*k]);p.x=fixed[0];p.depth=fixed[1]/.75;p.y=fixed[2]+currentObjectZ()}p.y=Math.max(FLOOR_Z+.035,p.y)}
 function streamlineSeedSet(){
- const md=mode(),seeds=[];
- if(md===&#x27;bernoulli&#x27;){
-   for(let i=0;i&lt;15;i++)seeds.push({x:-2.70,depth:0,y:-1.02+2.04*i/14,phase:i*.73});
-   return seeds;
- }
- // Several depth planes make the 3-D bypass visible after projection without pretending that the flow is planar.
- const depths=md===&#x27;wing&#x27;?[-.72,0,.72]:[-.92,-.46,0,.46,.92];
- const zs=md===&#x27;wing&#x27;?[-.82,-.58,-.38,-.24,-.12,0,.12,.24,.38,.58,.82]:[-.92,-.58,-.28,0,.28,.58,.92];
- for(const d of depths)for(const z of zs)seeds.push({x:-2.62,depth:d,y:z,phase:(d*3.7+z*5.3)});
+ // A few carefully spaced flow planes keep the object readable at classroom viewing sizes.
+ const seeds=[];
+ for(const d of [-.68,0,.68])for(const z of [-.77,-.46,-.17,.14,.45,.76])
+   seeds.push({x:-2.72,depth:d,y:z,phase:d*3.7+z*5.3});
  return seeds;
 }
 function streamlineColor(speed,U,alpha=.82){
- const Vref=Math.max(.001,clamp($(&quot;speed&quot;).value,0,100)),localMS=speed/Math.max(.001,U)*Vref;
- // Fixed 0–100 m/s visual scale: changing tunnel speed changes colour, while local acceleration/deceleration remains visible.
- const sf=clamp(localMS/100,0,1),sat=62+34*sf,light=78-50*sf,hue=207+18*sf;
+ const ratio=clamp(speed/Math.max(.001,U),.25,2.3);
+ const hue=ratio&lt;.83?205:(ratio&lt;1.15?188:45);
+ const sat=ratio&lt;1.15?70:88;
+ const light=ratio&lt;.83?61:(ratio&lt;1.15?43:52);
  return `hsla(${hue},${sat}%,${light}%,${alpha})`;
 }
 function drawStreamArrow(a,b,color,size=5.5){
@@ -586,19 +582,30 @@ function traceStream(seed,r,w,h){
  return pts;
 }
 function renderStreamlines(r,w,h,dt){
- const V=r.V||0;if(V&lt;=0)return;const U=Math.max(.001,V/28),seeds=streamlineSeedSet();
+ const V=r.V||0;if(V&lt;=0)return;
+ const U=Math.max(.001,V/28),seeds=streamlineSeedSet();
  ctx.save();ctx.lineCap=&#x27;round&#x27;;ctx.lineJoin=&#x27;round&#x27;;
  for(let si=0;si&lt;seeds.length;si++){
    const pts=traceStream(seeds[si],r,w,h);if(pts.length&lt;3)continue;
-   // Draw short speed-coloured segments so the line itself carries local-speed information.
+   const central=Math.abs(seeds[si].depth)&lt;.1;
+   const alpha=central?.74:.30;
+   // Transparent depth planes, no dark wireframe-like grid of overlapping arrows.
+   ctx.beginPath();
+   for(let i=0;i&lt;pts.length;i++)i?ctx.lineTo(pts[i].q[0],pts[i].q[1]):ctx.moveTo(pts[i].q[0],pts[i].q[1]);
+   ctx.strokeStyle=central?&#x27;rgba(0,128,155,.12)&#x27;:&#x27;rgba(56,145,182,.07)&#x27;;
+   ctx.lineWidth=central?4:2.5;ctx.stroke();
    for(let i=1;i&lt;pts.length;i++){
-     const depthFade=mode()===&#x27;bernoulli&#x27;?1:(.35+.65*(1-Math.min(1,Math.abs(pts[i].p.depth)*.42)));
-     ctx.strokeStyle=streamlineColor((pts[i-1].sp+pts[i].sp)/2,U,.22+.58*depthFade);ctx.lineWidth=(Math.abs(pts[i].p.depth)&lt;.18?1.8:1.15);ctx.beginPath();ctx.moveTo(pts[i-1].q[0],pts[i-1].q[1]);ctx.lineTo(pts[i].q[0],pts[i].q[1]);ctx.stroke();
+     ctx.strokeStyle=streamlineColor((pts[i-1].sp+pts[i].sp)/2,U,alpha);
+     ctx.lineWidth=central?1.9:1.05;
+     ctx.beginPath();ctx.moveTo(...pts[i-1].q.slice(0,2));ctx.lineTo(...pts[i].q.slice(0,2));ctx.stroke();
    }
-   // Animated arrowheads travel along each instantaneous streamline; no material particles accumulate at stagnation points.
-   const spacing=mode()===&#x27;bernoulli&#x27;?34:42,phase=((si*13-tunnelTime*Math.max(.22,V/18)*18)%spacing+spacing)%spacing;
-   for(let i=2;i&lt;pts.length;i++){
-     if(((i*3+phase)%spacing)&lt;3){const a=pts[i-1].q,b=pts[i].q;drawStreamArrow(a,b,streamlineColor(pts[i].sp,U,.96),(Math.abs(pts[i].p.depth)&lt;.18?5.8:4.8)*(0.86+0.18*clamp(pts[i].sp/U,.45,1.8)))}
+   // Only two or three moving direction markers per curve, away from the object itself.
+   const interval=central?64:94;
+   const offset=(tunnelTime*Math.max(.25,V/20)*14+si*23)%interval;
+   for(let i=5;i&lt;pts.length-2;i++){
+     if((i*3+offset)%interval&gt;=3)continue;
+     const pt=pts[i];if(Math.abs(pt.p.x)&lt;1.45)continue;
+     drawStreamArrow(pts[i-2].q,pt.q,streamlineColor(pt.sp,U,central?.9:.43),central?4.4:3.2);
    }
  }
  ctx.restore();
@@ -608,13 +615,51 @@ function rotateRawY(p,a){const c=Math.cos(a),s=Math.sin(a),[x,y,z]=p;return[x*c+
 function renderSpinMarkings(w,h,spinAngle,spinAxis,rpm){ctx.save();const seam=(phase,tilt)=&gt;{ctx.strokeStyle=&#x27;#c93f3f&#x27;;ctx.lineWidth=2.2;ctx.beginPath();for(let i=0;i&lt;=80;i++){const u=-Math.PI+2*Math.PI*i/80,x=.98*Math.cos(u),z=.98*Math.sin(u)*.58,y=.80*Math.sin(u+phase)*Math.cos(tilt);const q=proj([x,y,z],w,h,spinAngle,spinAxis);i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1])}ctx.stroke()};seam(0,.45);seam(Math.PI,.45);const a0=proj([0,-1.12,0],w,h),a1=proj([0,1.12,0],w,h);arrow(a0[0],a0[1],a1[0],a1[1],&#x27;#2c7be5&#x27;,&#x27;ω +Y&#x27;);ctx.fillStyle=&#x27;#9b3434&#x27;;ctx.font=&#x27;700 11px system-ui&#x27;;ctx.fillText(`${Math.round(rpm)} RPM · 빨간 실밥이 공과 함께 회전`,18,42);ctx.restore()}
 function rotateWingPhysical(p,a){const c=Math.cos(a),ss=Math.sin(a),[x,y,z]=p;return[x*c-z*ss,y,x*ss+z*c]}
 function mixRgb(a,b,t){return a.map((v,i)=&gt;Math.round(v*(1-t)+b[i]*t))}
-function renderModel(r,w,h){if(mode()===&#x27;bernoulli&#x27;){renderVenturi(r,w,h);return}const spin=currentSpin(),spinAngle=spin.enabled?tunnelTime*spin.rpm*2*Math.PI/60:0,visualHeight=mode()===&#x27;free&#x27;?currentObjectZ():0,aoa=mode()===&#x27;wing&#x27;?clamp($(&#x27;angle&#x27;).value,-12,25)*Math.PI/180:0;
- const drawable=tris.map(t=&gt;{const source=aoa?t.map(v=&gt;rotateWingPhysical(v,aoa)):t;const p=source.map(v=&gt;proj(v,w,h,spinAngle,spin.enabled?spin.axis:null,visualHeight));return{p,z:(p[0][2]+p[1][2]+p[2][2])/3,tr:t}}).sort((a,b)=&gt;a.z-b.z);
- const rgb=mode()===&#x27;free&#x27;?hexToRgb($(&#x27;objectColor&#x27;).value):[162,196,222];for(const d of drawable){ctx.beginPath();ctx.moveTo(d.p[0][0],d.p[0][1]);ctx.lineTo(d.p[1][0],d.p[1][1]);ctx.lineTo(d.p[2][0],d.p[2][1]);ctx.closePath();const shade=Math.max(.46,Math.min(1.2,.91-d.z*.105));let base=[Math.min(255,rgb[0]*shade),Math.min(255,rgb[1]*shade),Math.min(255,rgb[2]*shade)];if(mode()===&#x27;free&#x27;&amp;&amp;experimentRunning&amp;&amp;clamp($(&quot;speed&quot;).value,0,100)&gt;.001){const cp=trianglePressureProxy(d.tr),hot=mixRgb(base,[238,112,58],clamp(cp*1.25,0,.82));base=hot}ctx.fillStyle=`rgb(${base[0]},${base[1]},${base[2]})`;ctx.fill();ctx.strokeStyle=&#x27;rgba(42,68,82,.45)&#x27;;ctx.lineWidth=.9;ctx.stroke()}}
+function renderModel(r,w,h){
+ const spin=currentSpin(),spinAngle=spin.enabled?tunnelTime*spin.rpm*2*Math.PI/60:0;
+ const visualHeight=mode()===&#x27;free&#x27;?currentObjectZ():0;
+ const drawable=tris.map(t=&gt;{
+   const p=t.map(v=&gt;proj(v,w,h,spinAngle,spin.enabled?spin.axis:null,visualHeight));
+   const u=[p[1][0]-p[0][0],p[1][1]-p[0][1]],v=[p[2][0]-p[0][0],p[2][1]-p[0][1]];
+   const geom=triangleGeom(t,[0,0,0]);
+   return{p,z:(p[0][2]+p[1][2]+p[2][2])/3,tr:t,n:geom.n,area:Math.abs(u[0]*v[1]-u[1]*v[0])};
+ }).sort((a,b)=&gt;a.z-b.z);
+ const rgb=hexToRgb($(&#x27;objectColor&#x27;).value),light=vnorm([-.45,-.4,1]);
+ ctx.save();ctx.lineJoin=&#x27;round&#x27;;
+ for(const d of drawable){
+   if(d.area&lt;.05)continue;
+   const n=vnorm(rotateVectorByObject(d.n));
+   const diffuse=Math.abs(vdot(n,light)),shade=.67+.35*diffuse;
+   let base=rgb.map(x=&gt;Math.max(0,Math.min(255,Math.round(x*shade+17))));
+   if(experimentRunning&amp;&amp;clamp($(&#x27;speed&#x27;).value,0,100)&gt;.001){
+     const impact=trianglePressureProxy(d.tr);
+     base=mixRgb(base,[245,153,100],clamp(impact*.28,0,.24));
+   }
+   ctx.beginPath();ctx.moveTo(d.p[0][0],d.p[0][1]);ctx.lineTo(d.p[1][0],d.p[1][1]);ctx.lineTo(d.p[2][0],d.p[2][1]);ctx.closePath();
+   ctx.fillStyle=`rgb(${base.join(&#x27;,&#x27;)})`;ctx.fill();
+   // Tiny matching-color overdraw closes antialias seams without exposing each STL triangle.
+   ctx.strokeStyle=ctx.fillStyle;ctx.lineWidth=.65;ctx.stroke();
+ }
+ ctx.restore();
+}
 function arrow(x1,y1,x2,y2,color,label){ctx.strokeStyle=color;ctx.fillStyle=color;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();const a=Math.atan2(y2-y1,x2-x1),len=10;ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-len*Math.cos(a-.5),y2-len*Math.sin(a-.5));ctx.lineTo(x2-len*Math.cos(a+.5),y2-len*Math.sin(a+.5));ctx.closePath();ctx.fill();ctx.font=&#x27;12px system-ui&#x27;;ctx.fillText(label,x2+6,y2-6)}
 function renderForces(r,w,h){if(mode()===&#x27;bernoulli&#x27;||(!experimentRunning&amp;&amp;!lastResult))return;const s=experimentRunning?r:lastResult,cx=w*.5,cy=h*.5,dragLen=45+70*clamp((s.cd||0)/1.2,0,1);arrow(cx,cy,cx-dragLen,cy,&#x27;#ffc65b&#x27;,&#x27;항력 D&#x27;);if(Math.abs(s.fz||0)&gt;.01){const len=Math.max(-120,Math.min(120,-(s.fz/(s.weight||Math.abs(s.fz)||1))*70));arrow(cx,cy,cx,cy+len,&#x27;#66dd91&#x27;,&#x27;힘 Fy&#x27;)}if(Math.abs(s.fy||0)&gt;.01){const len=Math.max(-105,Math.min(105,(s.fy/(s.weight||Math.abs(s.fy)||1))*65));arrow(cx,cy,cx+len,cy,&#x27;#ff8dac&#x27;,&#x27;측면력&#x27;)}}
 function renderVelocityLegend(w,h,r){if((r.V||0)&lt;=0)return;ctx.save();const x=18,y=18,L=132,H=9,g=ctx.createLinearGradient(x,0,x+L,0);for(let i=0;i&lt;=5;i++){const ms=i*20,gc=streamlineColor((ms/Math.max(.001,r.V))*Math.max(.001,r.V/28),Math.max(.001,r.V/28),1);g.addColorStop(i/5,gc)}ctx.fillStyle=&#x27;rgba(255,255,255,.90)&#x27;;ctx.strokeStyle=&#x27;rgba(35,72,96,.18)&#x27;;ctx.lineWidth=1;ctx.beginPath();ctx.roundRect(x-8,y-8,L+72,35,8);ctx.fill();ctx.stroke();ctx.fillStyle=g;ctx.fillRect(x,y,L,H);ctx.strokeStyle=&#x27;rgba(25,70,110,.28)&#x27;;ctx.strokeRect(x,y,L,H);ctx.fillStyle=&#x27;#38596c&#x27;;ctx.font=&#x27;700 10px system-ui&#x27;;ctx.fillText(&#x27;0&#x27;,x,y+23);ctx.fillText(&#x27;50&#x27;,x+L*.49,y+23);ctx.fillText(&#x27;100 m/s&#x27;,x+L-5,y+23);ctx.restore()}
-function render(r,dt){const rect=canvas.getBoundingClientRect(),dpr=Math.max(1,devicePixelRatio||1),W=Math.floor(rect.width*dpr),H=Math.floor(rect.height*dpr);if(canvas.width!==W||canvas.height!==H){canvas.width=W;canvas.height=H}ctx.setTransform(dpr,0,0,dpr,0,0);const w=rect.width,h=rect.height;ctx.clearRect(0,0,w,h);ctx.fillStyle=&#x27;#f7fcff&#x27;;ctx.fillRect(0,0,w,h);renderTunnel(w,h);renderGround(w,h);renderStreamlines(r,w,h,dt);renderModel(r,w,h);renderForces(r,w,h);renderVelocityLegend(w,h,r)}
+function render(r,dt){
+ const rect=canvas.getBoundingClientRect(),dpr=Math.max(1,devicePixelRatio||1);
+ const W=Math.floor(rect.width*dpr),H=Math.floor(rect.height*dpr);
+ if(canvas.width!==W||canvas.height!==H){canvas.width=W;canvas.height=H}
+ ctx.setTransform(dpr,0,0,dpr,0,0);
+ const w=rect.width,h=rect.height;ctx.clearRect(0,0,w,h);
+ const bg=ctx.createLinearGradient(0,0,0,h);bg.addColorStop(0,&#x27;#f5fbff&#x27;);bg.addColorStop(1,&#x27;#e7f3fa&#x27;);ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
+ if($(&#x27;showGround&#x27;).checked)renderGround(w,h);
+ renderStreamlines(r,w,h,dt);
+ renderModel(r,w,h);
+ renderForces(r,w,h);
+ // Flow color is qualitative: do not show a misleading numeric speed legend.
+ ctx.save();ctx.fillStyle=&#x27;rgba(28,73,91,.83)&#x27;;ctx.font=&#x27;11px system-ui&#x27;;
+ ctx.fillText(&#x27;유선: 공기 흐름의 교육용 근사 시각화&#x27;,14,h-16);ctx.restore();
+}
 function tick(now){const dt=Math.min(.05,(now-last)/1000);last=now;const r=result();if(experimentRunning){tunnelTime+=dt;lastResult={...r};if(mode()===&#x27;free&#x27;&amp;&amp;$(&quot;freeMove&quot;).checked){const m=Math.max(.001,r.m),acc=((r.fz||0)-r.weight)/m,maxH=clamp($(&quot;maxHeight&quot;).value,.5,100);if(height&lt;=0&amp;&amp;acc&lt;=0){height=0;vy=0}else{vy+=acc*dt;height+=vy*dt;if(height&lt;0){height=0;vy=0}if(height&gt;=maxH){height=maxH;vy=0}}}else height=0;}updateUI(r,experimentRunning);render(r,dt);requestAnimationFrame(tick)}
 $(&quot;experimentType&quot;).addEventListener(&#x27;change&#x27;,updateControls);$(&quot;stlFile&quot;).addEventListener(&#x27;change&#x27;,async e=&gt;{const f=e.target.files[0];if(!f)return;try{loadedFreeTris=parseSTL(await f.arrayBuffer());tris=loadedFreeTris;loadedSTL=true;invalidateAeroCache();$(&quot;fileInfo&quot;).textContent=`${f.name} · ${tris.length.toLocaleString()} triangles`;cameraRotX=-.38;cameraRotY=.65;zoom=1.15;objectRot={x:0,y:0,z:0};$(&quot;objRotX&quot;).value=$(&quot;objRotY&quot;).value=$(&quot;objRotZ&quot;).value=0;updateGroundShift();updateProjectedArea();resetMeasurements()}catch(err){$(&quot;fileInfo&quot;).textContent=&#x27;오류: &#x27;+err.message}});
 [&#x27;objRotX&#x27;,&#x27;objRotY&#x27;,&#x27;objRotZ&#x27;].forEach(id=&gt;$(id).addEventListener(&#x27;input&#x27;,()=&gt;{syncObjectRotation();updateProjectedArea()}));$(&#x27;modelLength&#x27;).addEventListener(&#x27;input&#x27;,()=&gt;{invalidateAeroCache();updateProjectedArea()});$(&#x27;groundClearance&#x27;).addEventListener(&#x27;input&#x27;,()=&gt;{updateProjectedArea()});$(&quot;spinEnabled&quot;).addEventListener(&#x27;change&#x27;,()=&gt;$(&quot;freeSpinRows&quot;).classList.toggle(&#x27;hidden&#x27;,!$(&quot;spinEnabled&quot;).checked));$(&quot;showGround&quot;).addEventListener(&#x27;change&#x27;,()=&gt;$(&quot;groundRow&quot;).classList.toggle(&#x27;hidden&#x27;,!$(&quot;showGround&quot;).checked));$(&quot;freeMove&quot;).addEventListener(&#x27;change&#x27;,()=&gt;$(&quot;maxHeightRow&quot;).classList.toggle(&#x27;hidden&#x27;,!$(&quot;freeMove&quot;).checked));$(&quot;resetObjectRotation&quot;).onclick=()=&gt;{objectRot={x:0,y:0,z:0};$(&quot;objRotX&quot;).value=$(&quot;objRotY&quot;).value=$(&quot;objRotZ&quot;).value=0;updateGroundShift()};$(&quot;startExperiment&quot;).onclick=startPauseContinue;$(&quot;stopExperiment&quot;).onclick=endExperiment;$(&quot;recordWind&quot;).onclick=()=&gt;sampleData(result());$(&quot;resetMotion&quot;).onclick=resetMeasurements;$(&quot;resetView&quot;).onclick=()=&gt;{cameraRotX=.34;cameraRotY=-.72;zoom=1.15};$(&#x27;viewFront&#x27;).onclick=()=&gt;{cameraRotX=0;cameraRotY=0};$(&#x27;viewSide&#x27;).onclick=()=&gt;{cameraRotX=0;cameraRotY=-Math.PI/2};$(&#x27;viewTop&#x27;).onclick=()=&gt;{cameraRotX=1.45;cameraRotY=-Math.PI/2};$(&#x27;viewIso&#x27;).onclick=()=&gt;{cameraRotX=.34;cameraRotY=-.72};$(&#x27;viewZoomIn&#x27;).onclick=()=&gt;zoom=Math.min(3,zoom*1.18);$(&#x27;viewZoomOut&#x27;).onclick=()=&gt;zoom=Math.max(.45,zoom/1.18);canvas.addEventListener(&#x27;pointerdown&#x27;,e=&gt;{drag=true;px=e.clientX;py=e.clientY;canvas.setPointerCapture?.(e.pointerId);canvas.classList.add(&#x27;dragging&#x27;)});canvas.addEventListener(&#x27;pointermove&#x27;,e=&gt;{if(!drag)return;const dx=e.clientX-px,dy=e.clientY-py;px=e.clientX;py=e.clientY;cameraRotY-=dx*.008;cameraRotX=clamp(cameraRotX+dy*.008,-1.35,1.35)});const endDrag=e=&gt;{drag=false;canvas.classList.remove(&#x27;dragging&#x27;);try{canvas.releasePointerCapture?.(e.pointerId)}catch(_){}};canvas.addEventListener(&#x27;pointerup&#x27;,endDrag);canvas.addEventListener(&#x27;pointercancel&#x27;,endDrag);canvas.addEventListener(&#x27;wheel&#x27;,e=&gt;{e.preventDefault();zoom=clamp(zoom*(e.deltaY&lt;0?1.10:1/1.10),.45,3)},{passive:false});
