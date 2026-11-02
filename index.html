@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
+<html lang="ko-KR" class="transparentSkybridgeBackground desktopSkybridge light" data-theme="light" style="color-scheme: light; --safe-area-inset-top: 0px; --safe-area-inset-bottom: 0px; --safe-area-inset-left: 0px; --safe-area-inset-right: 0px;"><head><style>@layer sandbox-defaults{html,body,#root{margin:0;padding:0}}</style>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SciLab · 온라인 과학 실험실</title>
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script><style>html, body, #root {
+      margin-top: 0; margin-bottom: 0; padding-top: 0; padding-bottom: 0;
+      
+    }
+html,body,#root{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}html,body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Helvetica Neue,Arial,sans-serif!important}button,input,textarea,select{font-family:inherit}html{background-color:transparent}html.chatgptOled.dark,html.mobileSkybridge.dark{background-color:#000}@supports (font: -apple-system-body){html.mobileSkybridge{font:-apple-system-body}}html.desktopSkybridge.dark{background-color:#1e1e1e}html.transparentSkybridgeBackground,html.transparentSkybridgeBackground.dark{background-color:transparent}html.androidSkybridge,html.androidSkybridge body,html.androidSkybridge *{-webkit-tap-highlight-color:rgba(255,255,255,0)}html.androidSkybridge *::selection,html.androidSkybridge *::-moz-selection{background:#fff0;color:inherit}</style>
 <style>
 :root{--a:#00979d;--o:#ff7a00;--bg:#f5f7fb;--card:#fff;--line:#dfe5ec;--text:#202630;--muted:#6d7684;--purple:#7c3aed}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,"Noto Sans KR",sans-serif}.wrap{width:min(1450px,calc(100% - 28px));margin:18px auto}.head{text-align:center;margin:6px 0 16px}.brandLogo{cursor:pointer;user-select:none;display:block;margin:0 auto;max-width:min(520px,94vw);height:auto}.logo{font-size:42px;font-weight:900;margin:0}.logo .a{color:var(--a)}.logo .l{color:var(--o)}.by{font-size:12px;color:#999}.card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:15px;margin-bottom:13px;box-shadow:0 4px 16px #1e2d460a}.card h2{font-size:17px;margin:0 0 11px}.grid{display:grid;grid-template-columns:1fr 1.18fr;gap:13px}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.row>*{min-width:0}button,select,input,textarea{font:inherit}button{border:0;border-radius:9px;padding:9px 12px;font-weight:800;cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}.primary{background:var(--a);color:#fff}.orange{background:var(--o);color:#fff}.purple{background:var(--purple);color:#fff}.soft{background:#e8f5f5;color:#08767b}.gray{background:#edf0f4;color:#39414d}.danger{background:#fff0f0;color:#b83232}.small{padding:6px 9px;font-size:12px}select,input,textarea{border:1px solid var(--line);border-radius:8px;padding:8px;background:#fff}textarea{width:100%;resize:vertical}.status{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.stat{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:10px}.stat b{display:block;font-size:12px;margin-bottom:4px}.val{font-weight:900;color:var(--a)}.muted{color:var(--muted);font-size:13px;line-height:1.5}.chips{display:flex;gap:6px;flex-wrap:wrap}.chip{background:#eaf7f7;color:#08767b;border-radius:999px;padding:6px 10px;font-weight:800;font-size:13px}.tableWrap{max-height:400px;overflow:auto;border:1px solid var(--line);border-radius:10px;background:#fff}table{border-collapse:collapse;width:100%;font-size:13px}th,td{padding:7px 9px;border-bottom:1px solid #edf0f4;text-align:center;white-space:nowrap}th{position:sticky;top:0;background:#eef7f7;color:#16686c;z-index:2}.excluded{opacity:.35;text-decoration:line-through}.controls{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.controls label{font-size:12px;font-weight:800}.controls select,.controls input{width:100%;margin-top:4px}canvas.graph{width:100%;height:500px;border:1px solid var(--line);border-radius:10px;background:#fff;touch-action:none;cursor:crosshair}.result{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:14px;min-height:130px;font-size:15px;line-height:1.65;overflow:auto}.analysisSection{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:9px 0}.analysisTitle{font-size:16px;font-weight:900;color:#08767b;margin-bottom:7px}.analysisTitle.reg{color:#6d28d9}.analysisGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px 18px}.analysisItem b{color:#334155}.codeGuide{background:#f8fafc;border:1px solid var(--line);border-radius:9px;padding:10px;font-family:ui-monospace,Consolas,monospace;font-size:13px;white-space:pre-wrap}.footer{text-align:center;color:#aaa;font-size:12px;padding:8px}.banner{display:none;background:#fff9dd;border:1px solid #f0d46a;border-radius:10px;padding:10px 12px;margin-bottom:12px;font-size:13px}.modal{display:none;position:fixed;inset:0;background:#0009;z-index:50;align-items:center;justify-content:center;padding:20px}.modal.show{display:flex}.modalBox{background:#fff;border-radius:15px;padding:17px;width:min(850px,96vw);max-height:92vh;overflow:auto;box-shadow:0 20px 60px #0005}.modalBox.large{width:min(1180px,97vw)}.modalHead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}.modalHead h3{margin:0}.checkgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.checkitem{border:1px solid var(--line);border-radius:8px;padding:7px;background:#fafbfc}.sheetWrap{overflow:auto;max-height:500px;border:1px solid var(--line)}.sheet{min-width:700px}.sheet td,.sheet th{min-width:110px}.sheet td[contenteditable="true"]{background:#fff;text-align:left}.sheet .nameRow td{background:#eaf4f4;font-weight:700}.notegrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.notegrid .full{grid-column:1/-1}.tooltip{position:fixed;display:none;pointer-events:none;background:#fff;border:1px solid #cbd5e1;border-radius:8px;padding:7px 9px;font-size:12px;box-shadow:0 5px 20px #0002;z-index:80;white-space:pre-line}.inlineChecks{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.inlineChecks label{font-size:13px}.rangeGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.rangeGrid input{width:100%}.sampleList{display:grid;gap:8px}.sampleBtn{text-align:left;padding:12px;background:#f7fafb;border:1px solid var(--line)}
@@ -130,7 +133,7 @@
   <div class="modeChooser">
     <button class="modeBtn active" data-input-mode="arduino"><span class="modeIcon">🔌</span><span class="modeName">ArduLab</span><span class="modeDesc">Arduino · Web Serial로 센서 데이터를 실시간 수집</span><span class="modeFlow">피지컬 컴퓨팅 기반 데이터 수집</span></button>
     <button class="modeBtn" data-input-mode="media"><span class="modeIcon">📷</span><span class="modeName">영상 분석</span><span class="modeDesc">사진·영상에서 위치와 움직임을 좌표 데이터로 측정</span><span class="modeFlow">영상에서 측정 데이터 생성</span></button>
-    <button class="modeBtn" data-input-mode="wind"><span class="modeIcon">🌬️</span><span class="modeName">시뮬레이션 실험</span><span class="modeDesc">여러 과학 영역의 가상 실험으로 데이터를 생성</span><span class="modeFlow">가상 실험 데이터 생성</span></button>
+    <button class="modeBtn" data-input-mode="wind"><span class="modeIcon">🌬️</span><span class="modeName">3D 가상풍동실험</span><span class="modeDesc">STL 모델로 공기 흐름과 항력 데이터를 생성</span><span class="modeFlow">풍동 실험 데이터 생성</span></button>
     <button class="modeBtn" data-input-mode="file"><span class="modeIcon">📂</span><span class="modeName">데이터 가져오기</span><span class="modeDesc">CSV · Excel · 직접 입력 · 예제 데이터를 불러오기</span><span class="modeFlow">외부·수동 데이터 준비</span></button>
   </div>
   <div class="flowBridge"><span>① 데이터 수집·생성</span><b>→</b><span class="ardulabChip">분석데이터 보내기</span><b>→</b><span>② 데이터 분석</span></div>
@@ -144,10 +147,10 @@
       <select id="baud"><option>9600</option><option>19200</option><option>38400</option><option>57600</option><option>115200</option></select>
     </label>
     <button id="connect" class="primary">Arduino 연결</button>
-    <button id="disconnect" class="gray" disabled>연결 해제</button>
-    <button id="collect" class="orange" disabled>▶ 수집 시작</button>
+    <button id="disconnect" class="gray" disabled="">연결 해제</button>
+    <button id="collect" class="orange" disabled="">▶ 수집 시작</button>
   </div>
-  <div class="sendBoundary"><div class="sendHint">데이터 수집과 데이터 분석의 경계</div><button class="analysisSendBtn" data-send-analysis>수집한 데이터를 분석으로 보내기 →</button></div>
+  <div class="sendBoundary"><div class="sendHint">데이터 수집과 데이터 분석의 경계</div><button class="analysisSendBtn" data-send-analysis="">수집한 데이터를 분석으로 보내기 →</button></div>
 </section>
 
 <section id="mediaInputPanel" class="card inputPanel">
@@ -156,7 +159,7 @@
     <button id="loadImageBtn" class="primary">사진 불러오기</button>
     <button id="loadVideoBtn" class="primary">영상 불러오기</button>
     <button id="loadSampleMediaBtn" class="soft">샘플자료 가져오기</button>
-    <input id="mediaFileInput" type="file" hidden>
+    <input id="mediaFileInput" type="file" hidden="">
     <span id="mediaStatus" class="mediaStatus">사진 또는 영상을 불러와 주세요.</span>
   </div>
 
@@ -165,7 +168,7 @@
     <div class="mediaTargetTitle">기록 대상 설정</div>
     <div class="mediaTargetGrid">
       <label class="mediaTargetItem selected" data-target-item="1">
-        <input type="radio" name="mediaTargetRadio" value="1" checked>
+        <input type="radio" name="mediaTargetRadio" value="1" checked="">
         <span class="mediaTargetLabel">기록대상1</span>
         <input id="mediaTargetName1" class="mediaTargetNameInput" placeholder="(이름)">
       </label>
@@ -191,11 +194,11 @@
   <div class="mediaStepBox">
     <div class="mediaTargetTitle">측정 단계</div>
     <div class="mediaControls">
-      <button id="setScaleBtn" class="stepBtn step-disabled">기준 길이 설정</button>
-      <button id="setAxisBtn" class="stepBtn step-disabled">좌표축 설정</button>
-      <button id="recordPointBtn" class="stepBtn step-disabled">점 기록</button>
-      <button id="undoMediaPointBtn" class="stepBtn step-disabled">마지막 점 취소</button>
-      <button id="clearMediaPointsBtn" class="stepBtn step-disabled">측정점 지우기</button>
+      <button id="setScaleBtn" class="stepBtn step-disabled" disabled="">기준 길이 설정</button>
+      <button id="setAxisBtn" class="stepBtn step-disabled" disabled="">좌표축 설정</button>
+      <button id="recordPointBtn" class="stepBtn step-disabled" disabled="">점 기록</button>
+      <button id="undoMediaPointBtn" class="stepBtn step-disabled" disabled="">마지막 점 취소</button>
+      <button id="clearMediaPointsBtn" class="stepBtn step-disabled" disabled="">측정점 지우기</button>
     <button id="saveAnalysisScreenBtn" class="soft">🖼️ 분석화면 저장하기</button>
     </div>
   </div>
@@ -207,13 +210,13 @@
       <button id="prevFrameBtn" class="gray">◀ 이전 프레임</button>
       <button id="nextFrameBtn" class="gray">다음 프레임 ▶</button>
       <label>영상 FPS
-        <input id="videoFps" type="number" min="1" step="0.001" value="30" readonly title="영상에서 자동 감지합니다.">
+        <input id="videoFps" type="number" min="1" step="0.001" value="30" readonly="" title="영상에서 자동 감지합니다.">
       </label>
       <span id="videoFpsStatus" class="muted">영상 불러오기 후 자동 감지</span>
       <button id="fpsHelpBtn" class="gray small" type="button" title="FPS 유의사항 및 확인 방법" aria-label="FPS 유의사항 및 확인 방법">⚠️ FPS 안내</button>
       <button id="editVideoFpsBtn" class="gray small" type="button">FPS 직접 수정</button>
       <label class="seriesMini">
-        <input id="autoAdvanceCheck" type="checkbox" checked>
+        <input id="autoAdvanceCheck" type="checkbox" checked="">
         점 기록 후 자동 이동
       </label>
       <label>점 간 프레임 수
@@ -256,12 +259,12 @@
   <div class="inputPanelKicker">데이터 가져오기</div><h2>📂 데이터 가져오기</h2><p class="inputLead">이미 가지고 있는 데이터를 불러오거나 직접 입력해 분석할 데이터를 준비합니다.</p>
   <div class="row">
     <button id="loadFile" class="soft">CSV/Excel 불러오기</button>
-    <input id="fileInput" type="file" accept=".csv,.xlsx,text/csv" hidden>
+    <input id="fileInput" type="file" accept=".csv,.xlsx,text/csv" hidden="">
     <button id="manualBtn" class="soft">데이터 수동입력</button>
     <button id="sampleBtn" class="soft">예제 데이터</button>
   </div>
   <p class="muted">CSV/Excel, 직접 입력 데이터, 예제 데이터를 준비한 뒤 아래 전송 버튼을 눌러 공통 데이터 분석 영역으로 이동합니다.</p>
-  <div class="sendBoundary"><div class="sendHint">데이터 수집과 데이터 분석의 경계</div><button class="analysisSendBtn" data-send-analysis>수집한 데이터를 분석으로 보내기 →</button></div>
+  <div class="sendBoundary"><div class="sendHint">데이터 수집과 데이터 분석의 경계</div><button class="analysisSendBtn" data-send-analysis="">수집한 데이터를 분석으로 보내기 →</button></div>
 </section>
 
 <section id="windInputPanel" class="card inputPanel">
@@ -342,6 +345,7 @@ input[type=&quot;range&quot;]{appearance:none;height:5px;border-radius:999px;bac
   &lt;/div&gt;
 
   &lt;div class=&quot;button-grid&quot;&gt;&lt;button class=&quot;primary&quot; id=&quot;startExperiment&quot;&gt;▶ 실험 실행&lt;/button&gt;&lt;button class=&quot;danger&quot; id=&quot;stopExperiment&quot; disabled&gt;■ 실험 종료&lt;/button&gt;&lt;/div&gt;
+  &lt;p style=&quot;font-size:11px;line-height:1.5;color:#785a29;background:#fff9ea;border:1px solid #ead9a7;padding:9px;border-radius:8px&quot;&gt;항력·표면 색상은 STL 형상과 바람 방향을 반영한 교육용 근사 결과입니다. 실제 자동차·항공기의 정밀 CFD 또는 풍동 측정값이 아닙니다. 빨강은 바람에 정면으로 노출된 면을 뜻합니다.&lt;/p&gt;
   &lt;div class=&quot;state-line&quot; id=&quot;experimentState&quot;&gt;대기 중 · 조건을 설정한 뒤 실험을 시작하세요.&lt;/div&gt;&lt;button class=&quot;measureBtn&quot; id=&quot;recordWind&quot; disabled&gt;＋ 현재 측정값 기록&lt;/button&gt;
   &lt;button class=&quot;secondary&quot; id=&quot;resetMotion&quot;&gt;운동 / 측정 초기화&lt;/button&gt;&lt;button class=&quot;secondary&quot; id=&quot;resetView&quot;&gt;카메라 시점 초기화&lt;/button&gt;&lt;div id=&quot;sendState&quot; class=&quot;small&quot; style=&quot;margin-top:8px&quot;&gt;실험 데이터를 기록한 뒤 아래의 분석 전송 버튼을 눌러 주세요.&lt;/div&gt;
 &lt;/section&gt;
@@ -384,7 +388,7 @@ input[type=&quot;range&quot;]{appearance:none;height:5px;border-radius:999px;bac
 &lt;script&gt;
 (() =&gt; {
 const $=id=&gt;document.getElementById(id);const canvas=$(&quot;canvas&quot;),ctx=canvas.getContext(&quot;2d&quot;),graph=$(&quot;graph&quot;),gctx=graph.getContext(&quot;2d&quot;);
-const FLOOR_Z=-1.25,CEILING_Z=1.25;let tris=makeWing(),cameraRotX=.34,cameraRotY=-.72,zoom=1.15,objectRot={x:0,y:0,z:0},groundShiftZ=0,modelBounds=null;let drag=false,px=0,py=0;let experimentRunning=false,experimentPaused=false,lastResult=null,last=performance.now(),tunnelTime=0,height=0,vy=0,lastSample=0;const dataLog=[];const particles=[];const PARTICLE_COUNT=170;let loadedSTL=false,loadedFreeTris=null;let aeroFacetCache=null,aeroStatsCache=null;
+const FLOOR_Z=-1.25,CEILING_Z=1.25;let tris=makeWing(),cameraRotX=.34,cameraRotY=-.72,zoom=1.65,objectRot={x:0,y:0,z:0},groundShiftZ=0,modelBounds=null;let drag=false,px=0,py=0;let experimentRunning=false,experimentPaused=false,lastResult=null,last=performance.now(),tunnelTime=0,height=0,vy=0,lastSample=0;const dataLog=[];const particles=[];const PARTICLE_COUNT=170;let loadedSTL=false,loadedFreeTris=null;let aeroFacetCache=null,aeroStatsCache=null,silhouetteCache=null;
 const intros={wing:&quot;받음각에 따른 양력·항력 변화를 관찰하고 큰 받음각에서 실속을 탐구합니다.&quot;,free:&quot;기본 자동차 또는 직접 만든 STL의 자세·지상고·형상에 따른 Fx, Fy 변화를 측정합니다.&quot;};
 function addBox(out,x0,x1,y0,y1,z0,z1){const v=[[x0,y0,z0],[x1,y0,z0],[x1,y1,z0],[x0,y1,z0],[x0,y0,z1],[x1,y0,z1],[x1,y1,z1],[x0,y1,z1]],F=[[0,2,1],[0,3,2],[4,5,6],[4,6,7],[0,1,5],[0,5,4],[1,2,6],[1,6,5],[2,3,7],[2,7,6],[3,0,4],[3,4,7]];for(const f of F)out.push(f.map(i=&gt;v[i]));}
 function addCylinderY(out,cx,cy,cz,r,halfW,seg=14){for(let i=0;i&lt;seg;i++){const a=i*2*Math.PI/seg,b=(i+1)*2*Math.PI/seg,p1=[cx+r*Math.cos(a),cy-halfW,cz+r*Math.sin(a)],p2=[cx+r*Math.cos(b),cy-halfW,cz+r*Math.sin(b)],p3=[cx+r*Math.cos(b),cy+halfW,cz+r*Math.sin(b)],p4=[cx+r*Math.cos(a),cy+halfW,cz+r*Math.sin(a)];out.push([p1,p2,p3],[p1,p3,p4],[[cx,cy-halfW,cz],p2,p1],[[cx,cy+halfW,cz],p4,p3]);}}
@@ -395,75 +399,102 @@ function makeCar(){const out=[];addBox(out,-1.25,1.18,-.52,.52,-.24,.12);addBox(
 function parseSTL(buf){const dv=new DataView(buf);if(buf.byteLength&gt;=84){const n=dv.getUint32(80,true);if(84+n*50===buf.byteLength){const out=[];let o=84;for(let i=0;i&lt;n;i++){o+=12;const t=[];for(let k=0;k&lt;3;k++){t.push([dv.getFloat32(o,true),dv.getFloat32(o+4,true),dv.getFloat32(o+8,true)]);o+=12}out.push(t);o+=2}return normalize(out)}}const txt=new TextDecoder().decode(buf),verts=[...txt.matchAll(/vertex\s+([+\-\deE.]+)\s+([+\-\deE.]+)\s+([+\-\deE.]+)/g)].map(m=&gt;[+m[1],+m[2],+m[3]]),out=[];for(let i=0;i+2&lt;verts.length;i+=3)out.push([verts[i],verts[i+1],verts[i+2]]);if(!out.length)throw new Error(&quot;STL 삼각형을 읽지 못했습니다.&quot;);return normalize(out)}
 function normalize(t){const pts=t.flat(),mn=[Infinity,Infinity,Infinity],mx=[-Infinity,-Infinity,-Infinity];for(const p of pts)for(let j=0;j&lt;3;j++){mn[j]=Math.min(mn[j],p[j]);mx[j]=Math.max(mx[j],p[j])}const c=mn.map((v,j)=&gt;(v+mx[j])/2),span=Math.max(...mx.map((v,j)=&gt;v-mn[j]))||1;return t.map(tr=&gt;tr.map(p=&gt;p.map((v,j)=&gt;(v-c[j])/span*2.6)))}
 function clamp(n,a,b){n=Number(n);return Number.isFinite(n)?Math.max(a,Math.min(b,n)):a}function clamp360(v){v=Number(v);if(!Number.isFinite(v))return 0;v%=360;if(v&lt;0)v+=360;return v}
-function rotateByObject(p){let[x,y,z]=p;const rot=(axis,a)=&gt;{const c=Math.cos(a),ss=Math.sin(a);if(axis===&#x27;x&#x27;){const y1=y*c-z*ss,z1=y*ss+z*c;y=y1;z=z1}else if(axis===&#x27;y&#x27;){const x1=x*c+z*ss,z1=-x*ss+z*c;x=x1;z=z1}else{const x1=x*c-y*ss,y1=x*ss+y*c;x=x1;y=y1}};rot(&#x27;x&#x27;,objectRot.x*Math.PI/180);rot(&#x27;y&#x27;,objectRot.y*Math.PI/180);rot(&#x27;z&#x27;,objectRot.z*Math.PI/180);return[x,y,z]}
+function rotateByObject(p){let[x,y,z]=p;const rot=(axis,a)=&gt;{const c=Math.cos(a),ss=Math.sin(a);if(axis==='x'){const y1=y*c-z*ss,z1=y*ss+z*c;y=y1;z=z1}else if(axis==='y'){const x1=x*c+z*ss,z1=-x*ss+z*c;x=x1;z=z1}else{const x1=x*c-y*ss,y1=x*ss+y*c;x=x1;y=y1}};rot('x',objectRot.x*Math.PI/180);rot('y',objectRot.y*Math.PI/180);rot('z',objectRot.z*Math.PI/180);return[x,y,z]}
 function calcModelBounds(){if(!tris?.length)return{c:[0,0,0],h:[1,.6,.5]};const mn=[Infinity,Infinity,Infinity],mx=[-Infinity,-Infinity,-Infinity];for(const tr of tris)for(const p of tr)for(let i=0;i&lt;3;i++){mn[i]=Math.min(mn[i],p[i]);mx[i]=Math.max(mx[i],p[i])}return{c:mn.map((v,i)=&gt;(v+mx[i])/2),h:mn.map((v,i)=&gt;Math.max(.18,(mx[i]-v)/2))}}
 function vsub(a,b){return[a[0]-b[0],a[1]-b[1],a[2]-b[2]]}
 function vcross(a,b){return[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]]}
 function vdot(a,b){return a[0]*b[0]+a[1]*b[1]+a[2]*b[2]}
 function vnorm(a){const m=Math.hypot(...a)||1;return[a[0]/m,a[1]/m,a[2]/m]}
 function triangleGeom(tr,center){const e1=vsub(tr[1],tr[0]),e2=vsub(tr[2],tr[0]),cr=vcross(e1,e2),area=.5*Math.hypot(...cr);let n=vnorm(cr),c=[(tr[0][0]+tr[1][0]+tr[2][0])/3,(tr[0][1]+tr[1][1]+tr[2][1])/3,(tr[0][2]+tr[1][2]+tr[2][2])/3];if(vdot(n,vsub(c,center))&lt;0)n=n.map(x=&gt;-x);return{c,n,area}}
-function invalidateAeroCache(){aeroFacetCache=null;aeroStatsCache=null;modelBounds=null}
+function invalidateAeroCache(){aeroFacetCache=null;aeroStatsCache=null;silhouetteCache=null;modelBounds=null}
 function aeroFacets(){if(aeroFacetCache)return aeroFacetCache;const b=calcModelBounds(),center=b.c,step=Math.max(1,Math.ceil((tris?.length||1)/90)),fac=[];for(let i=0;i&lt;(tris?.length||0);i+=step){const g=triangleGeom(tris[i],center);if(g.area&gt;1e-8)fac.push(g)}aeroFacetCache=fac;return fac}
 function meshAeroEstimate(){
- if(mode()!==&#x27;free&#x27;||!tris?.length)return{bluntness:.45,projected:.6,shapeFactor:1,wake:.5};
- const key=[tris.length,objectRot.x.toFixed(2),objectRot.y.toFixed(2),objectRot.z.toFixed(2)].join(&#x27;|&#x27;);if(aeroStatsCache?.key===key)return aeroStatsCache;
+ if(mode()!=='free'||!tris?.length)return{bluntness:.45,projected:.6,shapeFactor:1,wake:.5};
+ const key=[tris.length,objectRot.x.toFixed(2),objectRot.y.toFixed(2),objectRot.z.toFixed(2)].join('|');if(aeroStatsCache?.key===key)return aeroStatsCache;
  const b=calcModelBounds(),center=b.c;let proj=0,impact3=0,areaSum=0,vertical=0;for(const tr of tris){const g=triangleGeom(tr,center);if(g.area&lt;1e-9)continue;const nw=vnorm(rotateVectorByObject(g.n)),impact=Math.max(0,-nw[0]);proj+=g.area*impact;impact3+=g.area*impact*impact*impact;vertical+=g.area*impact*impact*(-nw[2]);areaSum+=g.area}
  const bluntness=proj&gt;1e-9?clamp(impact3/proj,.08,1):.35;const projected=clamp(proj/Math.max(.01,areaSum),.03,.72);const shapeFactor=.48+1.12*bluntness;const wake=clamp(.22+.78*bluntness,.2,1);aeroStatsCache={key,bluntness,projected,shapeFactor,wake,vertical};return aeroStatsCache
 }
-function projectedAreaM2(){
+function silhouetteArea(){
  if(!tris?.length)return 0;
- const b=calcModelBounds(),span=Math.max(1e-6,2*Math.max(...b.h)),L=Math.max(.05,clamp($(&quot;modelLength&quot;)?.value||4.5,.05,50)),scale=L/span;
- let sum=0;for(const tr of tris){const g=triangleGeom(tr,b.c),nw=vnorm(rotateVectorByObject(g.n));sum+=g.area*Math.abs(nw[0]);}
- return Math.max(1e-6,.5*sum*scale*scale);
+ const b=calcModelBounds(), L=Math.max(.05,clamp($(&quot;modelLength&quot;)?.value||4.5,.05,50));
+ const span=Math.max(1e-6,2*Math.max(...b.h)), scale=L/span;
+ const key=[tris.length,objectRot.x,objectRot.y,objectRot.z,L].join('|');
+ if(silhouetteCache?.key===key)return silhouetteCache.area;
+ const N=120, rotated=tris.map(t=&gt;t.map(rotateByObject));
+ let loY=Infinity,hiY=-Infinity,loZ=Infinity,hiZ=-Infinity;
+ for(const tr of rotated)for(const v of tr){loY=Math.min(loY,v[1]);hiY=Math.max(hiY,v[1]);loZ=Math.min(loZ,v[2]);hiZ=Math.max(hiZ,v[2]);}
+ const dy=Math.max(1e-8,hiY-loY), dz=Math.max(1e-8,hiZ-loZ), filled=new Uint8Array(N*N);
+ for(const t of rotated){const v=t.map(p=&gt;[(p[1]-loY)/dy*(N-1),(p[2]-loZ)/dz*(N-1)]);
+   const [a,b,c]=v,den=(b[1]-c[1])*(a[0]-c[0])+(c[0]-b[0])*(a[1]-c[1]);if(Math.abs(den)&lt;1e-10)continue;
+   const l=Math.max(0,Math.floor(Math.min(...v.map(p=&gt;p[0])))),h=Math.min(N-1,Math.ceil(Math.max(...v.map(p=&gt;p[0]))));
+   const low=Math.max(0,Math.floor(Math.min(...v.map(p=&gt;p[1])))),high=Math.min(N-1,Math.ceil(Math.max(...v.map(p=&gt;p[1]))));
+   for(let j=low;j&lt;=high;j++)for(let i=l;i&lt;=h;i++){
+     const u=((b[1]-c[1])*(i-a[0])+(c[0]-b[0])*(j-a[1]))/den;
+     const w=((c[1]-a[1])*(i-a[0])+(a[0]-c[0])*(j-a[1]))/den;
+     if(u&gt;=-1e-7&amp;&amp;w&gt;=-1e-7&amp;&amp;u+w&lt;=1+1e-7)filled[j*N+i]=1;
+   }
+ }
+ let n=0;for(const v of filled)n+=v;
+ const area=Math.max(1e-6,n/(N*N)*dy*dz*scale*scale);
+ silhouetteCache={key,area};return area;
 }
-function currentObjectZ(){const clearance=mode()===&#x27;free&#x27;?clamp($(&quot;groundClearance&quot;)?.value||0,0,10):0;const move=(mode()===&#x27;free&#x27;&amp;&amp;$(&quot;freeMove&quot;)?.checked)?Math.min(.85,height/Math.max(.1,clamp($(&quot;maxHeight&quot;)?.value||10,.5,100)))*1.25:0;return groundShiftZ+clearance+move}
+function projectedAreaM2(){return silhouetteArea();}
+function currentObjectZ(){const clearance=mode()==='free'?clamp($(&quot;groundClearance&quot;)?.value||0,0,10):0;const move=(mode()==='free'&amp;&amp;$(&quot;freeMove&quot;)?.checked)?Math.min(.85,height/Math.max(.1,clamp($(&quot;maxHeight&quot;)?.value||10,.5,100)))*1.25:0;return groundShiftZ+clearance+move}
 function updateProjectedArea(){const e=$(&quot;projectedArea&quot;);if(e)e.value=projectedAreaM2().toFixed(3);}
-function trianglePressureProxy(tr){if(mode()!==&#x27;free&#x27;)return 0;const V=clamp($(&quot;speed&quot;).value,0,100);if(V&lt;=.001)return 0;const b=calcModelBounds(),g=triangleGeom(tr,b.c),nw=vnorm(rotateVectorByObject(g.n)),impact=Math.max(0,-nw[0]),qNorm=(V*V)/(100*100);return impact*impact*qNorm}
-
-function updateGroundShift(){modelBounds=calcModelBounds();if(mode()!==&#x27;free&#x27;||!tris?.length){groundShiftZ=0;return}let mn=Infinity;for(const tr of tris)for(const p of tr){const q=rotateByObject(p);if(q[2]&lt;mn)mn=q[2]}groundShiftZ=Number.isFinite(mn)?FLOOR_Z-mn:0}
+function trianglePressureProxy(tr){
+ if(mode()!=='free'||clamp($(&quot;speed&quot;).value,0,100)&lt;=0)return 0;
+ const b=calcModelBounds(),g=triangleGeom(tr,b.c),nw=vnorm(rotateVectorByObject(g.n));
+ return Math.pow(Math.max(0,-nw[0]),2);
+}
+function updateGroundShift(){modelBounds=calcModelBounds();if(mode()!=='free'||!tris?.length){groundShiftZ=0;return}let mn=Infinity;for(const tr of tris)for(const p of tr){const q=rotateByObject(p);if(q[2]&lt;mn)mn=q[2]}groundShiftZ=Number.isFinite(mn)?FLOOR_Z-mn:0}
 function syncObjectRotation(){invalidateAeroCache();objectRot.x=clamp360($(&quot;objRotX&quot;).value);objectRot.y=clamp360($(&quot;objRotY&quot;).value);objectRot.z=clamp360($(&quot;objRotZ&quot;).value);$(&quot;objRotX&quot;).value=Math.round(objectRot.x);$(&quot;objRotY&quot;).value=Math.round(objectRot.y);$(&quot;objRotZ&quot;).value=Math.round(objectRot.z);updateGroundShift()}
-function invRotateByObject(p){let[x,y,z]=p;const rot=(axis,a)=&gt;{const c=Math.cos(a),ss=Math.sin(a);if(axis===&#x27;x&#x27;){const y1=y*c-z*ss,z1=y*ss+z*c;y=y1;z=z1}else if(axis===&#x27;y&#x27;){const x1=x*c+z*ss,z1=-x*ss+z*c;x=x1;z=z1}else{const x1=x*c-y*ss,y1=x*ss+y*c;x=x1;y=y1}};rot(&#x27;z&#x27;,-objectRot.z*Math.PI/180);rot(&#x27;y&#x27;,-objectRot.y*Math.PI/180);rot(&#x27;x&#x27;,-objectRot.x*Math.PI/180);return[x,y,z]}
+function invRotateByObject(p){let[x,y,z]=p;const rot=(axis,a)=&gt;{const c=Math.cos(a),ss=Math.sin(a);if(axis==='x'){const y1=y*c-z*ss,z1=y*ss+z*c;y=y1;z=z1}else if(axis==='y'){const x1=x*c+z*ss,z1=-x*ss+z*c;x=x1;z=z1}else{const x1=x*c-y*ss,y1=x*ss+y*c;x=x1;y=y1}};rot('z',-objectRot.z*Math.PI/180);rot('y',-objectRot.y*Math.PI/180);rot('x',-objectRot.x*Math.PI/180);return[x,y,z]}
 function rotateVectorByObject(p){return rotateByObject(p)}
-function rotateObjectPoint(p,spinAngle=0,spinAxis=null){let[x,y,z]=rotateByObject(p);if(spinAxis){const c=Math.cos(spinAngle),ss=Math.sin(spinAngle);if(spinAxis===&#x27;x&#x27;){const y1=y*c-z*ss,z1=y*ss+z*c;y=y1;z=z1}else if(spinAxis===&#x27;y&#x27;){const x1=x*c+z*ss,z1=-x*ss+z*c;x=x1;z=z1}else{const x1=x*c-y*ss,y1=x*ss+y*c;x=x1;y=y1}}return[x,y,z]}
+function rotateObjectPoint(p,spinAngle=0,spinAxis=null){let[x,y,z]=rotateByObject(p);if(spinAxis){const c=Math.cos(spinAngle),ss=Math.sin(spinAngle);if(spinAxis==='x'){const y1=y*c-z*ss,z1=y*ss+z*c;y=y1;z=z1}else if(spinAxis==='y'){const x1=x*c+z*ss,z1=-x*ss+z*c;x=x1;z=z1}else{const x1=x*c-y*ss,y1=x*ss+y*c;x=x1;y=y1}}return[x,y,z]}
 function mode(){return $(&quot;experimentType&quot;).value}
-function currentSpin(){if(mode()===&#x27;free&#x27;&amp;&amp;$(&quot;spinEnabled&quot;).checked)return{enabled:true,axis:$(&quot;freeSpinAxis&quot;).value,rpm:clamp($(&quot;freeRpm&quot;).value,-10000,10000)};return{enabled:false,axis:&#x27;z&#x27;,rpm:0}}
-function standardAero(){const V=clamp($(&quot;speed&quot;).value,0,100),m=Math.max(.001,clamp($(&quot;mass&quot;).value,.001,100000)),rho=Math.max(.2,clamp($(&quot;airDensity&quot;).value,.2,2)),exp=mode();let S=exp===&#x27;free&#x27;?projectedAreaM2():Math.max(.000001,clamp($(&quot;area&quot;).value,.000001,10000)),cd0=exp===&#x27;free&#x27;?.38:Math.max(.001,clamp($(&quot;cd0&quot;).value,.001,5)),q=.5*rho*V*V,cl=0,cd=cd0,fy=0,fz=0,state=&#x27;&#x27;;
- if(exp===&#x27;wing&#x27;){const a=clamp($(&quot;angle&quot;).value,-30,40),aa=Math.abs(a),sgn=a&gt;=0?1:-1;cl=2*Math.PI*(Math.min(aa,14)*Math.PI/180)*sgn;if(aa&gt;14)cl*=Math.max(.18,1-(aa-14)/22);cd=cd0+cl*cl/(Math.PI*6*.8)+(aa&gt;14?(aa-14)*.012:0);fz=q*S*cl;state=aa&gt;14?&#x27;실속 영역 · 양력 증가가 둔화되고 항력이 크게 증가&#x27;:fz&gt;m*9.80665?&#x27;양력이 중량보다 큼 · 상승 가능&#x27;:&#x27;양력이 중량보다 작음&#x27;;return{V,m,S,q,rho,cl,cd,drag:q*S*cd,fy,fz,weight:m*9.80665,state};}
- const aero=meshAeroEstimate(),yaw=objectRot.z*Math.PI/180,pitch=objectRot.y*Math.PI/180,alignment=Math.max(.12,Math.abs(Math.cos(yaw)*Math.cos(pitch))),effectivePitch=Math.asin(Math.max(-1,Math.min(1,Math.sin(objectRot.y*Math.PI/180))))*180/Math.PI,aa=Math.abs(effectivePitch),sgn=effectivePitch&gt;=0?1:-1;cl=2*Math.PI*(Math.min(aa,12)*Math.PI/180)*sgn*.30;if(aa&gt;12)cl*=Math.max(.2,1-(aa-12)/35);cd=Math.max(.03,cd0*aero.shapeFactor+cl*cl/(Math.PI*5*.75)+(1-alignment)*.16);const clearance=clamp($(&quot;groundClearance&quot;).value,0,10),groundFactor=$(&quot;showGround&quot;).checked?Math.exp(-clearance/Math.max(.08,Math.sqrt(S)*.35)):0;fz=q*S*cl + q*S*clamp(aero.vertical,-.35,.35)*.10 - q*S*.035*groundFactor;state=$(&quot;freeMove&quot;).checked?`자유 이동 · 투영 기준면적 ${S.toFixed(3)} m² · 지면효과 반영`:`물체 고정 · 투영 기준면적 ${S.toFixed(3)} m² · 지면효과 반영`;updateProjectedArea();return{V,m,S,q,rho,cl,cd,drag:q*S*cd,fy,fz,weight:m*9.80665,state,aero};}
-function bernoulli(){const rho=1.225,v1=clamp($(&quot;speed&quot;).value,0,100),ratio=clamp($(&quot;throatRatio&quot;).value,.2,1),v2=v1/ratio,p1=clamp($(&quot;staticP&quot;).value,80,130)*1000,p2=p1+.5*rho*(v1*v1-v2*v2),total1=p1+.5*rho*v1*v1,total2=p2+.5*rho*v2*v2;return{V:v1,ratio,v1,v2,p1,p2,total1,total2,state:&#x27;연속방정식 A₁v₁=A₂v₂ · 수평 유동의 베르누이 근사&#x27;} }
-function result(){return mode()===&#x27;bernoulli&#x27;?bernoulli():standardAero()}
-function updateControls(){const m=mode();$(&quot;wingControls&quot;).classList.toggle(&#x27;hidden&#x27;,m!==&#x27;wing&#x27;);$(&quot;freeControls&quot;).classList.toggle(&#x27;hidden&#x27;,m!==&#x27;free&#x27;);$(&quot;stlBlock&quot;).classList.toggle(&#x27;hidden&#x27;,m!==&#x27;free&#x27;);$(&quot;rotationBox&quot;).classList.toggle(&#x27;hidden&#x27;,m!==&#x27;free&#x27;);$(&quot;massRow&quot;).classList.remove(&#x27;hidden&#x27;);$(&quot;areaRow&quot;).classList.toggle(&#x27;hidden&#x27;,m===&#x27;free&#x27;);$(&quot;cdRow&quot;).classList.toggle(&#x27;hidden&#x27;,m===&#x27;free&#x27;);$(&quot;standardMetrics&quot;).classList.remove(&#x27;hidden&#x27;);$(&quot;expIntro&quot;).textContent=intros[m];$(&quot;resultMode&quot;).textContent={wing:&#x27;날개&#x27;,free:&#x27;자유 풍동&#x27;}[m];if(m===&#x27;wing&#x27;){tris=makeWing();cameraRotX=0;cameraRotY=-Math.PI/2;objectRot={x:0,y:0,z:0}}if(m===&#x27;free&#x27;){tris=loadedFreeTris||makeCar();cameraRotX=.34;cameraRotY=-.72;objectRot={x:0,y:0,z:0};$(&#x27;objRotX&#x27;).value=$(&#x27;objRotY&#x27;).value=$(&#x27;objRotZ&#x27;).value=0;updateGroundShift();updateProjectedArea()}invalidateAeroCache();styleWindRoles();resetMeasurements();}
-function windRoles(){const m=mode();let setup=[&#x27;experimentType&#x27;,&#x27;stlFile&#x27;,&#x27;mass&#x27;,&#x27;cd0&#x27;,&#x27;airDensity&#x27;],live=[&#x27;speed&#x27;];if(m===&#x27;wing&#x27;){setup.push(&#x27;area&#x27;);live.push(&#x27;angle&#x27;)}if(m===&#x27;free&#x27;){setup.push(&#x27;modelLength&#x27;,&#x27;objectColor&#x27;,&#x27;showGround&#x27;,&#x27;freeMove&#x27;,&#x27;spinEnabled&#x27;,&#x27;groundClearance&#x27;,&#x27;maxHeight&#x27;,&#x27;freeSpinAxis&#x27;);live.push(&#x27;freeRpm&#x27;,&#x27;objRotX&#x27;,&#x27;objRotY&#x27;,&#x27;objRotZ&#x27;)}return{setup,live}}
-function styleWindRoles(){document.querySelectorAll(&#x27;.row&#x27;).forEach(x=&gt;x.classList.remove(&#x27;setupVar&#x27;,&#x27;liveVar&#x27;));let roles=windRoles();for(const id of roles.setup){let e=$(id);if(e){let r=e.closest(&#x27;.row&#x27;);if(r)r.classList.add(&#x27;setupVar&#x27;)}}for(const id of roles.live){let e=$(id);if(e){let r=e.closest(&#x27;.row&#x27;);if(r)r.classList.add(&#x27;liveVar&#x27;)}}}
-function lockExperimentControls(lock){let roles=windRoles();for(const id of roles.setup){let e=$(id);if(e)e.disabled=lock}for(const id of roles.live){let e=$(id);if(e)e.disabled=experimentPaused}[&#x27;resetMotion&#x27;].forEach(id=&gt;{if($(id))$(id).disabled=lock});$(&#x27;resetObjectRotation&#x27;).disabled=experimentPaused;$(&#x27;recordWind&#x27;).disabled=!(experimentRunning&amp;&amp;!experimentPaused)}
-function resetMeasurements(){height=0;vy=0;lastResult=null;dataLog.length=0;lastSample=0;experimentRunning=false;experimentPaused=false;tunnelTime=0;initParticles();$(&quot;dataBody&quot;).innerHTML=&#x27;&#x27;;drawGraph();lockExperimentControls(false);$(&quot;experimentState&quot;).textContent=&#x27;대기 중 · 조건을 설정한 뒤 실험을 실행하세요.&#x27;;updateRunButtons();}
+function currentSpin(){if(mode()==='free'&amp;&amp;$(&quot;spinEnabled&quot;).checked)return{enabled:true,axis:$(&quot;freeSpinAxis&quot;).value,rpm:clamp($(&quot;freeRpm&quot;).value,-10000,10000)};return{enabled:false,axis:'z',rpm:0}}
+function standardAero(){const V=clamp($(&quot;speed&quot;).value,0,100),m=Math.max(.001,clamp($(&quot;mass&quot;).value,.001,100000)),rho=Math.max(.2,clamp($(&quot;airDensity&quot;).value,.2,2)),exp=mode();let S=exp==='free'?projectedAreaM2():Math.max(.000001,clamp($(&quot;area&quot;).value,.000001,10000)),cd0=exp==='free'?.38:Math.max(.001,clamp($(&quot;cd0&quot;).value,.001,5)),q=.5*rho*V*V,cl=0,cd=cd0,fy=0,fz=0,state='';
+ if(exp==='wing'){const a=clamp($(&quot;angle&quot;).value,-30,40),aa=Math.abs(a),sgn=a&gt;=0?1:-1;cl=2*Math.PI*(Math.min(aa,14)*Math.PI/180)*sgn;if(aa&gt;14)cl*=Math.max(.18,1-(aa-14)/22);cd=cd0+cl*cl/(Math.PI*6*.8)+(aa&gt;14?(aa-14)*.012:0);fz=q*S*cl;state=aa&gt;14?'실속 영역 · 양력 증가가 둔화되고 항력이 크게 증가':fz&gt;m*9.80665?'양력이 중량보다 큼 · 상승 가능':'양력이 중량보다 작음';return{V,m,S,q,rho,cl,cd,drag:q*S*cd,fy,fz,weight:m*9.80665,state};}
+ const aero=meshAeroEstimate(),yaw=objectRot.z*Math.PI/180,pitch=objectRot.y*Math.PI/180,alignment=Math.max(.12,Math.abs(Math.cos(yaw)*Math.cos(pitch))),effectivePitch=Math.asin(Math.max(-1,Math.min(1,Math.sin(objectRot.y*Math.PI/180))))*180/Math.PI,aa=Math.abs(effectivePitch),sgn=effectivePitch&gt;=0?1:-1;cl=2*Math.PI*(Math.min(aa,12)*Math.PI/180)*sgn*.30;if(aa&gt;12)cl*=Math.max(.2,1-(aa-12)/35);// Educational pressure-impact approximation: projected silhouette normalizes front-facing triangle loading.
+ // This is not a Navier-Stokes solution; separation, turbulence and skin-friction are not resolved.
+ const geomB=calcModelBounds(),geomSpan=Math.max(1e-6,2*Math.max(...geomB.h)),physicalScale=clamp($(&quot;modelLength&quot;).value,.05,50)/geomSpan;
+ let frontLoad=0;for(const tr of tris){const g=triangleGeom(tr,geomB.c),n=vnorm(rotateVectorByObject(g.n)),facing=Math.max(0,-n[0]);frontLoad+=g.area*facing*facing*facing;}
+ const impactRatio=frontLoad*physicalScale*physicalScale/Math.max(1e-6,S);
+ cd=clamp(.12+.82*impactRatio+.08*(1-alignment),.12,2.8);const clearance=clamp($(&quot;groundClearance&quot;).value,0,10),groundFactor=$(&quot;showGround&quot;).checked?Math.exp(-clearance/Math.max(.08,Math.sqrt(S)*.35)):0;fz=q*S*cl + q*S*clamp(aero.vertical,-.35,.35)*.10 - q*S*.035*groundFactor;state=`형상 기반 근사 · 기준면적 ${S.toFixed(3)} m² · Cd는 교육용 추정값`; updateProjectedArea();return{V,m,S,q,rho,cl,cd,drag:q*S*cd,fy,fz,weight:m*9.80665,state,aero};}
+function bernoulli(){const rho=1.225,v1=clamp($(&quot;speed&quot;).value,0,100),ratio=clamp($(&quot;throatRatio&quot;).value,.2,1),v2=v1/ratio,p1=clamp($(&quot;staticP&quot;).value,80,130)*1000,p2=p1+.5*rho*(v1*v1-v2*v2),total1=p1+.5*rho*v1*v1,total2=p2+.5*rho*v2*v2;return{V:v1,ratio,v1,v2,p1,p2,total1,total2,state:'연속방정식 A₁v₁=A₂v₂ · 수평 유동의 베르누이 근사'} }
+function result(){return mode()==='bernoulli'?bernoulli():standardAero()}
+function updateControls(){const m=mode();$(&quot;wingControls&quot;).classList.toggle('hidden',m!=='wing');$(&quot;freeControls&quot;).classList.toggle('hidden',m!=='free');$(&quot;stlBlock&quot;).classList.toggle('hidden',m!=='free');$(&quot;rotationBox&quot;).classList.toggle('hidden',m!=='free');$(&quot;massRow&quot;).classList.remove('hidden');$(&quot;areaRow&quot;).classList.toggle('hidden',m==='free');$(&quot;cdRow&quot;).classList.toggle('hidden',m==='free');$(&quot;standardMetrics&quot;).classList.remove('hidden');$(&quot;expIntro&quot;).textContent=intros[m];$(&quot;resultMode&quot;).textContent={wing:'날개',free:'자유 풍동'}[m];if(m==='wing'){tris=makeWing();cameraRotX=0;cameraRotY=-Math.PI/2;objectRot={x:0,y:0,z:0}}if(m==='free'){tris=loadedFreeTris||makeCar();cameraRotX=.34;cameraRotY=-.72;objectRot={x:0,y:0,z:0};$('objRotX').value=$('objRotY').value=$('objRotZ').value=0;updateGroundShift();updateProjectedArea()}invalidateAeroCache();styleWindRoles();resetMeasurements();}
+function windRoles(){const m=mode();let setup=['experimentType','stlFile','mass','cd0','airDensity'],live=['speed'];if(m==='wing'){setup.push('area');live.push('angle')}if(m==='free'){setup.push('modelLength','objectColor','showGround','freeMove','spinEnabled','groundClearance','maxHeight','freeSpinAxis');live.push('freeRpm','objRotX','objRotY','objRotZ')}return{setup,live}}
+function styleWindRoles(){document.querySelectorAll('.row').forEach(x=&gt;x.classList.remove('setupVar','liveVar'));let roles=windRoles();for(const id of roles.setup){let e=$(id);if(e){let r=e.closest('.row');if(r)r.classList.add('setupVar')}}for(const id of roles.live){let e=$(id);if(e){let r=e.closest('.row');if(r)r.classList.add('liveVar')}}}
+function lockExperimentControls(lock){let roles=windRoles();for(const id of roles.setup){let e=$(id);if(e)e.disabled=lock}for(const id of roles.live){let e=$(id);if(e)e.disabled=experimentPaused}['resetMotion'].forEach(id=&gt;{if($(id))$(id).disabled=lock});$('resetObjectRotation').disabled=experimentPaused;$('recordWind').disabled=!(experimentRunning&amp;&amp;!experimentPaused)}
+function resetMeasurements(){height=0;vy=0;lastResult=null;dataLog.length=0;lastSample=0;experimentRunning=false;experimentPaused=false;tunnelTime=0;initParticles();$(&quot;dataBody&quot;).innerHTML='';drawGraph();lockExperimentControls(false);$(&quot;experimentState&quot;).textContent='대기 중 · 조건을 설정한 뒤 실험을 실행하세요.';updateRunButtons();}
 function updateRunButtons(){
  const b=$(&quot;startExperiment&quot;),end=$(&quot;stopExperiment&quot;);
- if(experimentRunning){b.textContent=&#x27;⏸ 실험 일시정지&#x27;;end.disabled=false;$(&quot;runDot&quot;).classList.add(&#x27;running&#x27;);$(&quot;runText&quot;).textContent=&#x27;WIND ON&#x27;;}
- else if(experimentPaused){b.textContent=&#x27;▶ 실험 계속&#x27;;end.disabled=false;$(&quot;runDot&quot;).classList.remove(&#x27;running&#x27;);$(&quot;runText&quot;).textContent=&#x27;PAUSED&#x27;;}
- else{b.textContent=dataLog.length?&#x27;▶ 다시 실험 실행&#x27;:&#x27;▶ 실험 실행&#x27;;end.disabled=true;$(&quot;runDot&quot;).classList.remove(&#x27;running&#x27;);$(&quot;runText&quot;).textContent=&#x27;WIND OFF&#x27;;}
+ if(experimentRunning){b.textContent='⏸ 실험 일시정지';end.disabled=false;$(&quot;runDot&quot;).classList.add('running');$(&quot;runText&quot;).textContent='WIND ON';}
+ else if(experimentPaused){b.textContent='▶ 실험 계속';end.disabled=false;$(&quot;runDot&quot;).classList.remove('running');$(&quot;runText&quot;).textContent='PAUSED';}
+ else{b.textContent=dataLog.length?'▶ 다시 실험 실행':'▶ 실험 실행';end.disabled=true;$(&quot;runDot&quot;).classList.remove('running');$(&quot;runText&quot;).textContent='WIND OFF';}
 }
 function startPauseContinue(){
- if(experimentRunning){experimentRunning=false;experimentPaused=true;lockExperimentControls(true);$(&quot;experimentState&quot;).textContent=&#x27;실험 일시정지 · 유동과 데이터 기록이 현재 위치에서 멈췄습니다. 조건은 잠긴 상태입니다.&#x27;;updateRunButtons();$(&#x27;recordWind&#x27;).disabled=true;return;}
- if(experimentPaused){experimentPaused=false;experimentRunning=true;lockExperimentControls(true);$(&quot;experimentState&quot;).textContent=&#x27;실험 계속 · 유동과 측정값을 이어서 기록합니다.&#x27;;last=performance.now();updateRunButtons();$(&#x27;recordWind&#x27;).disabled=false;return;}
- experimentRunning=true;experimentPaused=false;lastResult=null;tunnelTime=0;lastSample=0;dataLog.length=0;$(&quot;dataBody&quot;).innerHTML=&#x27;&#x27;;height=0;vy=0;initParticles();lockExperimentControls(true);$(&quot;experimentState&quot;).textContent=&#x27;실험 진행 중 · 풍속과 모델 방향을 바꾸고 ‘현재 측정값 기록’을 눌러 보세요.&#x27;;last=performance.now();updateRunButtons();$(&#x27;recordWind&#x27;).disabled=false;
+ if(experimentRunning){experimentRunning=false;experimentPaused=true;lockExperimentControls(true);$(&quot;experimentState&quot;).textContent='실험 일시정지 · 유동과 데이터 기록이 현재 위치에서 멈췄습니다. 조건은 잠긴 상태입니다.';updateRunButtons();$('recordWind').disabled=true;return;}
+ if(experimentPaused){experimentPaused=false;experimentRunning=true;lockExperimentControls(true);$(&quot;experimentState&quot;).textContent='실험 계속 · 유동과 측정값을 이어서 기록합니다.';last=performance.now();updateRunButtons();$('recordWind').disabled=false;return;}
+ experimentRunning=true;experimentPaused=false;lastResult=null;tunnelTime=0;lastSample=0;dataLog.length=0;$(&quot;dataBody&quot;).innerHTML='';height=0;vy=0;initParticles();lockExperimentControls(true);$(&quot;experimentState&quot;).textContent='실험 진행 중 · 풍속과 모델 방향을 바꾸고 ‘현재 측정값 기록’을 눌러 보세요.';last=performance.now();updateRunButtons();$('recordWind').disabled=false;
 }
-function endExperiment(){experimentRunning=false;experimentPaused=false;height=0;vy=0;tunnelTime=0;lastResult=null;initParticles();lockExperimentControls(false);$(&quot;experimentState&quot;).textContent=`실험 종료 · ${dataLog.length}개 측정 데이터는 유지되고 시뮬레이션 화면은 초기 상태로 돌아갔습니다.`;$(&#x27;recordWind&#x27;).disabled=true;updateRunButtons();}
-function updateUI(r,live){$(&quot;speedTxt&quot;).textContent=`${clamp($(&quot;speed&quot;).value,0,100).toFixed(0)} m/s`;$(&quot;angleTxt&quot;).textContent=`${clamp($(&quot;angle&quot;).value,-12,25).toFixed(0)}°`;if(!live&amp;&amp;!lastResult){$(&quot;stateTitle&quot;).textContent=&#x27;대기 중&#x27;;$(&quot;stateDetail&quot;).textContent=&#x27;실험 시작 전입니다.&#x27;;updateProjectedArea();return}const s=live?r:lastResult,fx=s.drag||0,fy2=s.fz||0,res=Math.hypot(fx,fy2);$(&quot;dragVal&quot;).textContent=fx.toFixed(2);$(&quot;fyVal&quot;).textContent=&#x27;0.00&#x27;;$(&quot;fzVal&quot;).textContent=fy2.toFixed(2);$(&quot;resultantVal&quot;).textContent=res.toFixed(2);$(&quot;coeffVal&quot;).textContent=(s.S||0).toFixed(3);$(&quot;heightVal&quot;).textContent=height.toFixed(2);$(&quot;stateTitle&quot;).textContent=s.state;$(&quot;stateDetail&quot;).textContent=mode()===&#x27;free&#x27;?`ρ=${(s.rho||1.225).toFixed(3)} kg/m³ · A=${(s.S||0).toFixed(3)} m² · Fx=${fx.toFixed(2)} N · Fy=${fy2.toFixed(2)} N`:`받음각 ${clamp($(&quot;angle&quot;).value,-12,25).toFixed(0)}° · Fx=${fx.toFixed(2)} N · Fy=${fy2.toFixed(2)} N`;$(&quot;forceBar&quot;).style.width=Math.min(100,res/Math.max(1,s.weight||1)*60)+&#x27;%&#x27;;updateProjectedArea();}
-function sampleData(r){if(!experimentRunning||experimentPaused)return;if(dataLog.length&gt;=120)dataLog.shift();dataLog.push({t:tunnelTime,V:r.V,Fx:r.drag||0,Fy:r.fz||0,angle:mode()===&#x27;wing&#x27;?clamp($(&quot;angle&quot;).value,-12,25):null,rotX:objectRot.x,rotY:objectRot.y,rotZ:objectRot.z,A:r.S,rho:r.rho,Cd:r.cd});renderTable();drawGraph();$(&quot;experimentState&quot;).textContent=`측정값 기록 완료 · 누적 ${dataLog.length}개 · 조작변수를 바꾸어 다음 측정점을 기록하세요.`}
-function renderTable(){const rows=dataLog.slice(-8).reverse();$(&quot;dataBody&quot;).innerHTML=rows.map(d=&gt;`&lt;tr&gt;&lt;td&gt;${d.t.toFixed(1)}&lt;/td&gt;&lt;td&gt;${d.V.toFixed(2)}&lt;/td&gt;&lt;td&gt;${d.Fx.toFixed(2)}&lt;/td&gt;&lt;td&gt;${d.Fy.toFixed(2)}&lt;/td&gt;&lt;/tr&gt;`).join(&#x27;&#x27;);$(&quot;thA&quot;).textContent=&#x27;풍속(m/s)&#x27;;$(&quot;thB&quot;).textContent=&#x27;Fx(N)&#x27;;$(&quot;thC&quot;).textContent=&#x27;Fy(N)&#x27;;}
-function drawGraph(){const rect=graph.getBoundingClientRect(),dpr=Math.max(1,devicePixelRatio||1),W=Math.max(10,Math.floor(rect.width*dpr)),H=Math.max(10,Math.floor(rect.height*dpr));if(graph.width!==W||graph.height!==H){graph.width=W;graph.height=H}gctx.setTransform(dpr,0,0,dpr,0,0);const w=rect.width,h=rect.height;gctx.clearRect(0,0,w,h);gctx.strokeStyle=&#x27;rgba(130,170,210,.22)&#x27;;gctx.lineWidth=1;for(let i=1;i&lt;5;i++){gctx.beginPath();gctx.moveTo(0,h*i/5);gctx.lineTo(w,h*i/5);gctx.stroke()}if(dataLog.length&lt;2)return;const vals=dataLog.map(d=&gt;d.Fx),mn=Math.min(...vals),mx=Math.max(...vals),span=mx-mn||1;gctx.strokeStyle=&#x27;#7ddcff&#x27;;gctx.lineWidth=2;gctx.beginPath();dataLog.forEach((d,i)=&gt;{const x=8+(w-16)*i/(dataLog.length-1),y=h-8-(h-16)*(d.Fx-mn)/span;i?gctx.lineTo(x,y):gctx.moveTo(x,y)});gctx.stroke();gctx.fillStyle=&#x27;#9eb2cb&#x27;;gctx.font=&#x27;10px system-ui&#x27;;gctx.fillText(`min ${mn.toFixed(2)}`,6,h-5);gctx.fillText(`max ${mx.toFixed(2)}`,6,12)}
+function endExperiment(){experimentRunning=false;experimentPaused=false;height=0;vy=0;tunnelTime=0;lastResult=null;initParticles();lockExperimentControls(false);$(&quot;experimentState&quot;).textContent=`실험 종료 · ${dataLog.length}개 측정 데이터는 유지되고 시뮬레이션 화면은 초기 상태로 돌아갔습니다.`;$('recordWind').disabled=true;updateRunButtons();}
+function updateUI(r,live){$(&quot;speedTxt&quot;).textContent=`${clamp($(&quot;speed&quot;).value,0,100).toFixed(0)} m/s`;$(&quot;angleTxt&quot;).textContent=`${clamp($(&quot;angle&quot;).value,-12,25).toFixed(0)}°`;if(!live&amp;&amp;!lastResult){$(&quot;stateTitle&quot;).textContent='대기 중';$(&quot;stateDetail&quot;).textContent='실험 시작 전입니다.';updateProjectedArea();return}const s=live?r:lastResult,fx=s.drag||0,fy2=s.fz||0,res=Math.hypot(fx,fy2);$(&quot;dragVal&quot;).textContent=fx.toFixed(2);$(&quot;fyVal&quot;).textContent='0.00';$(&quot;fzVal&quot;).textContent=fy2.toFixed(2);$(&quot;resultantVal&quot;).textContent=res.toFixed(2);$(&quot;coeffVal&quot;).textContent=(s.S||0).toFixed(3);$(&quot;heightVal&quot;).textContent=height.toFixed(2);$(&quot;stateTitle&quot;).textContent=s.state;$(&quot;stateDetail&quot;).textContent=mode()==='free'?`ρ=${(s.rho||1.225).toFixed(3)} kg/m³ · A=${(s.S||0).toFixed(3)} m² · Fx=${fx.toFixed(2)} N · Fy=${fy2.toFixed(2)} N`:`받음각 ${clamp($(&quot;angle&quot;).value,-12,25).toFixed(0)}° · Fx=${fx.toFixed(2)} N · Fy=${fy2.toFixed(2)} N`;$(&quot;forceBar&quot;).style.width=Math.min(100,res/Math.max(1,s.weight||1)*60)+'%';updateProjectedArea();}
+function sampleData(r){if(!experimentRunning||experimentPaused)return;if(dataLog.length&gt;=120)dataLog.shift();dataLog.push({t:tunnelTime,V:r.V,Fx:r.drag||0,Fy:r.fz||0,angle:mode()==='wing'?clamp($(&quot;angle&quot;).value,-12,25):null,rotX:objectRot.x,rotY:objectRot.y,rotZ:objectRot.z,A:r.S,rho:r.rho,Cd:r.cd});renderTable();drawGraph();$(&quot;experimentState&quot;).textContent=`측정값 기록 완료 · 누적 ${dataLog.length}개 · 조작변수를 바꾸어 다음 측정점을 기록하세요.`}
+function renderTable(){const rows=dataLog.slice(-8).reverse();$(&quot;dataBody&quot;).innerHTML=rows.map(d=&gt;`&lt;tr&gt;&lt;td&gt;${d.t.toFixed(1)}&lt;/td&gt;&lt;td&gt;${d.V.toFixed(2)}&lt;/td&gt;&lt;td&gt;${d.Fx.toFixed(2)}&lt;/td&gt;&lt;td&gt;${d.Fy.toFixed(2)}&lt;/td&gt;&lt;/tr&gt;`).join('');$(&quot;thA&quot;).textContent='풍속(m/s)';$(&quot;thB&quot;).textContent='Fx(N)';$(&quot;thC&quot;).textContent='Fy(N)';}
+function drawGraph(){const rect=graph.getBoundingClientRect(),dpr=Math.max(1,devicePixelRatio||1),W=Math.max(10,Math.floor(rect.width*dpr)),H=Math.max(10,Math.floor(rect.height*dpr));if(graph.width!==W||graph.height!==H){graph.width=W;graph.height=H}gctx.setTransform(dpr,0,0,dpr,0,0);const w=rect.width,h=rect.height;gctx.clearRect(0,0,w,h);gctx.strokeStyle='rgba(130,170,210,.22)';gctx.lineWidth=1;for(let i=1;i&lt;5;i++){gctx.beginPath();gctx.moveTo(0,h*i/5);gctx.lineTo(w,h*i/5);gctx.stroke()}if(dataLog.length&lt;2)return;const vals=dataLog.map(d=&gt;d.Fx),mn=Math.min(...vals),mx=Math.max(...vals),span=mx-mn||1;gctx.strokeStyle='#7ddcff';gctx.lineWidth=2;gctx.beginPath();dataLog.forEach((d,i)=&gt;{const x=8+(w-16)*i/(dataLog.length-1),y=h-8-(h-16)*(d.Fx-mn)/span;i?gctx.lineTo(x,y):gctx.moveTo(x,y)});gctx.stroke();gctx.fillStyle='#9eb2cb';gctx.font='10px system-ui';gctx.fillText(`min ${mn.toFixed(2)}`,6,h-5);gctx.fillText(`max ${mx.toFixed(2)}`,6,12)}
 function proj(p,w,h,spinAngle=0,spinAxis=null,zOffset=0){let[x,y,z]=rotateObjectPoint(p,spinAngle,spinAxis);z+=zOffset;const yaw=cameraRotY,pitch=cameraRotX,cy=Math.cos(yaw),sy=Math.sin(yaw),cp=Math.cos(pitch),sp=Math.sin(pitch);const right=[-sy,cy,0],up=[-sp*cy,-sp*sy,cp],forward=[cp*cy,cp*sy,sp];const sx=x*right[0]+y*right[1]+z*right[2],sv=x*up[0]+y*up[1]+z*up[2],depth=x*forward[0]+y*forward[1]+z*forward[2],f=92*zoom;return[w/2+sx*f,h/2-sv*f,depth]}
 function venturiHalfAtX(x,ratio){const u=(x+2.75)/5.5;const smooth=t=&gt;t*t*(3-2*t);let f=0;if(u&lt;=.29)f=0;else if(u&lt;.43)f=smooth((u-.29)/.14);else if(u&lt;=.59)f=1;else if(u&lt;.73)f=1-smooth((u-.59)/.14);else f=0;return 1.15*(1-(1-ratio)*f)}
-function resetParticle(p,randomX=true){p.x=randomX?(-2.75+Math.random()*5.5):-2.75;const half=mode()===&#x27;bernoulli&#x27;?venturiHalfAtX(p.x,clamp($(&quot;throatRatio&quot;).value,.2,1)):1.15;p.y=(Math.random()*2-1)*half*.92;p.depth=Math.random()*2-1;p.phase=Math.random()*Math.PI*2;p.size=.85+Math.random()*1.35;p.speed=.92+Math.random()*.16;p.tracer=Math.random()&lt;.24;p.history=[];}
+function resetParticle(p,randomX=true){p.x=randomX?(-2.75+Math.random()*5.5):-2.75;const half=mode()==='bernoulli'?venturiHalfAtX(p.x,clamp($(&quot;throatRatio&quot;).value,.2,1)):1.15;p.y=(Math.random()*2-1)*half*.92;p.depth=Math.random()*2-1;p.phase=Math.random()*Math.PI*2;p.size=.85+Math.random()*1.35;p.speed=.92+Math.random()*.16;p.tracer=Math.random()&lt;.24;p.history=[];}
 function initParticles(){particles.length=0;for(let i=0;i&lt;PARTICLE_COUNT;i++){const p={};resetParticle(p,true);particles.push(p)}}
-function worldLine(a,b,w,h,color=&#x27;rgba(70,105,125,.25)&#x27;,lw=1){const A=proj(a,w,h),B=proj(b,w,h);ctx.strokeStyle=color;ctx.lineWidth=lw;ctx.beginPath();ctx.moveTo(A[0],A[1]);ctx.lineTo(B[0],B[1]);ctx.stroke()}
-function renderGround(w,h){ctx.save();const xs=[-2.8,-2,-1,0,1,2,2.8],ys=[-1.3,-.8,-.4,0,.4,.8,1.3];for(const x of xs)worldLine([x,-1.3,FLOOR_Z],[x,1.3,FLOOR_Z],w,h,&#x27;rgba(65,110,130,.16)&#x27;);for(const y of ys)worldLine([-2.8,y,FLOOR_Z],[2.8,y,FLOOR_Z],w,h,&#x27;rgba(65,110,130,.16)&#x27;);worldLine([-2.8,-1.3,FLOOR_Z],[2.8,-1.3,FLOOR_Z],w,h,&#x27;rgba(48,88,106,.48)&#x27;,1.4);const c=proj([-2.55,-1.15,FLOOR_Z],w,h);ctx.fillStyle=&#x27;#466674&#x27;;ctx.font=&#x27;700 11px system-ui&#x27;;ctx.fillText(&#x27;바닥&#x27;,c[0]+5,c[1]-5);ctx.restore()}
-function renderTunnel(w,h){ctx.save();const xs=[-2.8,2.8],ys=[-1.3,1.3],zs=[FLOOR_Z,CEILING_Z];for(const y of ys){worldLine([-2.8,y,FLOOR_Z],[2.8,y,FLOOR_Z],w,h);worldLine([-2.8,y,CEILING_Z],[2.8,y,CEILING_Z],w,h)}for(const x of xs){worldLine([x,-1.3,FLOOR_Z],[x,1.3,FLOOR_Z],w,h);worldLine([x,-1.3,CEILING_Z],[x,1.3,CEILING_Z],w,h);worldLine([x,-1.3,FLOOR_Z],[x,-1.3,CEILING_Z],w,h);worldLine([x,1.3,FLOOR_Z],[x,1.3,CEILING_Z],w,h)}const top=proj([-2.55,-1.15,CEILING_Z],w,h);ctx.fillStyle=&#x27;#55717e&#x27;;ctx.font=&#x27;700 11px system-ui&#x27;;ctx.fillText(&#x27;천장&#x27;,top[0]+5,top[1]-5);const origin=proj([2.25,1.05,FLOOR_Z+.15],w,h),up=proj([2.25,1.05,FLOOR_Z+.75],w,h);arrow(origin[0],origin[1],up[0],up[1],&#x27;#2d8f68&#x27;,&#x27;+Z 위&#x27;);ctx.restore()}
+function worldLine(a,b,w,h,color='rgba(70,105,125,.25)',lw=1){const A=proj(a,w,h),B=proj(b,w,h);ctx.strokeStyle=color;ctx.lineWidth=lw;ctx.beginPath();ctx.moveTo(A[0],A[1]);ctx.lineTo(B[0],B[1]);ctx.stroke()}
+function renderGround(w,h){ctx.save();const xs=[-2.8,-2,-1,0,1,2,2.8],ys=[-1.3,-.8,-.4,0,.4,.8,1.3];for(const x of xs)worldLine([x,-1.3,FLOOR_Z],[x,1.3,FLOOR_Z],w,h,'rgba(65,110,130,.16)');for(const y of ys)worldLine([-2.8,y,FLOOR_Z],[2.8,y,FLOOR_Z],w,h,'rgba(65,110,130,.16)');worldLine([-2.8,-1.3,FLOOR_Z],[2.8,-1.3,FLOOR_Z],w,h,'rgba(48,88,106,.48)',1.4);const c=proj([-2.55,-1.15,FLOOR_Z],w,h);ctx.fillStyle='#466674';ctx.font='700 11px system-ui';ctx.fillText('바닥',c[0]+5,c[1]-5);ctx.restore()}
+function renderTunnel(w,h){ctx.save();const xs=[-2.8,2.8],ys=[-1.3,1.3],zs=[FLOOR_Z,CEILING_Z];for(const y of ys){worldLine([-2.8,y,FLOOR_Z],[2.8,y,FLOOR_Z],w,h);worldLine([-2.8,y,CEILING_Z],[2.8,y,CEILING_Z],w,h)}for(const x of xs){worldLine([x,-1.3,FLOOR_Z],[x,1.3,FLOOR_Z],w,h);worldLine([x,-1.3,CEILING_Z],[x,1.3,CEILING_Z],w,h);worldLine([x,-1.3,FLOOR_Z],[x,-1.3,CEILING_Z],w,h);worldLine([x,1.3,FLOOR_Z],[x,1.3,CEILING_Z],w,h)}const top=proj([-2.55,-1.15,CEILING_Z],w,h);ctx.fillStyle='#55717e';ctx.font='700 11px system-ui';ctx.fillText('천장',top[0]+5,top[1]-5);const origin=proj([2.25,1.05,FLOOR_Z+.15],w,h),up=proj([2.25,1.05,FLOOR_Z+.75],w,h);arrow(origin[0],origin[1],up[0],up[1],'#2d8f68','+Z 위');ctx.restore()}
 function renderVenturi(r,w,h){const cy=h*.5,x0=w*.10,xA=w*.29,xB=w*.43,xC=w*.59,xD=w*.73,x1=w*.90,outer=Math.min(h*.235,150),th=outer*r.ratio;ctx.save();const tubePath=()=&gt;{ctx.beginPath();ctx.moveTo(x0,cy-outer);ctx.lineTo(xA,cy-outer);ctx.bezierCurveTo(xA+(xB-xA)*.45,cy-outer,xB-(xB-xA)*.45,cy-th,xB,cy-th);ctx.lineTo(xC,cy-th);ctx.bezierCurveTo(xC+(xD-xC)*.45,cy-th,xD-(xD-xC)*.45,cy-outer,xD,cy-outer);ctx.lineTo(x1,cy-outer);ctx.lineTo(x1,cy+outer);ctx.lineTo(xD,cy+outer);ctx.bezierCurveTo(xD-(xD-xC)*.45,cy+outer,xC+(xD-xC)*.45,cy+th,xC,cy+th);ctx.lineTo(xB,cy+th);ctx.bezierCurveTo(xB-(xB-xA)*.45,cy+th,xA+(xB-xA)*.45,cy+outer,xA,cy+outer);ctx.lineTo(x0,cy+outer);ctx.closePath()};
- const grad=ctx.createLinearGradient(0,cy-outer,0,cy+outer);grad.addColorStop(0,&#x27;rgba(120,210,240,.24)&#x27;);grad.addColorStop(.48,&#x27;rgba(18,85,120,.10)&#x27;);grad.addColorStop(.52,&#x27;rgba(18,85,120,.16)&#x27;);grad.addColorStop(1,&#x27;rgba(120,210,240,.26)&#x27;);tubePath();ctx.fillStyle=grad;ctx.fill();ctx.strokeStyle=&#x27;rgba(195,235,250,.92)&#x27;;ctx.lineWidth=3;ctx.stroke();ctx.strokeStyle=&#x27;rgba(255,255,255,.38)&#x27;;ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(x0+8,cy-outer+8);ctx.lineTo(xA-5,cy-outer+8);ctx.bezierCurveTo(xA+28,cy-outer+8,xB-22,cy-th+8,xB+8,cy-th+8);ctx.lineTo(xC-8,cy-th+8);ctx.stroke();
- const tap=(x,half,label,val)=&gt;{ctx.strokeStyle=&#x27;rgba(125,210,255,.85)&#x27;;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,cy-half);ctx.lineTo(x,cy-half-48);ctx.stroke();ctx.fillStyle=&#x27;rgba(5,21,35,.82)&#x27;;ctx.strokeStyle=&#x27;rgba(125,210,255,.55)&#x27;;ctx.lineWidth=1;const bw=112,bh=38,bx=x-bw/2,by=cy-half-86;ctx.beginPath();ctx.roundRect(bx,by,bw,bh,8);ctx.fill();ctx.stroke();ctx.fillStyle=&#x27;#dff7ff&#x27;;ctx.font=&#x27;700 11px system-ui&#x27;;ctx.textAlign=&#x27;center&#x27;;ctx.fillText(label,bx+bw/2,by+14);ctx.font=&#x27;11px system-ui&#x27;;ctx.fillStyle=&#x27;#9edfff&#x27;;ctx.fillText(val,bx+bw/2,by+29)};
- tap(xA-18,outer,&#x27;A₁ · P₁&#x27;,`${(r.p1/1000).toFixed(2)} kPa`);tap((xB+xC)/2,th,&#x27;A₂ · P₂&#x27;,`${(r.p2/1000).toFixed(2)} kPa`);ctx.fillStyle=&#x27;#d9f5ff&#x27;;ctx.font=&#x27;700 12px system-ui&#x27;;ctx.textAlign=&#x27;left&#x27;;ctx.fillText(`v₁ ${r.v1.toFixed(1)} m/s`,x0+12,cy+outer+25);ctx.textAlign=&#x27;center&#x27;;ctx.fillText(`v₂ ${r.v2.toFixed(1)} m/s`,(xB+xC)/2,cy+th+25);ctx.fillStyle=&#x27;rgba(150,220,255,.8)&#x27;;ctx.font=&#x27;11px system-ui&#x27;;ctx.fillText(&#x27;수축부&#x27;,xB-22,cy+8);ctx.fillText(&#x27;목(throat)&#x27;,(xB+xC)/2,cy+8);ctx.fillText(&#x27;확산부&#x27;,xC+40,cy+8);ctx.restore()}
+ const grad=ctx.createLinearGradient(0,cy-outer,0,cy+outer);grad.addColorStop(0,'rgba(120,210,240,.24)');grad.addColorStop(.48,'rgba(18,85,120,.10)');grad.addColorStop(.52,'rgba(18,85,120,.16)');grad.addColorStop(1,'rgba(120,210,240,.26)');tubePath();ctx.fillStyle=grad;ctx.fill();ctx.strokeStyle='rgba(195,235,250,.92)';ctx.lineWidth=3;ctx.stroke();ctx.strokeStyle='rgba(255,255,255,.38)';ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(x0+8,cy-outer+8);ctx.lineTo(xA-5,cy-outer+8);ctx.bezierCurveTo(xA+28,cy-outer+8,xB-22,cy-th+8,xB+8,cy-th+8);ctx.lineTo(xC-8,cy-th+8);ctx.stroke();
+ const tap=(x,half,label,val)=&gt;{ctx.strokeStyle='rgba(125,210,255,.85)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,cy-half);ctx.lineTo(x,cy-half-48);ctx.stroke();ctx.fillStyle='rgba(5,21,35,.82)';ctx.strokeStyle='rgba(125,210,255,.55)';ctx.lineWidth=1;const bw=112,bh=38,bx=x-bw/2,by=cy-half-86;ctx.beginPath();ctx.roundRect(bx,by,bw,bh,8);ctx.fill();ctx.stroke();ctx.fillStyle='#dff7ff';ctx.font='700 11px system-ui';ctx.textAlign='center';ctx.fillText(label,bx+bw/2,by+14);ctx.font='11px system-ui';ctx.fillStyle='#9edfff';ctx.fillText(val,bx+bw/2,by+29)};
+ tap(xA-18,outer,'A₁ · P₁',`${(r.p1/1000).toFixed(2)} kPa`);tap((xB+xC)/2,th,'A₂ · P₂',`${(r.p2/1000).toFixed(2)} kPa`);ctx.fillStyle='#d9f5ff';ctx.font='700 12px system-ui';ctx.textAlign='left';ctx.fillText(`v₁ ${r.v1.toFixed(1)} m/s`,x0+12,cy+outer+25);ctx.textAlign='center';ctx.fillText(`v₂ ${r.v2.toFixed(1)} m/s`,(xB+xC)/2,cy+th+25);ctx.fillStyle='rgba(150,220,255,.8)';ctx.font='11px system-ui';ctx.fillText('수축부',xB-22,cy+8);ctx.fillText('목(throat)',(xB+xC)/2,cy+8);ctx.fillText('확산부',xC+40,cy+8);ctx.restore()}
 function ellipseBoundary(x,y,a,b){return (x*x)/(a*a)+(y*y)/(b*b)}
 function potentialCircleField(x,y,U,a,gamma){
  const r2=Math.max(a*a*1.03,x*x+y*y),r4=r2*r2;
@@ -546,8 +577,8 @@ function freeBodyFlow3(p,r,U){
  if($(&quot;showGround&quot;).checked){const clearance=Math.max(.02,clamp($(&quot;groundClearance&quot;).value,0,10)),floorDist=Math.max(.02,p.y-FLOOR_Z),under=(p.x&gt;-a*1.1&amp;&amp;p.x&lt;a*1.1&amp;&amp;p.y&lt;currentObjectZ()+c[2]);const ge=Math.exp(-clearance/Math.max(.08,cc*.7))*Math.exp(-floorDist/.45);if(under)v[0]*=1+.38*ge;v[2]+=U*.10*ge;}
  return rotateVectorByObject(v)
 }
-function flowVector(p,r){const V=Math.max(0,r.V||0),U=V/28,md=mode();if(V&lt;=0)return[0,0,0];if(md===&#x27;wing&#x27;)return wingFlow3(p,r,U);return freeBodyFlow3(p,r,U)}
-function pushOutsideObstacle(p){const md=mode();if(md===&#x27;wing&#x27;){const alpha=clamp($(&quot;angle&quot;).value,-12,25)*Math.PI/180,ca=Math.cos(-alpha),sa=Math.sin(-alpha);let X=p.x*ca-p.y*sa,Y=p.x*sa+p.y*ca;if(X&gt;=-1.45&amp;&amp;X&lt;=1.45){const g=naca2412Profile(X),pad=.018;if(Y&gt;g.zl-pad&amp;&amp;Y&lt;g.zu+pad){Y=(Y&gt;=g.zc?g.zu+pad:g.zl-pad);const c=Math.cos(alpha),si=Math.sin(alpha);p.x=X*c-Y*si;p.y=X*si+Y*c}}return}modelBounds=modelBounds||calcModelBounds();const c=modelBounds.c,h=modelBounds.h,loc=invRotateByObject([p.x,p.depth*.75,p.y-currentObjectZ()]),X=loc[0]-c[0],Y=loc[1]-c[1],Z=loc[2]-c[2],a=Math.max(.45,h[0]*1.03),b=Math.max(.34,h[1]*1.05),cc=Math.max(.30,h[2]*1.08),q=X*X/(a*a)+Y*Y/(b*b)+Z*Z/(cc*cc);if(q&lt;1){const k=1.025/Math.sqrt(Math.max(q,.001)),fixed=rotateByObject([c[0]+X*k,c[1]+Y*k,c[2]+Z*k]);p.x=fixed[0];p.depth=fixed[1]/.75;p.y=fixed[2]+currentObjectZ()}p.y=Math.max(FLOOR_Z+.035,p.y)}
+function flowVector(p,r){const V=Math.max(0,r.V||0),U=V/28,md=mode();if(V&lt;=0)return[0,0,0];if(md==='wing')return wingFlow3(p,r,U);return freeBodyFlow3(p,r,U)}
+function pushOutsideObstacle(p){const md=mode();if(md==='wing'){const alpha=clamp($(&quot;angle&quot;).value,-12,25)*Math.PI/180,ca=Math.cos(-alpha),sa=Math.sin(-alpha);let X=p.x*ca-p.y*sa,Y=p.x*sa+p.y*ca;if(X&gt;=-1.45&amp;&amp;X&lt;=1.45){const g=naca2412Profile(X),pad=.018;if(Y&gt;g.zl-pad&amp;&amp;Y&lt;g.zu+pad){Y=(Y&gt;=g.zc?g.zu+pad:g.zl-pad);const c=Math.cos(alpha),si=Math.sin(alpha);p.x=X*c-Y*si;p.y=X*si+Y*c}}return}modelBounds=modelBounds||calcModelBounds();const c=modelBounds.c,h=modelBounds.h,loc=invRotateByObject([p.x,p.depth*.75,p.y-currentObjectZ()]),X=loc[0]-c[0],Y=loc[1]-c[1],Z=loc[2]-c[2],a=Math.max(.45,h[0]*1.03),b=Math.max(.34,h[1]*1.05),cc=Math.max(.30,h[2]*1.08),q=X*X/(a*a)+Y*Y/(b*b)+Z*Z/(cc*cc);if(q&lt;1){const k=1.025/Math.sqrt(Math.max(q,.001)),fixed=rotateByObject([c[0]+X*k,c[1]+Y*k,c[2]+Z*k]);p.x=fixed[0];p.depth=fixed[1]/.75;p.y=fixed[2]+currentObjectZ()}p.y=Math.max(FLOOR_Z+.035,p.y)}
 function streamlineSeedSet(){
  // A few carefully spaced flow planes keep the object readable at classroom viewing sizes.
  const seeds=[];
@@ -567,11 +598,11 @@ function drawStreamArrow(a,b,color,size=5.5){
  const ux=dx/m,uy=dy/m,x=b[0],y=b[1];ctx.fillStyle=color;ctx.beginPath();ctx.moveTo(x+ux*1.5,y+uy*1.5);ctx.lineTo(x-ux*size-uy*size*.55,y-uy*size+ux*size*.55);ctx.lineTo(x-ux*size+uy*size*.55,y-uy*size-ux*size*.55);ctx.closePath();ctx.fill();
 }
 function traceStream(seed,r,w,h){
- const md=mode(),U=Math.max(.001,(r.V||0)/28),pts=[],maxSteps=md===&#x27;bernoulli&#x27;?170:210,ds=md===&#x27;bernoulli&#x27;?.045:.042;
+ const md=mode(),U=Math.max(.001,(r.V||0)/28),pts=[],maxSteps=md==='bernoulli'?170:210,ds=md==='bernoulli'?.045:.042;
  let p={...seed};
  for(let i=0;i&lt;maxSteps;i++){
    let v=flowVector(p,r),sp=Math.hypot(...v);if(!Number.isFinite(sp)||sp&lt;U*.025)break;
-   let q=md===&#x27;bernoulli&#x27;?[w*.10+(p.x+2.75)/5.5*w*.80,h*.5+p.y*(Math.min(h*.235,150)/1.15),0]:proj([p.x,p.depth*.75,p.y],w,h);
+   let q=md==='bernoulli'?[w*.10+(p.x+2.75)/5.5*w*.80,h*.5+p.y*(Math.min(h*.235,150)/1.15),0]:proj([p.x,p.depth*.75,p.y],w,h);
    pts.push({q,sp,p:{...p}});
    // Arc-length integration: geometry does not bunch up at a stagnation point. The local speed is encoded by colour/arrows instead.
    let h1=ds/sp,mid={...p,x:p.x+v[0]*h1*.5,depth:p.depth+v[1]*h1*.5/.75,y:p.y+v[2]*h1*.5},v2=flowVector(mid,r),sp2=Math.hypot(...v2);if(!Number.isFinite(sp2)||sp2&lt;U*.02)break;
@@ -584,7 +615,7 @@ function traceStream(seed,r,w,h){
 function renderStreamlines(r,w,h,dt){
  const V=r.V||0;if(V&lt;=0)return;
  const U=Math.max(.001,V/28),seeds=streamlineSeedSet();
- ctx.save();ctx.lineCap=&#x27;round&#x27;;ctx.lineJoin=&#x27;round&#x27;;
+ ctx.save();ctx.lineCap='round';ctx.lineJoin='round';
  for(let si=0;si&lt;seeds.length;si++){
    const pts=traceStream(seeds[si],r,w,h);if(pts.length&lt;3)continue;
    const central=Math.abs(seeds[si].depth)&lt;.1;
@@ -592,7 +623,7 @@ function renderStreamlines(r,w,h,dt){
    // Transparent depth planes, no dark wireframe-like grid of overlapping arrows.
    ctx.beginPath();
    for(let i=0;i&lt;pts.length;i++)i?ctx.lineTo(pts[i].q[0],pts[i].q[1]):ctx.moveTo(pts[i].q[0],pts[i].q[1]);
-   ctx.strokeStyle=central?&#x27;rgba(0,128,155,.12)&#x27;:&#x27;rgba(56,145,182,.07)&#x27;;
+   ctx.strokeStyle=central?'rgba(0,128,155,.12)':'rgba(56,145,182,.07)';
    ctx.lineWidth=central?4:2.5;ctx.stroke();
    for(let i=1;i&lt;pts.length;i++){
      ctx.strokeStyle=streamlineColor((pts[i-1].sp+pts[i].sp)/2,U,alpha);
@@ -612,64 +643,72 @@ function renderStreamlines(r,w,h,dt){
 }
 function hexToRgb(hex){const n=parseInt(hex.slice(1),16);return[(n&gt;&gt;16)&amp;255,(n&gt;&gt;8)&amp;255,n&amp;255]}
 function rotateRawY(p,a){const c=Math.cos(a),s=Math.sin(a),[x,y,z]=p;return[x*c+z*s,y,-x*s+z*c]}
-function renderSpinMarkings(w,h,spinAngle,spinAxis,rpm){ctx.save();const seam=(phase,tilt)=&gt;{ctx.strokeStyle=&#x27;#c93f3f&#x27;;ctx.lineWidth=2.2;ctx.beginPath();for(let i=0;i&lt;=80;i++){const u=-Math.PI+2*Math.PI*i/80,x=.98*Math.cos(u),z=.98*Math.sin(u)*.58,y=.80*Math.sin(u+phase)*Math.cos(tilt);const q=proj([x,y,z],w,h,spinAngle,spinAxis);i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1])}ctx.stroke()};seam(0,.45);seam(Math.PI,.45);const a0=proj([0,-1.12,0],w,h),a1=proj([0,1.12,0],w,h);arrow(a0[0],a0[1],a1[0],a1[1],&#x27;#2c7be5&#x27;,&#x27;ω +Y&#x27;);ctx.fillStyle=&#x27;#9b3434&#x27;;ctx.font=&#x27;700 11px system-ui&#x27;;ctx.fillText(`${Math.round(rpm)} RPM · 빨간 실밥이 공과 함께 회전`,18,42);ctx.restore()}
+function renderSpinMarkings(w,h,spinAngle,spinAxis,rpm){ctx.save();const seam=(phase,tilt)=&gt;{ctx.strokeStyle='#c93f3f';ctx.lineWidth=2.2;ctx.beginPath();for(let i=0;i&lt;=80;i++){const u=-Math.PI+2*Math.PI*i/80,x=.98*Math.cos(u),z=.98*Math.sin(u)*.58,y=.80*Math.sin(u+phase)*Math.cos(tilt);const q=proj([x,y,z],w,h,spinAngle,spinAxis);i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1])}ctx.stroke()};seam(0,.45);seam(Math.PI,.45);const a0=proj([0,-1.12,0],w,h),a1=proj([0,1.12,0],w,h);arrow(a0[0],a0[1],a1[0],a1[1],'#2c7be5','ω +Y');ctx.fillStyle='#9b3434';ctx.font='700 11px system-ui';ctx.fillText(`${Math.round(rpm)} RPM · 빨간 실밥이 공과 함께 회전`,18,42);ctx.restore()}
 function rotateWingPhysical(p,a){const c=Math.cos(a),ss=Math.sin(a),[x,y,z]=p;return[x*c-z*ss,y,x*ss+z*c]}
 function mixRgb(a,b,t){return a.map((v,i)=&gt;Math.round(v*(1-t)+b[i]*t))}
 function renderModel(r,w,h){
  const spin=currentSpin(),spinAngle=spin.enabled?tunnelTime*spin.rpm*2*Math.PI/60:0;
- const visualHeight=mode()===&#x27;free&#x27;?currentObjectZ():0;
+ const visualHeight=mode()==='free'?currentObjectZ():0;
  const drawable=tris.map(t=&gt;{
    const p=t.map(v=&gt;proj(v,w,h,spinAngle,spin.enabled?spin.axis:null,visualHeight));
    const u=[p[1][0]-p[0][0],p[1][1]-p[0][1]],v=[p[2][0]-p[0][0],p[2][1]-p[0][1]];
    const geom=triangleGeom(t,[0,0,0]);
    return{p,z:(p[0][2]+p[1][2]+p[2][2])/3,tr:t,n:geom.n,area:Math.abs(u[0]*v[1]-u[1]*v[0])};
  }).sort((a,b)=&gt;a.z-b.z);
- const rgb=hexToRgb($(&#x27;objectColor&#x27;).value),light=vnorm([-.45,-.4,1]);
- ctx.save();ctx.lineJoin=&#x27;round&#x27;;
+ const rgb=hexToRgb($('objectColor').value),light=vnorm([-.45,-.4,1]);
+ ctx.save();ctx.lineJoin='round';
  for(const d of drawable){
    if(d.area&lt;.05)continue;
    const n=vnorm(rotateVectorByObject(d.n));
    const diffuse=Math.abs(vdot(n,light)),shade=.67+.35*diffuse;
    let base=rgb.map(x=&gt;Math.max(0,Math.min(255,Math.round(x*shade+17))));
-   if(experimentRunning&amp;&amp;clamp($(&#x27;speed&#x27;).value,0,100)&gt;.001){
+   if(experimentRunning&amp;&amp;clamp($('speed').value,0,100)&gt;.001){
      const impact=trianglePressureProxy(d.tr);
-     base=mixRgb(base,[245,153,100],clamp(impact*.28,0,.24));
+     base=impact&gt;.02?mixRgb([50,139,210],[245,66,42],Math.pow(impact,.62)):mixRgb(base,[57,153,210],.78);
    }
    ctx.beginPath();ctx.moveTo(d.p[0][0],d.p[0][1]);ctx.lineTo(d.p[1][0],d.p[1][1]);ctx.lineTo(d.p[2][0],d.p[2][1]);ctx.closePath();
-   ctx.fillStyle=`rgb(${base.join(&#x27;,&#x27;)})`;ctx.fill();
+   ctx.fillStyle=`rgb(${base.join(',')})`;ctx.fill();
    // Tiny matching-color overdraw closes antialias seams without exposing each STL triangle.
    ctx.strokeStyle=ctx.fillStyle;ctx.lineWidth=.65;ctx.stroke();
  }
  ctx.restore();
 }
-function arrow(x1,y1,x2,y2,color,label){ctx.strokeStyle=color;ctx.fillStyle=color;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();const a=Math.atan2(y2-y1,x2-x1),len=10;ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-len*Math.cos(a-.5),y2-len*Math.sin(a-.5));ctx.lineTo(x2-len*Math.cos(a+.5),y2-len*Math.sin(a+.5));ctx.closePath();ctx.fill();ctx.font=&#x27;12px system-ui&#x27;;ctx.fillText(label,x2+6,y2-6)}
-function renderForces(r,w,h){if(mode()===&#x27;bernoulli&#x27;||(!experimentRunning&amp;&amp;!lastResult))return;const s=experimentRunning?r:lastResult,cx=w*.5,cy=h*.5,dragLen=45+70*clamp((s.cd||0)/1.2,0,1);arrow(cx,cy,cx-dragLen,cy,&#x27;#ffc65b&#x27;,&#x27;항력 D&#x27;);if(Math.abs(s.fz||0)&gt;.01){const len=Math.max(-120,Math.min(120,-(s.fz/(s.weight||Math.abs(s.fz)||1))*70));arrow(cx,cy,cx,cy+len,&#x27;#66dd91&#x27;,&#x27;힘 Fy&#x27;)}if(Math.abs(s.fy||0)&gt;.01){const len=Math.max(-105,Math.min(105,(s.fy/(s.weight||Math.abs(s.fy)||1))*65));arrow(cx,cy,cx+len,cy,&#x27;#ff8dac&#x27;,&#x27;측면력&#x27;)}}
-function renderVelocityLegend(w,h,r){if((r.V||0)&lt;=0)return;ctx.save();const x=18,y=18,L=132,H=9,g=ctx.createLinearGradient(x,0,x+L,0);for(let i=0;i&lt;=5;i++){const ms=i*20,gc=streamlineColor((ms/Math.max(.001,r.V))*Math.max(.001,r.V/28),Math.max(.001,r.V/28),1);g.addColorStop(i/5,gc)}ctx.fillStyle=&#x27;rgba(255,255,255,.90)&#x27;;ctx.strokeStyle=&#x27;rgba(35,72,96,.18)&#x27;;ctx.lineWidth=1;ctx.beginPath();ctx.roundRect(x-8,y-8,L+72,35,8);ctx.fill();ctx.stroke();ctx.fillStyle=g;ctx.fillRect(x,y,L,H);ctx.strokeStyle=&#x27;rgba(25,70,110,.28)&#x27;;ctx.strokeRect(x,y,L,H);ctx.fillStyle=&#x27;#38596c&#x27;;ctx.font=&#x27;700 10px system-ui&#x27;;ctx.fillText(&#x27;0&#x27;,x,y+23);ctx.fillText(&#x27;50&#x27;,x+L*.49,y+23);ctx.fillText(&#x27;100 m/s&#x27;,x+L-5,y+23);ctx.restore()}
+function arrow(x1,y1,x2,y2,color,label){ctx.strokeStyle=color;ctx.fillStyle=color;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();const a=Math.atan2(y2-y1,x2-x1),len=10;ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-len*Math.cos(a-.5),y2-len*Math.sin(a-.5));ctx.lineTo(x2-len*Math.cos(a+.5),y2-len*Math.sin(a+.5));ctx.closePath();ctx.fill();ctx.font='12px system-ui';ctx.fillText(label,x2+6,y2-6)}
+function renderForces(r,w,h){
+ if(!experimentRunning&amp;&amp;!lastResult)return;
+ const s=experimentRunning?r:lastResult,cx=w*.5,cy=h*.5;
+ const v=[-Math.sin(cameraRotY),-Math.sin(cameraRotX)*Math.cos(cameraRotY)];
+ const mag=Math.max(.1,Math.hypot(...v)),len=28+50*clamp((s.cd||0)/1.3,0,1);
+ // Flow travels toward +X; drag on a fixed body points in the same direction.
+ arrow(cx,cy,cx+v[0]/mag*len,cy-v[1]/mag*len,'#f59e0b','항력');
+ if(Math.abs(s.fz||0)&gt;.01){const zLen=Math.max(-65,Math.min(65,s.fz/(Math.max(1,s.weight))*55));arrow(cx+16,cy,cx+16,cy-zLen,'#16a34a','양력');}
+}
+function renderVelocityLegend(w,h,r){if((r.V||0)&lt;=0)return;ctx.save();const x=18,y=18,L=132,H=9,g=ctx.createLinearGradient(x,0,x+L,0);for(let i=0;i&lt;=5;i++){const ms=i*20,gc=streamlineColor((ms/Math.max(.001,r.V))*Math.max(.001,r.V/28),Math.max(.001,r.V/28),1);g.addColorStop(i/5,gc)}ctx.fillStyle='rgba(255,255,255,.90)';ctx.strokeStyle='rgba(35,72,96,.18)';ctx.lineWidth=1;ctx.beginPath();ctx.roundRect(x-8,y-8,L+72,35,8);ctx.fill();ctx.stroke();ctx.fillStyle=g;ctx.fillRect(x,y,L,H);ctx.strokeStyle='rgba(25,70,110,.28)';ctx.strokeRect(x,y,L,H);ctx.fillStyle='#38596c';ctx.font='700 10px system-ui';ctx.fillText('0',x,y+23);ctx.fillText('50',x+L*.49,y+23);ctx.fillText('100 m/s',x+L-5,y+23);ctx.restore()}
 function render(r,dt){
  const rect=canvas.getBoundingClientRect(),dpr=Math.max(1,devicePixelRatio||1);
  const W=Math.floor(rect.width*dpr),H=Math.floor(rect.height*dpr);
  if(canvas.width!==W||canvas.height!==H){canvas.width=W;canvas.height=H}
  ctx.setTransform(dpr,0,0,dpr,0,0);
  const w=rect.width,h=rect.height;ctx.clearRect(0,0,w,h);
- const bg=ctx.createLinearGradient(0,0,0,h);bg.addColorStop(0,&#x27;#f5fbff&#x27;);bg.addColorStop(1,&#x27;#e7f3fa&#x27;);ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
- if($(&#x27;showGround&#x27;).checked)renderGround(w,h);
+ const bg=ctx.createLinearGradient(0,0,0,h);bg.addColorStop(0,'#f5fbff');bg.addColorStop(1,'#e7f3fa');ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
+ if($('showGround').checked)renderGround(w,h);
  renderStreamlines(r,w,h,dt);
  renderModel(r,w,h);
  renderForces(r,w,h);
  // Flow color is qualitative: do not show a misleading numeric speed legend.
- ctx.save();ctx.fillStyle=&#x27;rgba(28,73,91,.83)&#x27;;ctx.font=&#x27;11px system-ui&#x27;;
- ctx.fillText(&#x27;유선: 공기 흐름의 교육용 근사 시각화&#x27;,14,h-16);ctx.restore();
+ ctx.save();ctx.fillStyle='rgba(28,73,91,.83)';ctx.font='11px system-ui';
+ ctx.fillText('유선: 공기 흐름의 교육용 근사 시각화',14,h-16);ctx.restore();
 }
-function tick(now){const dt=Math.min(.05,(now-last)/1000);last=now;const r=result();if(experimentRunning){tunnelTime+=dt;lastResult={...r};if(mode()===&#x27;free&#x27;&amp;&amp;$(&quot;freeMove&quot;).checked){const m=Math.max(.001,r.m),acc=((r.fz||0)-r.weight)/m,maxH=clamp($(&quot;maxHeight&quot;).value,.5,100);if(height&lt;=0&amp;&amp;acc&lt;=0){height=0;vy=0}else{vy+=acc*dt;height+=vy*dt;if(height&lt;0){height=0;vy=0}if(height&gt;=maxH){height=maxH;vy=0}}}else height=0;}updateUI(r,experimentRunning);render(r,dt);requestAnimationFrame(tick)}
-$(&quot;experimentType&quot;).addEventListener(&#x27;change&#x27;,updateControls);$(&quot;stlFile&quot;).addEventListener(&#x27;change&#x27;,async e=&gt;{const f=e.target.files[0];if(!f)return;try{loadedFreeTris=parseSTL(await f.arrayBuffer());tris=loadedFreeTris;loadedSTL=true;invalidateAeroCache();$(&quot;fileInfo&quot;).textContent=`${f.name} · ${tris.length.toLocaleString()} triangles`;cameraRotX=-.38;cameraRotY=.65;zoom=1.15;objectRot={x:0,y:0,z:0};$(&quot;objRotX&quot;).value=$(&quot;objRotY&quot;).value=$(&quot;objRotZ&quot;).value=0;updateGroundShift();updateProjectedArea();resetMeasurements()}catch(err){$(&quot;fileInfo&quot;).textContent=&#x27;오류: &#x27;+err.message}});
-[&#x27;objRotX&#x27;,&#x27;objRotY&#x27;,&#x27;objRotZ&#x27;].forEach(id=&gt;$(id).addEventListener(&#x27;input&#x27;,()=&gt;{syncObjectRotation();updateProjectedArea()}));$(&#x27;modelLength&#x27;).addEventListener(&#x27;input&#x27;,()=&gt;{invalidateAeroCache();updateProjectedArea()});$(&#x27;groundClearance&#x27;).addEventListener(&#x27;input&#x27;,()=&gt;{updateProjectedArea()});$(&quot;spinEnabled&quot;).addEventListener(&#x27;change&#x27;,()=&gt;$(&quot;freeSpinRows&quot;).classList.toggle(&#x27;hidden&#x27;,!$(&quot;spinEnabled&quot;).checked));$(&quot;showGround&quot;).addEventListener(&#x27;change&#x27;,()=&gt;$(&quot;groundRow&quot;).classList.toggle(&#x27;hidden&#x27;,!$(&quot;showGround&quot;).checked));$(&quot;freeMove&quot;).addEventListener(&#x27;change&#x27;,()=&gt;$(&quot;maxHeightRow&quot;).classList.toggle(&#x27;hidden&#x27;,!$(&quot;freeMove&quot;).checked));$(&quot;resetObjectRotation&quot;).onclick=()=&gt;{objectRot={x:0,y:0,z:0};$(&quot;objRotX&quot;).value=$(&quot;objRotY&quot;).value=$(&quot;objRotZ&quot;).value=0;updateGroundShift()};$(&quot;startExperiment&quot;).onclick=startPauseContinue;$(&quot;stopExperiment&quot;).onclick=endExperiment;$(&quot;recordWind&quot;).onclick=()=&gt;sampleData(result());$(&quot;resetMotion&quot;).onclick=resetMeasurements;$(&quot;resetView&quot;).onclick=()=&gt;{cameraRotX=.34;cameraRotY=-.72;zoom=1.15};$(&#x27;viewFront&#x27;).onclick=()=&gt;{cameraRotX=0;cameraRotY=0};$(&#x27;viewSide&#x27;).onclick=()=&gt;{cameraRotX=0;cameraRotY=-Math.PI/2};$(&#x27;viewTop&#x27;).onclick=()=&gt;{cameraRotX=1.45;cameraRotY=-Math.PI/2};$(&#x27;viewIso&#x27;).onclick=()=&gt;{cameraRotX=.34;cameraRotY=-.72};$(&#x27;viewZoomIn&#x27;).onclick=()=&gt;zoom=Math.min(3,zoom*1.18);$(&#x27;viewZoomOut&#x27;).onclick=()=&gt;zoom=Math.max(.45,zoom/1.18);canvas.addEventListener(&#x27;pointerdown&#x27;,e=&gt;{drag=true;px=e.clientX;py=e.clientY;canvas.setPointerCapture?.(e.pointerId);canvas.classList.add(&#x27;dragging&#x27;)});canvas.addEventListener(&#x27;pointermove&#x27;,e=&gt;{if(!drag)return;const dx=e.clientX-px,dy=e.clientY-py;px=e.clientX;py=e.clientY;cameraRotY-=dx*.008;cameraRotX=clamp(cameraRotX+dy*.008,-1.35,1.35)});const endDrag=e=&gt;{drag=false;canvas.classList.remove(&#x27;dragging&#x27;);try{canvas.releasePointerCapture?.(e.pointerId)}catch(_){}};canvas.addEventListener(&#x27;pointerup&#x27;,endDrag);canvas.addEventListener(&#x27;pointercancel&#x27;,endDrag);canvas.addEventListener(&#x27;wheel&#x27;,e=&gt;{e.preventDefault();zoom=clamp(zoom*(e.deltaY&lt;0?1.10:1/1.10),.45,3)},{passive:false});
+function tick(now){const dt=Math.min(.05,(now-last)/1000);last=now;const r=result();if(experimentRunning){tunnelTime+=dt;lastResult={...r};if(mode()==='free'&amp;&amp;$(&quot;freeMove&quot;).checked){const m=Math.max(.001,r.m),acc=((r.fz||0)-r.weight)/m,maxH=clamp($(&quot;maxHeight&quot;).value,.5,100);if(height&lt;=0&amp;&amp;acc&lt;=0){height=0;vy=0}else{vy+=acc*dt;height+=vy*dt;if(height&lt;0){height=0;vy=0}if(height&gt;=maxH){height=maxH;vy=0}}}else height=0;}updateUI(r,experimentRunning);render(r,dt);requestAnimationFrame(tick)}
+$(&quot;experimentType&quot;).addEventListener('change',updateControls);$(&quot;stlFile&quot;).addEventListener('change',async e=&gt;{const f=e.target.files[0];if(!f)return;try{loadedFreeTris=parseSTL(await f.arrayBuffer());tris=loadedFreeTris;loadedSTL=true;invalidateAeroCache();$(&quot;fileInfo&quot;).textContent=`${f.name} · ${tris.length.toLocaleString()} triangles`;cameraRotX=-.38;cameraRotY=.65;zoom=1.15;objectRot={x:0,y:0,z:0};$(&quot;objRotX&quot;).value=$(&quot;objRotY&quot;).value=$(&quot;objRotZ&quot;).value=0;updateGroundShift();updateProjectedArea();resetMeasurements()}catch(err){$(&quot;fileInfo&quot;).textContent='오류: '+err.message}});
+['objRotX','objRotY','objRotZ'].forEach(id=&gt;$(id).addEventListener('input',()=&gt;{syncObjectRotation();updateProjectedArea()}));$('modelLength').addEventListener('input',()=&gt;{invalidateAeroCache();updateProjectedArea()});$('groundClearance').addEventListener('input',()=&gt;{updateProjectedArea()});$(&quot;spinEnabled&quot;).addEventListener('change',()=&gt;$(&quot;freeSpinRows&quot;).classList.toggle('hidden',!$(&quot;spinEnabled&quot;).checked));$(&quot;showGround&quot;).addEventListener('change',()=&gt;$(&quot;groundRow&quot;).classList.toggle('hidden',!$(&quot;showGround&quot;).checked));$(&quot;freeMove&quot;).addEventListener('change',()=&gt;$(&quot;maxHeightRow&quot;).classList.toggle('hidden',!$(&quot;freeMove&quot;).checked));$(&quot;resetObjectRotation&quot;).onclick=()=&gt;{objectRot={x:0,y:0,z:0};$(&quot;objRotX&quot;).value=$(&quot;objRotY&quot;).value=$(&quot;objRotZ&quot;).value=0;updateGroundShift()};$(&quot;startExperiment&quot;).onclick=startPauseContinue;$(&quot;stopExperiment&quot;).onclick=endExperiment;$(&quot;recordWind&quot;).onclick=()=&gt;sampleData(result());$(&quot;resetMotion&quot;).onclick=resetMeasurements;$(&quot;resetView&quot;).onclick=()=&gt;{cameraRotX=.34;cameraRotY=-.72;zoom=1.15};$('viewFront').onclick=()=&gt;{cameraRotX=0;cameraRotY=0};$('viewSide').onclick=()=&gt;{cameraRotX=0;cameraRotY=-Math.PI/2};$('viewTop').onclick=()=&gt;{cameraRotX=1.45;cameraRotY=-Math.PI/2};$('viewIso').onclick=()=&gt;{cameraRotX=.34;cameraRotY=-.72};$('viewZoomIn').onclick=()=&gt;zoom=Math.min(3,zoom*1.18);$('viewZoomOut').onclick=()=&gt;zoom=Math.max(.45,zoom/1.18);canvas.addEventListener('pointerdown',e=&gt;{drag=true;px=e.clientX;py=e.clientY;canvas.setPointerCapture?.(e.pointerId);canvas.classList.add('dragging')});canvas.addEventListener('pointermove',e=&gt;{if(!drag)return;const dx=e.clientX-px,dy=e.clientY-py;px=e.clientX;py=e.clientY;cameraRotY-=dx*.008;cameraRotX=clamp(cameraRotX+dy*.008,-1.35,1.35)});const endDrag=e=&gt;{drag=false;canvas.classList.remove('dragging');try{canvas.releasePointerCapture?.(e.pointerId)}catch(_){}};canvas.addEventListener('pointerup',endDrag);canvas.addEventListener('pointercancel',endDrag);canvas.addEventListener('wheel',e=&gt;{e.preventDefault();zoom=clamp(zoom*(e.deltaY&lt;0?1.10:1/1.10),.45,3)},{passive:false});
 
 function sendWindDataToParent(){
- const m=mode();if(!dataLog.length){$(&quot;sendState&quot;).textContent=&#x27;전송할 기록 데이터가 없습니다. 실험을 먼저 실행하세요.&#x27;;return;}
- let vars=[&#x27;time&#x27;,&#x27;wind_speed_mps&#x27;,&#x27;rotation_x_deg&#x27;,&#x27;rotation_y_deg&#x27;,&#x27;rotation_z_deg&#x27;,&#x27;air_density_kg_m3&#x27;,&#x27;reference_area_m2&#x27;,&#x27;drag_N&#x27;,&#x27;lift_N&#x27;,&#x27;Cd_estimated&#x27;],rows=dataLog.map(d=&gt;({time:d.t,wind_speed_mps:d.V,rotation_x_deg:d.rotX,rotation_y_deg:d.rotY,rotation_z_deg:d.rotZ,air_density_kg_m3:d.rho,reference_area_m2:d.A,drag_N:d.Fx,lift_N:d.Fy,Cd_estimated:d.Cd}));
- if(m===&#x27;wing&#x27;){vars=[&#x27;time&#x27;,&#x27;wind_speed_mps&#x27;,&#x27;angle_deg&#x27;,&#x27;Fx_N&#x27;,&#x27;Fy_N&#x27;];rows=dataLog.map(d=&gt;({time:d.t,wind_speed_mps:d.V,angle_deg:d.angle,Fx_N:d.Fx,Fy_N:d.Fy}));}
- const meta={air_density_kg_m3:Number($(&quot;airDensity&quot;).value)};if(m===&#x27;free&#x27;)Object.assign(meta,{projected_area_m2:projectedAreaM2(),ground_clearance_m:Number($(&quot;groundClearance&quot;).value),rotation_x_deg:objectRot.x,rotation_y_deg:objectRot.y,rotation_z_deg:objectRot.z,model_length_m:Number($(&quot;modelLength&quot;).value),model:loadedSTL?&#x27;STL&#x27;:&#x27;기본 자동차&#x27;});else meta.reference_area_m2=Number($(&quot;area&quot;).value);
- parent.postMessage({type:&#x27;SCILAB_SIM_DATA&#x27;,mode:m,vars,rows,meta},&#x27;*&#x27;);$(&quot;sendState&quot;).textContent=`${rows.length}개 측정값을 데이터 분석 영역으로 보냈습니다.`;
+ const m=mode();if(!dataLog.length){$(&quot;sendState&quot;).textContent='전송할 기록 데이터가 없습니다. 실험을 먼저 실행하세요.';return;}
+ let vars=['time','wind_speed_mps','rotation_x_deg','rotation_y_deg','rotation_z_deg','air_density_kg_m3','reference_area_m2','drag_N','lift_N','Cd_estimated'],rows=dataLog.map(d=&gt;({time:d.t,wind_speed_mps:d.V,rotation_x_deg:d.rotX,rotation_y_deg:d.rotY,rotation_z_deg:d.rotZ,air_density_kg_m3:d.rho,reference_area_m2:d.A,drag_N:d.Fx,lift_N:d.Fy,Cd_estimated:d.Cd}));
+ if(m==='wing'){vars=['time','wind_speed_mps','angle_deg','Fx_N','Fy_N'];rows=dataLog.map(d=&gt;({time:d.t,wind_speed_mps:d.V,angle_deg:d.angle,Fx_N:d.Fx,Fy_N:d.Fy}));}
+ const meta={air_density_kg_m3:Number($(&quot;airDensity&quot;).value)};if(m==='free')Object.assign(meta,{projected_area_m2:projectedAreaM2(),ground_clearance_m:Number($(&quot;groundClearance&quot;).value),rotation_x_deg:objectRot.x,rotation_y_deg:objectRot.y,rotation_z_deg:objectRot.z,model_length_m:Number($(&quot;modelLength&quot;).value),model:loadedSTL?'STL':'기본 자동차'});else meta.reference_area_m2=Number($(&quot;area&quot;).value);
+ parent.postMessage({type:'SCILAB_SIM_DATA',mode:m,vars,rows,meta},'*');$(&quot;sendState&quot;).textContent=`${rows.length}개 측정값을 데이터 분석 영역으로 보냈습니다.`;
 }
 window.addEventListener(&quot;message&quot;,e=&gt;{const m=e.data;if(m&amp;&amp;m.type===&quot;SCILAB_REQUEST_SEND&quot;)sendWindDataToParent()});
 initParticles();updateControls();updateRunButtons();requestAnimationFrame(tick);
@@ -695,7 +734,7 @@ initParticles();updateControls();updateRunButtons();requestAnimationFrame(tick);
 </section>
 
 <div class="grid"><div>
-<section class="card"><h2>📋 실험 데이터</h2><div class="tableWrap" id="tableWrap"><table><thead id="thead"></thead><tbody id="tbody"></tbody></table></div><div class="muted" style="margin-top:6px">화면에는 최근 최대 500행을 표시하지만 내부 데이터와 CSV에는 전체 데이터를 사용합니다.</div></section>
+<section class="card"><h2>📋 실험 데이터</h2><div class="tableWrap" id="tableWrap"><table><thead id="thead"><tr><th>No.</th><th>time</th></tr></thead><tbody id="tbody"></tbody></table></div><div class="muted" style="margin-top:6px">화면에는 최근 최대 500행을 표시하지만 내부 데이터와 CSV에는 전체 데이터를 사용합니다.</div></section>
 <section class="card"><h2>🧮 데이터 처리</h2><div class="row"><button id="tableVarsBtn" class="gray">표 변수 선택</button><button id="calcVarBtn" class="soft">계산 변수 추가</button><button id="maVarBtn" class="soft">이동평균 변수 생성</button><button id="outlierBtn" class="soft">이상값 제외</button><button id="outlierReset" class="gray">이상값 초기화</button></div><p class="muted">이상값은 실제 삭제하지 않고 분석에서만 제외합니다.</p></section>
 </div><div>
 <section class="card"><h2>📈 그래프 / 분석</h2>
@@ -712,7 +751,18 @@ initParticles();updateControls();updateRunButtons();requestAnimationFrame(tick);
   </div>
 </div>
 
-<div id="graphSeriesList" class="graphSeriesList"></div>
+<div id="graphSeriesList" class="graphSeriesList"><div class="graphSeriesRow" data-series-id="1">
+      <span class="seriesSwatch" style="background:#00979d;color:#00979d"></span>
+      <label class="seriesLabel">Y1<select class="seriesY" style="width:100%;margin-top:3px"></select></label>
+      <label class="seriesMini"><input class="seriesActive" type="radio" name="seriesActive" checked=""> 분석</label>
+      <label class="seriesMini"><input class="seriesSmooth" type="checkbox"> 이동평균 <input class="seriesMaN" type="number" min="2" value="5"></label>
+      <label class="seriesMini">회귀 <select class="seriesReg">
+        <option value="none" selected="">없음</option>
+        <option value="linear">1차</option>
+        <option value="quadratic">2차</option>
+      </select></label>
+      <span></span>
+    </div></div>
 
 <div class="row" style="margin-top:8px">
   <button id="addGraphSeriesBtn" class="soft">＋ 그래프 추가</button>
@@ -870,7 +920,7 @@ Arduino 코드를 작성하거나 수정할 때 시리얼 데이터는 ArduLab�
       <label>단위
         <select id="scaleUnitPopup">
           <option value="mm">mm</option>
-          <option value="cm" selected>cm</option>
+          <option value="cm" selected="">cm</option>
           <option value="m">m</option>
         </select>
       </label>
@@ -903,7 +953,7 @@ Arduino 코드를 작성하거나 수정할 때 시리얼 데이터는 ArduLab�
 <div id="sampleModal" class="modal"><div class="modalBox"><div class="modalHead"><h3>예제 데이터 선택</h3><button data-close="sampleModal" class="gray">닫기</button></div><div class="sampleList"><button class="sampleBtn" data-sample="ohm">옴의 법칙 실험 (직선 관계와 회귀 분석)</button><button class="sampleBtn" data-sample="resonance">기주공명 실험 (피크와 구간 분석)</button><button class="sampleBtn" data-sample="fall">자유낙하운동 (변수 추가)</button><button class="sampleBtn" data-sample="light">거리에 따른 빛의 세기 (이상값 제거와 이동평균)</button><button class="sampleBtn" data-sample="reaction">시각 vs 청각 반응속도 비교 (변수 해석과 AI 협업)</button></div></div></div>
 
 <!-- 수동 입력 -->
-<div id="manualModal" class="modal"><div class="modalBox large"><div class="modalHead"><h3>데이터 수동입력</h3><button data-close="manualModal" class="gray">닫기</button></div><p class="muted">첫 행은 변수명입니다. 셀을 직접 편집하거나 Excel/Sheets에서 범위를 복사해 붙여넣을 수 있습니다.</p><div class="sheetWrap"><table id="manualSheet" class="sheet"></table></div><div class="row" style="margin-top:10px"><button id="manualExample" class="soft">옴의 법칙 예시</button><button id="addRows" class="gray">행 10개 추가</button><button id="addCols" class="gray">열 3개 추가</button><button id="manualClear" class="gray">전체 지우기</button><button id="manualApply" class="primary">적용</button></div></div></div>
+<div id="manualModal" class="modal"><div class="modalBox large"><div class="modalHead"><h3>데이터 수동입력</h3><button data-close="manualModal" class="gray">닫기</button></div><p class="muted">첫 행은 변수명입니다. 셀을 직접 편집하거나 Excel/Sheets에서 범위를 복사해 붙여넣을 수 있습니다.</p><div class="sheetWrap"><table id="manualSheet" class="sheet"><thead><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr></thead><tbody><tr class="nameRow"><th>변수명</th><td contenteditable="true" data-r="0" data-c="0"></td><td contenteditable="true" data-r="0" data-c="1"></td><td contenteditable="true" data-r="0" data-c="2"></td><td contenteditable="true" data-r="0" data-c="3"></td><td contenteditable="true" data-r="0" data-c="4"></td><td contenteditable="true" data-r="0" data-c="5"></td></tr><tr class=""><th>1</th><td contenteditable="true" data-r="1" data-c="0"></td><td contenteditable="true" data-r="1" data-c="1"></td><td contenteditable="true" data-r="1" data-c="2"></td><td contenteditable="true" data-r="1" data-c="3"></td><td contenteditable="true" data-r="1" data-c="4"></td><td contenteditable="true" data-r="1" data-c="5"></td></tr><tr class=""><th>2</th><td contenteditable="true" data-r="2" data-c="0"></td><td contenteditable="true" data-r="2" data-c="1"></td><td contenteditable="true" data-r="2" data-c="2"></td><td contenteditable="true" data-r="2" data-c="3"></td><td contenteditable="true" data-r="2" data-c="4"></td><td contenteditable="true" data-r="2" data-c="5"></td></tr><tr class=""><th>3</th><td contenteditable="true" data-r="3" data-c="0"></td><td contenteditable="true" data-r="3" data-c="1"></td><td contenteditable="true" data-r="3" data-c="2"></td><td contenteditable="true" data-r="3" data-c="3"></td><td contenteditable="true" data-r="3" data-c="4"></td><td contenteditable="true" data-r="3" data-c="5"></td></tr><tr class=""><th>4</th><td contenteditable="true" data-r="4" data-c="0"></td><td contenteditable="true" data-r="4" data-c="1"></td><td contenteditable="true" data-r="4" data-c="2"></td><td contenteditable="true" data-r="4" data-c="3"></td><td contenteditable="true" data-r="4" data-c="4"></td><td contenteditable="true" data-r="4" data-c="5"></td></tr><tr class=""><th>5</th><td contenteditable="true" data-r="5" data-c="0"></td><td contenteditable="true" data-r="5" data-c="1"></td><td contenteditable="true" data-r="5" data-c="2"></td><td contenteditable="true" data-r="5" data-c="3"></td><td contenteditable="true" data-r="5" data-c="4"></td><td contenteditable="true" data-r="5" data-c="5"></td></tr><tr class=""><th>6</th><td contenteditable="true" data-r="6" data-c="0"></td><td contenteditable="true" data-r="6" data-c="1"></td><td contenteditable="true" data-r="6" data-c="2"></td><td contenteditable="true" data-r="6" data-c="3"></td><td contenteditable="true" data-r="6" data-c="4"></td><td contenteditable="true" data-r="6" data-c="5"></td></tr><tr class=""><th>7</th><td contenteditable="true" data-r="7" data-c="0"></td><td contenteditable="true" data-r="7" data-c="1"></td><td contenteditable="true" data-r="7" data-c="2"></td><td contenteditable="true" data-r="7" data-c="3"></td><td contenteditable="true" data-r="7" data-c="4"></td><td contenteditable="true" data-r="7" data-c="5"></td></tr><tr class=""><th>8</th><td contenteditable="true" data-r="8" data-c="0"></td><td contenteditable="true" data-r="8" data-c="1"></td><td contenteditable="true" data-r="8" data-c="2"></td><td contenteditable="true" data-r="8" data-c="3"></td><td contenteditable="true" data-r="8" data-c="4"></td><td contenteditable="true" data-r="8" data-c="5"></td></tr><tr class=""><th>9</th><td contenteditable="true" data-r="9" data-c="0"></td><td contenteditable="true" data-r="9" data-c="1"></td><td contenteditable="true" data-r="9" data-c="2"></td><td contenteditable="true" data-r="9" data-c="3"></td><td contenteditable="true" data-r="9" data-c="4"></td><td contenteditable="true" data-r="9" data-c="5"></td></tr><tr class=""><th>10</th><td contenteditable="true" data-r="10" data-c="0"></td><td contenteditable="true" data-r="10" data-c="1"></td><td contenteditable="true" data-r="10" data-c="2"></td><td contenteditable="true" data-r="10" data-c="3"></td><td contenteditable="true" data-r="10" data-c="4"></td><td contenteditable="true" data-r="10" data-c="5"></td></tr><tr class=""><th>11</th><td contenteditable="true" data-r="11" data-c="0"></td><td contenteditable="true" data-r="11" data-c="1"></td><td contenteditable="true" data-r="11" data-c="2"></td><td contenteditable="true" data-r="11" data-c="3"></td><td contenteditable="true" data-r="11" data-c="4"></td><td contenteditable="true" data-r="11" data-c="5"></td></tr><tr class=""><th>12</th><td contenteditable="true" data-r="12" data-c="0"></td><td contenteditable="true" data-r="12" data-c="1"></td><td contenteditable="true" data-r="12" data-c="2"></td><td contenteditable="true" data-r="12" data-c="3"></td><td contenteditable="true" data-r="12" data-c="4"></td><td contenteditable="true" data-r="12" data-c="5"></td></tr><tr class=""><th>13</th><td contenteditable="true" data-r="13" data-c="0"></td><td contenteditable="true" data-r="13" data-c="1"></td><td contenteditable="true" data-r="13" data-c="2"></td><td contenteditable="true" data-r="13" data-c="3"></td><td contenteditable="true" data-r="13" data-c="4"></td><td contenteditable="true" data-r="13" data-c="5"></td></tr><tr class=""><th>14</th><td contenteditable="true" data-r="14" data-c="0"></td><td contenteditable="true" data-r="14" data-c="1"></td><td contenteditable="true" data-r="14" data-c="2"></td><td contenteditable="true" data-r="14" data-c="3"></td><td contenteditable="true" data-r="14" data-c="4"></td><td contenteditable="true" data-r="14" data-c="5"></td></tr><tr class=""><th>15</th><td contenteditable="true" data-r="15" data-c="0"></td><td contenteditable="true" data-r="15" data-c="1"></td><td contenteditable="true" data-r="15" data-c="2"></td><td contenteditable="true" data-r="15" data-c="3"></td><td contenteditable="true" data-r="15" data-c="4"></td><td contenteditable="true" data-r="15" data-c="5"></td></tr><tr class=""><th>16</th><td contenteditable="true" data-r="16" data-c="0"></td><td contenteditable="true" data-r="16" data-c="1"></td><td contenteditable="true" data-r="16" data-c="2"></td><td contenteditable="true" data-r="16" data-c="3"></td><td contenteditable="true" data-r="16" data-c="4"></td><td contenteditable="true" data-r="16" data-c="5"></td></tr><tr class=""><th>17</th><td contenteditable="true" data-r="17" data-c="0"></td><td contenteditable="true" data-r="17" data-c="1"></td><td contenteditable="true" data-r="17" data-c="2"></td><td contenteditable="true" data-r="17" data-c="3"></td><td contenteditable="true" data-r="17" data-c="4"></td><td contenteditable="true" data-r="17" data-c="5"></td></tr><tr class=""><th>18</th><td contenteditable="true" data-r="18" data-c="0"></td><td contenteditable="true" data-r="18" data-c="1"></td><td contenteditable="true" data-r="18" data-c="2"></td><td contenteditable="true" data-r="18" data-c="3"></td><td contenteditable="true" data-r="18" data-c="4"></td><td contenteditable="true" data-r="18" data-c="5"></td></tr><tr class=""><th>19</th><td contenteditable="true" data-r="19" data-c="0"></td><td contenteditable="true" data-r="19" data-c="1"></td><td contenteditable="true" data-r="19" data-c="2"></td><td contenteditable="true" data-r="19" data-c="3"></td><td contenteditable="true" data-r="19" data-c="4"></td><td contenteditable="true" data-r="19" data-c="5"></td></tr><tr class=""><th>20</th><td contenteditable="true" data-r="20" data-c="0"></td><td contenteditable="true" data-r="20" data-c="1"></td><td contenteditable="true" data-r="20" data-c="2"></td><td contenteditable="true" data-r="20" data-c="3"></td><td contenteditable="true" data-r="20" data-c="4"></td><td contenteditable="true" data-r="20" data-c="5"></td></tr></tbody></table></div><div class="row" style="margin-top:10px"><button id="manualExample" class="soft">옴의 법칙 예시</button><button id="addRows" class="gray">행 10개 추가</button><button id="addCols" class="gray">열 3개 추가</button><button id="manualClear" class="gray">전체 지우기</button><button id="manualApply" class="primary">적용</button></div></div></div>
 
 <!-- 미분 / 적분 변수 선택 -->
 <div id="calculusModal" class="modal">
@@ -941,10 +991,10 @@ Arduino 코드를 작성하거나 수정할 때 시리얼 데이터는 ArduLab�
 <div id="maModal" class="modal"><div class="modalBox"><div class="modalHead"><h3>이동평균 변수 생성</h3><button data-close="maModal" class="gray">닫기</button></div><label>변수<select id="maVarSelect" style="width:100%;margin-top:4px"></select></label><label style="display:block;margin-top:9px">이동평균 개수 n<input id="maVarN" type="number" min="2" value="5" style="width:100%;margin-top:4px"></label><button id="maCreate" class="primary" style="margin-top:10px">생성</button></div></div>
 
 <!-- 이상값 -->
-<div id="outlierModal" class="modal"><div class="modalBox"><div class="modalHead"><h3>이상값 제외</h3><button data-close="outlierModal" class="gray">닫기</button></div><label>기준 변수<select id="outlierVar" style="width:100%;margin-top:4px"></select></label><div style="margin-top:10px"><label><input type="radio" name="outMethod" value="zscore" checked> 평균 ± nσ</label> &nbsp; <label><input type="radio" name="outMethod" value="iqr"> IQR 방식</label> &nbsp; <label><input type="radio" name="outMethod" value="range"> 직접 범위</label></div><div class="row" style="margin-top:9px"><input id="out1" value="2" placeholder="nσ 또는 최소값"><input id="out2" placeholder="최대값(직접 범위)"></div><button id="outApply" class="primary" style="margin-top:10px">제외 적용</button></div></div>
+<div id="outlierModal" class="modal"><div class="modalBox"><div class="modalHead"><h3>이상값 제외</h3><button data-close="outlierModal" class="gray">닫기</button></div><label>기준 변수<select id="outlierVar" style="width:100%;margin-top:4px"></select></label><div style="margin-top:10px"><label><input type="radio" name="outMethod" value="zscore" checked=""> 평균 ± nσ</label> &nbsp; <label><input type="radio" name="outMethod" value="iqr"> IQR 방식</label> &nbsp; <label><input type="radio" name="outMethod" value="range"> 직접 범위</label></div><div class="row" style="margin-top:9px"><input id="out1" value="2" placeholder="nσ 또는 최소값"><input id="out2" placeholder="최대값(직접 범위)"></div><button id="outApply" class="primary" style="margin-top:10px">제외 적용</button></div></div>
 
 <!-- 실험노트 -->
-<div id="noteModal" class="modal"><div class="modalBox large"><div class="modalHead"><h3>실험노트</h3><button data-close="noteModal" class="gray">닫기</button></div><p class="muted">작성 내용은 현재 페이지를 사용하는 동안 자동으로 유지됩니다. 새 실험 또는 새로고침 시 초기화됩니다.</p><div class="notegrid"><label>실험 제목<textarea id="noteTitle" rows="2"></textarea></label><label>실험 설계 요약<textarea id="noteDesign" rows="2"></textarea></label><label>X 변수<select id="noteX" style="width:100%;margin-top:4px"></select><textarea id="noteXDesc" rows="3" placeholder="X 변수 설명"></textarea></label><label>Y 변수<select id="noteY" style="width:100%;margin-top:4px"></select><textarea id="noteYDesc" rows="3" placeholder="Y 변수 설명"></textarea></label><label>실험 관찰 내용<textarea id="noteObs" rows="3"></textarea></label><label>결과 해석<textarea id="noteInterp" rows="4"></textarea></label><label>오차 원인<textarea id="noteError" rows="3"></textarea></label><label>궁금한 점<textarea id="noteQuestion" rows="3"></textarea></label></div><div class="row" style="margin-top:10px"><button id="promptBtn" class="primary">AI 협업 프롬프트 만들기</button><button id="copyPrompt" class="soft" disabled>프롬프트 복사</button></div><div id="promptResult" class="result" style="display:none;margin-top:10px"></div></div></div>
+<div id="noteModal" class="modal"><div class="modalBox large"><div class="modalHead"><h3>실험노트</h3><button data-close="noteModal" class="gray">닫기</button></div><p class="muted">작성 내용은 현재 페이지를 사용하는 동안 자동으로 유지됩니다. 새 실험 또는 새로고침 시 초기화됩니다.</p><div class="notegrid"><label>실험 제목<textarea id="noteTitle" rows="2"></textarea></label><label>실험 설계 요약<textarea id="noteDesign" rows="2"></textarea></label><label>X 변수<select id="noteX" style="width:100%;margin-top:4px"></select><textarea id="noteXDesc" rows="3" placeholder="X 변수 설명"></textarea></label><label>Y 변수<select id="noteY" style="width:100%;margin-top:4px"></select><textarea id="noteYDesc" rows="3" placeholder="Y 변수 설명"></textarea></label><label>실험 관찰 내용<textarea id="noteObs" rows="3"></textarea></label><label>결과 해석<textarea id="noteInterp" rows="4"></textarea></label><label>오차 원인<textarea id="noteError" rows="3"></textarea></label><label>궁금한 점<textarea id="noteQuestion" rows="3"></textarea></label></div><div class="row" style="margin-top:10px"><button id="promptBtn" class="primary">AI 협업 프롬프트 만들기</button><button id="copyPrompt" class="soft" disabled="">프롬프트 복사</button></div><div id="promptResult" class="result" style="display:none;margin-top:10px"></div></div></div>
 
 <!-- 구간 그래프 -->
 <div id="intervalModal" class="modal"><div class="modalBox large"><div class="modalHead"><h3>구간 그래프</h3><button data-close="intervalModal" class="gray">닫기</button></div><canvas id="intervalChart" class="graph" width="1100" height="520"></canvas><div id="intervalResult" class="result" style="margin-top:10px"></div><div class="row" style="margin-top:9px"><button id="intervalPng" class="soft">구간 그래프 PNG 저장</button></div></div></div>
@@ -969,7 +1019,7 @@ Arduino 코드를 작성하거나 수정할 때 시리얼 데이터는 ArduLab�
     </div>
   </div>
 </div>
-</div>
+
 
 <script>
 'use strict';
@@ -3298,5 +3348,525 @@ if(brandLogoHome){
 })();
 </script>
 
-</body>
-</html>
+
+<!-- SciLab 전체 코드 보기 기능: 다른 기능과 독립적 -->
+<style id="scilabSourceViewerStyles">
+#scilabSourceBar{position:fixed;right:14px;bottom:14px;z-index:2147483000;display:flex;gap:8px;align-items:center;background:#163d49f2;color:white;padding:8px 10px;border-radius:13px;box-shadow:0 5px 22px #10293755;font:600 13px Arial,sans-serif}
+#scilabSourceBar button{background:#fff!important;color:#165a61!important;border:0!important;padding:9px 14px!important;font:700 13px Arial,sans-serif!important;border-radius:9px!important;min-height:0!important}
+#scilabSourcePanel{display:none;position:fixed;inset:0;z-index:2147483200;background:#101921dd;padding:clamp(6px,2vw,22px)}
+#scilabSourcePanel.scilab-visible{display:flex;flex-direction:column}
+#scilabSourceShell{background:#fff;display:flex;flex-direction:column;width:100%;height:100%;min-height:0;border-radius:12px;overflow:hidden}
+#scilabSourceTop{display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:12px;background:#eff8f8;color:#19464c;font:700 14px Arial,sans-serif}
+#scilabSourceTop .source-spacer{flex:1}
+#scilabSourceTop button{background:#087e86!important;color:white!important;border:0!important;border-radius:8px!important;padding:10px 14px!important;font:700 13px Arial,sans-serif!important;cursor:pointer}
+#scilabSourceTop button#scilabCloseSource{background:#e6ecf0!important;color:#24333e!important}
+#scilabFullSource{display:block;flex:1;width:100%;min-height:0;resize:none;border:0;border-top:1px solid #dde9ea;padding:15px;background:#fcfdfd;color:#182330;font:12px/1.55 Consolas,Monaco,monospace;white-space:pre;tab-size:2}
+#scilabSourceHint{padding:8px 12px;background:#f7fafb;color:#53656e;font:12px Arial,sans-serif}
+</style>
+<div id="scilabSourceBar"><span>SciLab 전체 HTML</span><button id="scilabOpenSource" type="button">&lt;/&gt; 코드 보기</button></div>
+<div id="scilabSourcePanel" role="dialog" aria-label="SciLab 전체 코드" aria-modal="true">
+  <div id="scilabSourceShell">
+    <div id="scilabSourceTop"><strong>전체 HTML 소스 코드</strong><span class="source-spacer"></span><button id="scilabCopySource" type="button">전체 코드 복사</button><button id="scilabSelectSource" type="button">전체 선택</button><button id="scilabCloseSource" type="button">닫기</button></div>
+    <textarea id="scilabFullSource" readonly="" spellcheck="false" aria-label="SciLab HTML 전체 코드"></textarea>
+    <div id="scilabSourceHint">한 파일에 들어 있는 SciLab 전체 코드입니다. 전체 코드 복사를 누르고 HTML 편집기에 붙여 넣으세요.</div>
+  </div>
+</div>
+<script id="scilabSourceViewerLogic">
+(function(){
+ const open=document.getElementById('scilabOpenSource');
+ const panel=document.getElementById('scilabSourcePanel');
+ const area=document.getElementById('scilabFullSource');
+ const copy=document.getElementById('scilabCopySource');
+ const select=document.getElementById('scilabSelectSource');
+ const close=document.getElementById('scilabCloseSource');
+ const hint=document.getElementById('scilabSourceHint');
+ function completeSource(){
+   // Serialize current complete document, including inline iframe srcdoc.
+   const dt=document.doctype;
+   const head=dt?'<!DOCTYPE '+dt.name+'>\n':'<!DOCTYPE html>\n';
+   return head+document.documentElement.outerHTML;
+ }
+ open.addEventListener('click',()=>{
+   area.value=completeSource();
+   panel.classList.add('scilab-visible');
+   document.body.style.overflow='hidden';
+   area.scrollTop=0;
+ });
+ function dismiss(){panel.classList.remove('scilab-visible');document.body.style.overflow=''}
+ close.addEventListener('click',dismiss);
+ panel.addEventListener('click',e=>{if(e.target===panel)dismiss()});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&panel.classList.contains('scilab-visible'))dismiss()});
+ select.addEventListener('click',()=>{area.focus();area.select();hint.textContent='전체 코드를 선택했습니다. Ctrl+C 또는 ⌘+C로 복사하세요.'});
+ copy.addEventListener('click',async()=>{
+   const source=area.value||completeSource();
+   try{
+     await navigator.clipboard.writeText(source);
+     hint.textContent='전체 HTML 코드가 복사되었습니다. 붙여 넣기 하시면 됩니다.';
+   }catch(err){
+     area.focus();area.select();
+     try{const ok=document.execCommand('copy');hint.textContent=ok?'전체 HTML 코드가 복사되었습니다.':'전체 선택되었습니다. Ctrl+C 또는 ⌘+C로 복사하세요.'}
+     catch(_){hint.textContent='전체 선택되었습니다. Ctrl+C 또는 ⌘+C로 복사하세요.'}
+   }
+ });
+})();
+</script>
+
+
+<script>globalThis.__codexVisualizationInitialGlobals={"statePersistence":"none","stateModelContext":"none","visualizationStyleVariables":{"--accent":"rgb(232, 243, 254)","--accent-foreground":"rgb(44, 103, 197)","--background":"rgb(252, 252, 252)","--border":"rgba(0, 0, 0, 0.1)","--border-strong":"rgba(0, 0, 0, 0.15)","--card":"color-mix(in oklab, rgb(13, 13, 13) 5%, transparent)","--card-foreground":"rgb(13, 13, 13)","--corner-shape":"round","--control-spacing":"12px","--cursor-interaction":"pointer","--destructive":"rgb(226, 85, 7)","--font-mono":"ui-monospace, SFMono-Regular, \"SF Mono\", menlo, consolas, \"Liberation Mono\", monospace","--font-sans":"-apple-system-body, ui-sans-serif, -apple-system, system-ui, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif, \"Segoe UI Emoji\", \"Segoe UI Symbol\"","--font-size-base":"16px","--font-weight-normal":"400","--foreground":"rgb(13, 13, 13)","--input":"rgba(0, 0, 0, 0.15)","--muted":"color-mix(in srgb, rgb(13, 13, 13) 10%, transparent)","--muted-foreground":"rgb(143, 143, 143)","--popover":"rgb(255, 255, 255)","--popover-foreground":"rgb(13, 13, 13)","--primary":"rgb(44, 103, 197)","--primary-foreground":"rgb(255, 255, 255)","--radius":"8px","--radius-2xl":"16px","--radius-lg":"8px","--radius-md":"6px","--radius-sm":"4px","--ring":"rgb(58, 131, 247)","--secondary":"rgb(243, 243, 243)","--secondary-foreground":"rgb(13, 13, 13)","--blue":"rgb(58, 131, 247)","--orange":"rgb(226, 85, 7)","--green":"rgb(0, 162, 64)","--red":"rgb(224, 46, 42)","--purple":"rgb(146, 79, 247)","--yellow":"rgb(255, 195, 0)","--visualize-paint-gutter":"0px","--viz-series-1":"rgb(44, 103, 197)","--viz-series-2":"#f3c944","--viz-series-3":"#ea77b0","--viz-series-4":"#3db9b0","--viz-series-5":"#5ec978","--viz-series-6":"#f2893c"},"visualizationTheme":"light"};</script>
+<style id="codex-visualization-host-theme">:root {}</style>
+<script>
+(() => {
+  // Host colors are defaults; later authored styles can give the same names
+  // their own meaning (for example, --muted as a chart's label color).
+  const hostStyles = document.getElementById("codex-visualization-host-theme");
+  const hostStyle = hostStyles.sheet.cssRules[0].style;
+  // Typography, geometry and interaction cursors still follow the host.
+  const styleForProperty = (property) =>
+    /^--(?:font-|radius|corner-shape$|control-spacing$|cursor-interaction$|icon-size$|visualize-paint-gutter$)/.test(property)
+      ? document.documentElement.style
+      : hostStyle;
+  const initialGlobals =
+    globalThis.__codexVisualizationInitialGlobals ?? globalThis.openai;
+  delete globalThis.__codexVisualizationInitialGlobals;
+  if (initialGlobals?.statePersistence != null) {
+    globalThis.openai ??= {};
+    globalThis.openai.statePersistence = initialGlobals.statePersistence;
+    globalThis.openai.stateModelContext = initialGlobals.stateModelContext ?? "none";
+  }
+  if (!false) {
+    return;
+  }
+  let appliedProperties = [];
+  const applyHostStyleVariables = (styleVariables) => {
+    if (styleVariables == null || typeof styleVariables !== "object") {
+      return;
+    }
+    for (const property of appliedProperties) {
+      styleForProperty(property).removeProperty(property);
+    }
+    appliedProperties = [];
+    for (const [property, value] of Object.entries(styleVariables)) {
+      if (property.startsWith("--") && typeof value === "string") {
+        styleForProperty(property).setProperty(property, value);
+        appliedProperties.push(property);
+      }
+    }
+  };
+
+  const syncHostStyles = (globals) => {
+    applyHostStyleVariables(globals?.visualizationStyleVariables);
+    const sandboxDocument = globalThis.frameElement?.ownerDocument;
+    if (sandboxDocument != null && globals?.visualizationTheme != null) {
+      let colorSchemeMeta = sandboxDocument.querySelector(
+        'meta[name="color-scheme"]',
+      );
+      if (colorSchemeMeta == null) {
+        colorSchemeMeta = sandboxDocument.createElement("meta");
+        colorSchemeMeta.name = "color-scheme";
+        sandboxDocument.head.appendChild(colorSchemeMeta);
+      }
+      colorSchemeMeta.content = globals.visualizationTheme;
+      sandboxDocument.documentElement.style.colorScheme =
+        globals.visualizationTheme;
+      // Paint the host surface behind transparent saved visualization documents.
+      sandboxDocument.documentElement.style.backgroundColor =
+        hostStyle.getPropertyValue("--background");
+    }
+  };
+
+  syncHostStyles(initialGlobals);
+  globalThis.addEventListener("openai:set_globals", (event) => {
+    syncHostStyles(event.detail?.globals);
+  });
+})();
+</script>
+
+
+<script>
+(() => {
+  const reportEnvironmentError = (value) => {
+    const error = value instanceof Error ? value : new Error(String(value));
+    void globalThis.openai
+      .callTool(
+        "__codex_inline_visualization_error__",
+        {
+          message: error.message,
+          name: error.name,
+          stack: error.stack,
+        },
+      )
+      .catch(() => {});
+  };
+
+  globalThis.addEventListener("error", (event) => {
+    if (event.target?.localName === "script") {
+      // A script's own onerror may render a fallback or load an alternative.
+      // Let that handler run; failures it throws still reach the global error path.
+      const handlesError = typeof event.target.onerror === "function";
+      globalThis.queueMicrotask(() => {
+        if (!handlesError && !event.defaultPrevented) {
+          reportEnvironmentError("Visualization script could not be loaded");
+        }
+      });
+    } else if (event.target === globalThis) {
+      // The browser defers resize notifications to another frame; no script threw.
+      if (event.error == null && (
+        event.message === "ResizeObserver loop completed with undelivered notifications." ||
+        event.message === "ResizeObserver loop limit exceeded"
+      )) {
+        return;
+      }
+      reportEnvironmentError(event.error ?? event.message);
+    }
+  }, true);
+  globalThis.addEventListener("unhandledrejection", (event) => {
+    reportEnvironmentError(event.reason);
+  });
+})();
+</script>
+<script id="codex-visualization-variants">
+(() => {
+  let previousSnapshot = "[]";
+  let roots = [];
+  const report = () => {
+    roots = Array.from(
+      document.querySelectorAll(".viz-carousel[data-active-variant]"),
+    ).slice(0, 32);
+    const selectedVariants = roots.flatMap((root, carousel) => {
+      const variant = root.dataset.activeVariant;
+      const label = root.getAttribute("aria-label")?.slice(0, 256);
+      return variant ? [{
+        carousel,
+        ...(label == null ? {} : { label }),
+        variant: variant.slice(0, 256),
+      }] : [];
+    });
+    const snapshot = JSON.stringify(selectedVariants);
+    if (snapshot !== previousSnapshot) {
+      previousSnapshot = snapshot;
+      void globalThis.openai.callTool("__codex_visualization_annotations__", {
+        type: "variants",
+        selectedVariants,
+      }).catch(() => {});
+    }
+  };
+  const observer = new MutationObserver((records) => {
+    if (records.some((record) => record.type === "attributes") || roots.some((root) => !root.isConnected)) {
+      report();
+    }
+  });
+  observer.observe(document, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ["data-active-variant"],
+  });
+  report();
+  globalThis.addEventListener("pagehide", () => observer.disconnect(), { once: true });
+})();
+</script>
+<script>
+(() => {
+  const selectorInRoot = (target, root) => {
+    const parts = [];
+    for (let element = target; element != null && parts.length < 64; element = element.parentElement) {
+      const id = element.id && globalThis.CSS?.escape?.(element.id);
+      if (id && id.length <= 256) {
+        const selector = ["#" + id, ...parts].join(" > ");
+        const matches = root.querySelectorAll(selector);
+        if (matches.length === 1 && matches[0] === target) {
+          return selector;
+        }
+      }
+      let index = 1;
+      for (let sibling = element.previousElementSibling; sibling != null; sibling = sibling.previousElementSibling) {
+        if (sibling.localName === element.localName) { index += 1; }
+      }
+      const tag = globalThis.CSS?.escape?.(element.localName) ?? element.localName;
+      parts.unshift(tag + ":nth-of-type(" + index + ")");
+      if (parts.join(" > ").length > 1024) { return null; }
+      if (element.parentElement == null) {
+        const selector = parts.join(" > ");
+        const matches = root.querySelectorAll(selector);
+        return matches.length === 1 && matches[0] === target ? selector : null;
+      }
+    }
+    return null;
+  };
+  const describeTarget = (element) => {
+    if (element == null || !element.isConnected) { return undefined; }
+    const tagName = element.localName.toLowerCase();
+    if (!/^[a-z][a-z0-9-]{0,63}$/.test(tagName)) { return undefined; }
+    const parts = [];
+    let current = element;
+    for (let depth = 0; depth < 16; depth += 1) {
+      const root = current.getRootNode();
+      const selector = selectorInRoot(current, root);
+      if (selector == null) { return undefined; }
+      parts.unshift(selector);
+      if (root === document) {
+        const selector = parts.length === 1 ? parts[0] : "shadow:" + parts.join(">>>");
+        if (selector.length > 1024) { return undefined; }
+        const label = (element.getAttribute("aria-label") || element.getAttribute("title") || "")
+          .replace(/[\u0000-\u001f\u007f-\u009f\u061c\u200e\u200f\u2028-\u202e\u2066-\u2069]/gu, " ")
+          .replace(/\s+/g, " ").trim().slice(0, 160);
+        return { selector, tagName, ...(label ? { label } : {}) };
+      }
+      if (!(root instanceof ShadowRoot) || root.mode !== "open") { return undefined; }
+      current = root.host;
+    }
+    return undefined;
+  };
+  let previousSnapshot = JSON.stringify({ isHovering: false });
+  const reportHover = (event, isHovering, isTouch = false, target) => {
+    const report = isTouch
+      ? { isHovering: false, pointerType: "touch" }
+      : { isHovering, ...(isHovering && target != null ? { target } : {}) };
+    const snapshot = JSON.stringify(report);
+    if (snapshot === previousSnapshot) {
+      return;
+    }
+    previousSnapshot = snapshot;
+    void globalThis.openai
+      .callTool(
+        "__codex_inline_visualization_hover__",
+        { ...report, eventTime: globalThis.performance.timeOrigin + event.timeStamp },
+      )
+      .catch(() => {});
+  };
+
+  let hoveredElement;
+  let isTouchHover = false;
+  let latestHover = null;
+  let latestResetTime = 0;
+  const handlePointerHover = (event) => {
+    const isTouch = event.pointerType === "touch";
+    const element = isTouch ? undefined : event.composedPath().find((element) => element instanceof Element);
+    latestHover = { event, element, isTouch };
+    if (event.type === "pointermove" && element === hoveredElement && isTouch === isTouchHover) {
+      return;
+    }
+    hoveredElement = element;
+    isTouchHover = isTouch;
+    reportHover(event, !isTouch, isTouch, isTouch ? undefined : describeTarget(element));
+  };
+  const clearHover = (event) => {
+    hoveredElement = undefined;
+    isTouchHover = false;
+    latestHover = null;
+    reportHover(event, false);
+  };
+  globalThis.addEventListener("openai:set_globals", (event) => {
+    const resetTime = event.detail?.globals?.visualizationHoverReset;
+    if (typeof resetTime !== "number" || !Number.isFinite(resetTime) || resetTime <= latestResetTime) {
+      return;
+    }
+    latestResetTime = resetTime;
+    const latest = latestHover;
+    hoveredElement = undefined;
+    isTouchHover = false;
+    latestHover = null;
+    previousSnapshot = JSON.stringify({ isHovering: false });
+    // A host-observed exit can arrive after the pointer has already reentered.
+    if (latest != null && globalThis.performance.timeOrigin + latest.event.timeStamp > resetTime) {
+      latestHover = latest;
+      hoveredElement = latest.element;
+      isTouchHover = latest.isTouch;
+      reportHover(latest.event, !latest.isTouch, latest.isTouch,
+        latest.isTouch ? undefined : describeTarget(latest.element));
+    }
+  });
+  globalThis.addEventListener("pointerover", handlePointerHover, { capture: true });
+  // Moves between descendants in one shadow root do not emit pointerover outside
+  // that root. The identity guard avoids selector work while a target is unchanged.
+  globalThis.addEventListener("pointermove", handlePointerHover, { capture: true });
+  globalThis.addEventListener(
+    "pointerout",
+    (event) => {
+      if (event.pointerType !== "touch" && event.relatedTarget == null) {
+        clearHover(event);
+      }
+    },
+    { capture: true },
+  );
+  globalThis.addEventListener("pagehide", clearHover);
+})();
+</script>
+<script>
+(() => {
+  const report = (method) => {
+    void globalThis.openai.callTool("__codex_inline_visualization_input__", { method }).catch(() => {});
+  };
+  globalThis.addEventListener("pointerdown", () => report("pointer"), { capture: true });
+  globalThis.addEventListener("keydown", (event) => {
+    if (!event.isComposing && event.key !== "Shift" && !event.altKey && !event.ctrlKey && !event.metaKey) {
+      report(["Tab","ArrowLeft","ArrowRight","ArrowUp","ArrowDown"].includes(event.key) ? "keyboard-navigation" : "keyboard");
+    }
+  }, { capture: true });
+})();
+</script>
+<script>
+(() => {
+  const bubbledClicks = new WeakSet();
+  const interactiveSelector = [
+    "button", "input", "select", "textarea", "label", "summary", "a[href]",
+    "audio[controls]", "video[controls]", "[onclick]", "[data-visualization-interactive]",
+    '[contenteditable]:not([contenteditable="false"])',
+    ...[
+      "button", "checkbox", "combobox", "gridcell", "link", "listbox",
+      "menuitem", "menuitemcheckbox", "menuitemradio", "option", "radio",
+      "scrollbar", "searchbox", "slider", "spinbutton", "switch", "tab",
+      "textbox", "treeitem",
+    ].map((role) => '[role~="' + role + '"]'),
+  ].join(",");
+
+  globalThis.addEventListener("click", (event) => bubbledClicks.add(event));
+  globalThis.addEventListener("click", (event) => {
+    // Capture the path before a control can remove itself. Custom delegated
+    // controls can opt in with data-visualization-interactive.
+    const elements = event.composedPath().filter((target) => target instanceof Element);
+    const isInteractiveTarget = elements.some((element) =>
+      element.matches(interactiveSelector) ||
+      (element.hasAttribute("tabindex") && element.tabIndex >= 0)) ||
+      (elements[0] != null && getComputedStyle(elements[0]).cursor === "pointer");
+    // Use a task, not a microtask: native dispatch can run microtasks between
+    // listeners. Propagation flags are reset when dispatch finishes:
+    // https://dom.spec.whatwg.org/#concept-event-dispatch
+    globalThis.setTimeout(() => {
+      void globalThis.openai.callTool("__codex_inline_visualization_click__", {
+        isInteractive: isInteractiveTarget || event.defaultPrevented ||
+          (event.bubbles && !bubbledClicks.has(event)),
+      }).catch(() => {});
+    }, 0);
+  }, { capture: true });
+})();
+</script>
+<script>
+(() => {
+  globalThis.addEventListener("keydown", (event) => {
+    if (event.isComposing || event.altKey || event.ctrlKey || event.metaKey ||
+      event.shiftKey || !["ArrowLeft", "ArrowRight", "Escape"].includes(event.key)) {
+      return;
+    }
+    const target = event.composedPath().find((element) => element instanceof HTMLElement);
+    const editable = target?.closest("[contenteditable]");
+    const editing = target && (target.isContentEditable ||
+      (editable && editable.getAttribute("contenteditable") !== "false") ||
+      target.closest('input, textarea, select, [role="slider"], [role="spinbutton"], [role="combobox"], [role="listbox"], [role="grid"], [role="tree"], [role="tablist"], [role="menu"]'));
+    if (event.key !== "Escape" && editing) { return; }
+    // Let the widget handle the key before forwarding it across the sandbox.
+    globalThis.setTimeout(() => {
+      if (!event.defaultPrevented && globalThis.openai?.displayMode === "fullscreen") {
+        void globalThis.openai.callTool("__codex_inline_visualization_preview_key__", {
+          key: event.key,
+        }).catch(() => {});
+      }
+    }, 0);
+  });
+})();
+</script>
+
+
+
+
+<script>
+(() => {
+  const contentRange = document.createRange();
+  let previousMeasurement = null;
+  let heightReportTimer = null;
+  const reportHeight = () => {
+    const bodyChildren = Array.from(document.body.children).filter(
+      (element) =>
+        element.tagName !== "SCRIPT" &&
+        element.tagName !== "STYLE" &&
+        element.getAttribute("role") !== "tooltip",
+    );
+    const bodyStyle = globalThis.getComputedStyle(document.body);
+    const contentWidth = Math.max(
+      0,
+      Math.round(
+        globalThis.innerWidth -
+          parseFloat(bodyStyle.paddingLeft) -
+          parseFloat(bodyStyle.paddingRight),
+      ),
+    );
+    let contentHeight;
+    if (bodyChildren.length === 0) {
+      contentRange.selectNodeContents(document.body);
+      contentHeight = contentRange.getBoundingClientRect().height;
+    } else if (bodyChildren.length === 1) {
+      const [bodyChild] = bodyChildren;
+      const childRect = bodyChild.getBoundingClientRect();
+      // Child margins can collapse above the root without adding to its height.
+      // The host adds body padding separately.
+      contentHeight =
+        Math.max(bodyChild.scrollHeight, childRect.height) +
+        Math.max(
+          0,
+          childRect.top -
+            document.body.getBoundingClientRect().top -
+            parseFloat(bodyStyle.paddingTop),
+        );
+    } else {
+      const bodyTop = document.body.getBoundingClientRect().top;
+      contentHeight = Math.max(
+        ...bodyChildren.map(
+          (bodyChild) => bodyChild.getBoundingClientRect().bottom - bodyTop,
+        ),
+      );
+    }
+    const viewportHeight = globalThis.innerHeight;
+    const previous = previousMeasurement;
+    previousMeasurement = { contentHeight, contentWidth, viewportHeight };
+    if (
+      previous != null &&
+      contentWidth === previous.contentWidth &&
+      contentHeight - previous.contentHeight ===
+        viewportHeight - previous.viewportHeight
+    ) {
+      return;
+    }
+
+    void globalThis.openai
+      .callTool(
+        "__codex_inline_visualization_height__",
+        { height: contentHeight, width: contentWidth },
+      )
+      .catch(() => {});
+  };
+  const scheduleHeightReport = () => {
+    if (heightReportTimer != null) {
+      return;
+    }
+    // Offscreen frames can suspend animation callbacks while their content loads.
+    heightReportTimer = globalThis.setTimeout(() => {
+      heightReportTimer = null;
+      reportHeight();
+    }, 0);
+  };
+
+  const resizeObserver = new ResizeObserver(scheduleHeightReport);
+  const observeBodyChildren = () => {
+    for (const element of document.body.children) {
+      resizeObserver.observe(element);
+    }
+  };
+  resizeObserver.observe(document.body);
+  observeBodyChildren();
+  new MutationObserver(() => {
+    observeBodyChildren();
+    scheduleHeightReport();
+  }).observe(document.body, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ["style", "class", "height", "width"],
+  });
+  globalThis.addEventListener("resize", scheduleHeightReport);
+  reportHeight();
+})();
+</script>
+<style id="codex-visualization-document-scrollbar">html,body{scrollbar-width:none!important}html::-webkit-scrollbar,body::-webkit-scrollbar{display:none!important}</style>
+
+
+</body></html>
